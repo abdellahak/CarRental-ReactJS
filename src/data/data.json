@@ -1,0 +1,297 @@
+{
+  "cars": [
+    {
+      "id": "1",
+      "name": "Toyota",
+      "model": "Corolla",
+      "year": "2023",
+      "type": "petrol",
+      "price": "300",
+      "available": true,
+      "image": "/images/car1.png"
+    },
+    {
+      "id": "2",
+      "name": "Honda",
+      "model": "Civic",
+      "year": "2016",
+      "type": "diesel",
+      "price": "160",
+      "available": true,
+      "image": "/images/car2.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Suzuki",
+      "model": "Swift",
+      "year": "2017",
+      "type": "petrol",
+      "price": "140",
+      "available": false,
+      "image": "/images/car3.png"
+    },
+    {
+      "id": "4",
+      "name": "Hyundai",
+      "model": "Accent",
+      "year": 2018,
+      "available": false,
+      "image": "/images/car4.JPG",
+      "price": 170,
+      "type": "diesel"
+    },
+    {
+      "id": "5",
+      "name": "Kia",
+      "model": "Rio",
+      "year": "2019",
+      "type": "petrol",
+      "price": "180",
+      "available": false,
+      "image": "/images/car5.jpeg"
+    },
+    {
+      "id": "6",
+      "name": "Fiat",
+      "model": "Tipo",
+      "year": "2024",
+      "type": "petrol",
+      "price": "180",
+      "available": true,
+      "image": "/images/car6.jpg  "
+    },
+    {
+      "id": "7",
+      "name": "Cyber",
+      "model": "Tesla",
+      "year": "2020",
+      "type": "petrol",
+      "price": "50",
+      "available": true,
+      "image": "/images/car7.jpeg"
+    },
+    {
+      "id": "8",
+      "name": "Chevrolet",
+      "model": "Malibu",
+      "year": 2021,
+      "type": "diesel",
+      "price": 220,
+      "available": false,
+      "image": "/images/default.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Nissan",
+      "model": "Altima",
+      "year": 2022,
+      "type": "petrol",
+      "price": 250,
+      "available": true,
+      "image": "/images/default.jpg"
+    },
+    {
+      "id": "10",
+      "name": "BMW",
+      "model": "X5",
+      "year": 2023,
+      "type": "petrol",
+      "price": 500,
+      "available": true,
+      "image": "/images/default.jpg"
+    },
+    {
+      "id": "12",
+      "name": "fiat",
+      "model": "Corolla2",
+      "year": "2024",
+      "type": "diesel",
+      "price": "233",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgwODg1NzN8&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "13",
+      "name": "dacia",
+      "model": "logan",
+      "year": "2025",
+      "type": "petrol",
+      "price": "400",
+      "image": "https://images.unsplash.com/photo-1536909526839-8f10e29ba80c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgwODg2Njl8&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "14",
+      "name": "lambergini",
+      "model": "LAM2347",
+      "year": "2025",
+      "type": "petrol",
+      "price": "4000",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1535063130681-0fe292a3524b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgwODk0ODJ8&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "15",
+      "name": "fiat",
+      "model": "R868",
+      "year": "2024",
+      "type": "diesel",
+      "price": "233",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1571607388263-1044f9ea01dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgxODU4OTJ8&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "16",
+      "name": "qsdf",
+      "model": "qsdfq",
+      "year": "2025",
+      "type": "diesel",
+      "price": "232",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1567818668259-e66acac21610?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgyNTcwMjl8&ixlib=rb-4.0.3&q=80&w=1080"
+    },
+    {
+      "id": "6711",
+      "name": "fiat",
+      "model": "R231",
+      "year": "2025",
+      "type": "diesel",
+      "price": "455",
+      "available": true,
+      "image": "https://images.unsplash.com/photo-1517672651691-24622a91b550?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Mzg3NzI1Njl8&ixlib=rb-4.0.3&q=80&w=1080"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "John Does",
+      "email": "johndoe@mail.com",
+      "phone": "1234567890",
+      "address": "123 Main St, New York, NY 10030",
+      "image": "/images/clients/client1.jpg",
+      "role": "client",
+      "login": "johndoe",
+      "password": "password123"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "janesmith@mail.com",
+      "phone": "0987654321",
+      "address": "456 Elm St, Los Angeles, CA 90001",
+      "image": "/images/clients/client2.jpg",
+      "role": "client",
+      "login": "janesmith",
+      "password": "password123"
+    },
+    {
+      "id": "3",
+      "name": "Alice Johnson",
+      "email": "alicejohnson@mail.com",
+      "phone": "5551234567",
+      "address": "789 Oak St, Chicago, IL 60601",
+      "image": "/images/clients/client3.jpg",
+      "role": "client",
+      "login": "alicejohnson",
+      "password": "password123"
+    },
+    {
+      "id": "4",
+      "name": "Bob Brown",
+      "email": "bobbrown@mail.com",
+      "phone": "4449876543",
+      "address": "321 Pine St, Houston, TX 77001",
+      "image": "/images/clients/client4.jpg",
+      "role": "client",
+      "login": "bobbrown",
+      "password": "password123"
+    },
+    {
+      "id": "1fd3",
+      "name": "mohamed ali",
+      "email": "mohamedali@mail.com",
+      "phone": "0345678901",
+      "address": "agadir ait melloul lamzar",
+      "image": "/images/clients/client5.jpg",
+      "role": "client",
+      "login": "mohamedali",
+      "password": "password123"
+    },
+    {
+      "id": "9c15",
+      "name": "alaoui",
+      "email": "alaoui@mail.com",
+      "phone": "0123123123",
+      "address": "lamzar \n",
+      "image": "/images/clients/client6.jpg",
+      "role": "client",
+      "login": "alaoui",
+      "password": "password123"
+    }
+  ],
+  "contracts": [
+    {
+      "id": "1",
+      "clientId": "1",
+      "carId": "1",
+      "startDate": "2025-02-21",
+      "endDate": "2025-03-31",
+      "price": 300
+    },
+    {
+      "id": "2",
+      "clientId": "2",
+      "carId": "2",
+      "startDate": "2025-01-11",
+      "endDate": "2025-01-30",
+      "price": 160
+    },
+    {
+      "id": "3",
+      "clientId": "3",
+      "carId": "3",
+      "startDate": "2025-01-31",
+      "endDate": "2025-02-21",
+      "price": 140
+    },
+    {
+      "id": "4",
+      "clientId": "4",
+      "carId": "4",
+      "startDate": "2025-01-01",
+      "endDate": "2025-02-30",
+      "price": 170
+    },
+    {
+      "id": "5",
+      "clientId": "1fd3",
+      "carId": "5",
+      "startDate": "2025-02-01",
+      "endDate": "2025-03-15",
+      "price": 180
+    },
+    {
+      "id": "6",
+      "clientId": "9c15",
+      "carId": "6",
+      "startDate": "2025-04-01",
+      "endDate": "2025-04-10",
+      "price": 180
+    },
+    {
+      "id": "7",
+      "clientId": "1",
+      "carId": "7",
+      "startDate": "2025-01-01",
+      "endDate": "2025-01-20",
+      "price": 50
+    },
+    {
+      "id": "8",
+      "clientId": "2",
+      "carId": "8",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-15",
+      "price": 220
+    }
+  ]
+}
