@@ -4,18 +4,12 @@ import Car from "./Car";
 import { useState, useEffect } from "react";
 import { Plus, Search } from "lucide-react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 function CarsList() {
-  const [cars, setCars] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    fetch("http://localhost:2001/cars")
-      .then((res) => res.json())
-      .then((data) => {
-        setCars(data);
-      });
-  }, []);
+  const cars = useSelector((state) => state.cars);
 
   const filteredCars = cars.filter((car) => {
     return (
