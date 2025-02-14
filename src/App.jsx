@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/admin/Dashboard";
+import CarsList from "./pages/admin/dashboard/cars/CarsList";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<h1>Statistics</h1>} />
-          <Route path="cars" element={<h1>Cars</h1>} />
+          <Route path="cars" element={<CarsList />} />
           <Route path="users" element={<h1>Users</h1>} />
           <Route path="contracts" element={<h1>Contracts</h1>} />
         </Route>
