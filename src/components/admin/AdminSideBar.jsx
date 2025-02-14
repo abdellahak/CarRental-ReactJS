@@ -37,7 +37,7 @@ function AdminSideBar({ isOpen, onToggle }) {
         <ul className="space-y-2">
           <li>
             <Link
-              to="/cars"
+              to="/dashboard/cars"
               className={`flex items-center gap-3 px-4 py-2 rounded-lg ${
                 isActive("/dashboard/cars") ? "bg-blue-600 text-white" : "hover:bg-gray-700/50"
               } ${!isOpen && "justify-center"}`}
@@ -49,7 +49,7 @@ function AdminSideBar({ isOpen, onToggle }) {
           </li>
           <li>
             <Link
-              to="/clients"
+              to="/dashboard/clients"
               className={`flex items-center gap-3 px-4 py-2 rounded-lg ${
                 isActive("/dashboard/clients") ? "bg-blue-600 text-white" : "hover:bg-gray-700/50"
               } ${!isOpen && "justify-center"}`}
@@ -61,7 +61,7 @@ function AdminSideBar({ isOpen, onToggle }) {
           </li>
           <li>
             <Link
-              to="/contracts"
+              to="/dashboard/contracts"
               className={`flex items-center gap-3 px-4 py-2 rounded-lg ${
                 isActive("/dashboard/contracts") ? "bg-blue-600 text-white" : "hover:bg-gray-700/50"
               } ${!isOpen && "justify-center"}`}

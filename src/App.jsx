@@ -1,7 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/admin/Dashboard";
+
+// cars
 import CarsDashboard from "./pages/admin/dashboard/cars/CarsDashboard";
 import CarsList from "./pages/admin/dashboard/cars/cars list/CarsList";
+import CarDetails from "./pages/admin/dashboard/cars/car details/CarDetails";
 
 
 function App() {
@@ -18,6 +21,7 @@ function App() {
           <Route index element={<h1>Statistics</h1>} />
           <Route path="cars" element={<CarsDashboard />}>
             <Route index element={<CarsList />} />
+            <Route path=":id" element={<CarDetails />} />
           </Route>
           <Route path="users" element={<h1>Users</h1>} />
           <Route path="contracts" element={<h1>Contracts</h1>} />

@@ -118,46 +118,6 @@
       "type": "petrol",
       "price": "400",
       "image": "https://images.unsplash.com/photo-1536909526839-8f10e29ba80c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgwODg2Njl8&ixlib=rb-4.0.3&q=80&w=1080"
-    },
-    {
-      "id": "14",
-      "name": "lambergini",
-      "model": "LAM2347",
-      "year": "2025",
-      "type": "petrol",
-      "price": "4000",
-      "available": true,
-      "image": "https://images.unsplash.com/photo-1535063130681-0fe292a3524b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgwODk0ODJ8&ixlib=rb-4.0.3&q=80&w=1080"
-    },
-    {
-      "id": "15",
-      "name": "fiat",
-      "model": "R868",
-      "year": "2024",
-      "type": "diesel",
-      "price": "233",
-      "available": true,
-      "image": "https://images.unsplash.com/photo-1571607388263-1044f9ea01dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgxODU4OTJ8&ixlib=rb-4.0.3&q=80&w=1080"
-    },
-    {
-      "id": "16",
-      "name": "qsdf",
-      "model": "qsdfq",
-      "year": "2025",
-      "type": "diesel",
-      "price": "232",
-      "available": true,
-      "image": "https://images.unsplash.com/photo-1567818668259-e66acac21610?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgyNTcwMjl8&ixlib=rb-4.0.3&q=80&w=1080"
-    },
-    {
-      "id": "6711",
-      "name": "fiat",
-      "model": "R231",
-      "year": "2025",
-      "type": "diesel",
-      "price": "455",
-      "available": true,
-      "image": "https://images.unsplash.com/photo-1517672651691-24622a91b550?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Mzg3NzI1Njl8&ixlib=rb-4.0.3&q=80&w=1080"
     }
   ],
   "users": [

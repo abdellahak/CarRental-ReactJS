@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Car from "./Car";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Plus, Search } from "lucide-react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
 function CarsList() {
   const [searchQuery, setSearchQuery] = useState("");
-
+  const dispatch = useDispatch();
   const cars = useSelector((state) => state.cars);
 
   const filteredCars = cars.filter((car) => {
@@ -23,7 +23,7 @@ function CarsList() {
       axios
         .delete(`http://localhost:2001/cars/${id}`)
         .then((res) => {
-          setCars(cars.filter((car) => car.id !== id));
+          dispatch({ type: "DELETE_CAR", payload: id });
         })
         .catch((err) => console.log(err));
     }
@@ -34,7 +34,7 @@ function CarsList() {
       <div className=" mb-4 flex justify-between flex-wrap">
         <h2 className="text-2xl font-bold">Cars : </h2>
         <Link
-          to="/cars/add"
+          to="/dashboard/cars/add"
           className="flex items-center text-center mt-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
         >
           <Plus className="w-6 h-6 mr-2"></Plus>
