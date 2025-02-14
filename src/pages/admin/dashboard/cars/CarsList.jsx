@@ -10,7 +10,7 @@ function CarsList() {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/cars")
+    fetch("http://localhost:2001/cars")
       .then((res) => res.json())
       .then((data) => {
         setCars(data);
@@ -27,7 +27,7 @@ function CarsList() {
   function deleteCar(id) {
     if (confirm("Are you sure you want to delete this car?")) {
       axios
-        .delete(`http://localhost:8080/cars/${id}`)
+        .delete(`http://localhost:2001/cars/${id}`)
         .then((res) => {
           setCars(cars.filter((car) => car.id !== id));
         })

@@ -8,7 +8,7 @@
       "type": "petrol",
       "price": "300",
       "available": true,
-      "image": "/images/car1.png"
+      "image": "/images/cars/car1.png"
     },
     {
       "id": "2",
@@ -18,7 +18,7 @@
       "type": "diesel",
       "price": "160",
       "available": true,
-      "image": "/images/car2.jpg"
+      "image": "/images/cars/car2.jpg"
     },
     {
       "id": "3",
@@ -28,7 +28,7 @@
       "type": "petrol",
       "price": "140",
       "available": false,
-      "image": "/images/car3.png"
+      "image": "/images/cars/car3.png"
     },
     {
       "id": "4",
@@ -36,7 +36,7 @@
       "model": "Accent",
       "year": 2018,
       "available": false,
-      "image": "/images/car4.JPG",
+      "image": "/images/cars/car4.JPG",
       "price": 170,
       "type": "diesel"
     },
@@ -48,7 +48,7 @@
       "type": "petrol",
       "price": "180",
       "available": false,
-      "image": "/images/car5.jpeg"
+      "image": "/images/cars/car5.jpeg"
     },
     {
       "id": "6",
@@ -58,7 +58,7 @@
       "type": "petrol",
       "price": "180",
       "available": true,
-      "image": "/images/car6.jpg  "
+      "image": "/images/cars/car6.jpg  "
     },
     {
       "id": "7",
@@ -68,7 +68,7 @@
       "type": "petrol",
       "price": "50",
       "available": true,
-      "image": "/images/car7.jpeg"
+      "image": "/images/cars/car7.jpeg"
     },
     {
       "id": "8",
@@ -78,7 +78,7 @@
       "type": "diesel",
       "price": 220,
       "available": false,
-      "image": "/images/default.jpg"
+      "image": "/images/cars/default.jpg"
     },
     {
       "id": "9",
@@ -88,7 +88,7 @@
       "type": "petrol",
       "price": 250,
       "available": true,
-      "image": "/images/default.jpg"
+      "image": "/images/cars/default.jpg"
     },
     {
       "id": "10",
@@ -98,7 +98,7 @@
       "type": "petrol",
       "price": 500,
       "available": true,
-      "image": "/images/default.jpg"
+      "image": "/images/cars/default.jpg"
     },
     {
       "id": "12",
@@ -108,7 +108,7 @@
       "type": "diesel",
       "price": "233",
       "available": true,
-      "image": "https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgwODg1NzN8&ixlib=rb-4.0.3&q=80&w=1080"
+      "image": "https://images/cars.unsplash.com/photo-1514316454349-750a7fd3da3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgwODg1NzN8&ixlib=rb-4.0.3&q=80&w=1080"
     },
     {
       "id": "13",
