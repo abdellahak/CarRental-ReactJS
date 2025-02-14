@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/admin/Dashboard";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
           <Route path="/login" element={<h1>Login</h1>} />
           <Route path="/register" element={<h1>Register</h1>} />
         </Route>
-        <Route path="/dashboard" element={<h1>Dashboard</h1>}>
+        <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<h1>Statistics</h1>} />
           <Route path="cars" element={<h1>Cars</h1>} />
           <Route path="users" element={<h1>Users</h1>} />
