@@ -12,6 +12,7 @@ function CarsList() {
   const cars = useSelector((state) => state.cars);
   const apiURL = import.meta.env.VITE_DATA_API_URL;
 
+  
   const filteredCars = cars.filter((car) => {
     return (
       car.model.toLowerCase().includes(searchQuery.toLowerCase()) ||

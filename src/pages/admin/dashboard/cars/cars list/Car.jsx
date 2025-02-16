@@ -52,12 +52,14 @@ function Car({ car, deleteCar }) {
           <p className="text-xs text-gray-500">Agadir</p>
         </div>
         <div className="mt-4 flex justify-stretch flex-wrap gap-1">
-          <Link
-            to={`/dashboard/cars/edit/${car.id}`}
-            className="text-center mt-1 flex-1 bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700 transition-colors block"
+          <button
+            onClick={(e)=>{
+              e.stopPropagation();
+              navigate(`/dashboard/cars/edit/${car.id}`)}}
+            className="cursor-pointer text-center mt-1 flex-1 bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700 transition-colors block"
           >
             Modify
-          </Link>
+          </button>
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -67,12 +69,15 @@ function Car({ car, deleteCar }) {
           >
             Delete
           </button>
-          <Link
-            to={`/dashboard/cars/${car.id}`}
-            className="text-center mt-1 flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors block"
+          <button
+            onClick={(e)=>{
+              e.stopPropagation();
+              navigate(`/dashboard/cars/${car.id}`)
+            }}
+            className="cursor-pointer text-center mt-1 flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors block"
           >
             Details
-          </Link>
+          </button>
         </div>
       </div>
     </div>

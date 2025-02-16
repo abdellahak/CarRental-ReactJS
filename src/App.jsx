@@ -6,6 +6,7 @@ import CarsDashboard from "./pages/admin/dashboard/cars/CarsDashboard";
 import CarsList from "./pages/admin/dashboard/cars/cars list/CarsList";
 import CarDetails from "./pages/admin/dashboard/cars/car details/CarDetails";
 import AddCar from "./pages/admin/dashboard/cars/add car/AddCar";
+import EditCar from "./pages/admin/dashboard/cars/modify car/EditCar";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route index element={<CarsList />} />
             <Route path=":id" element={<CarDetails />} />
             <Route path="add" element={<AddCar/>} />
+            <Route path="edit/:id" element={<EditCar/>} />
           </Route>
           <Route path="users" element={<h1>Users</h1>} />
           <Route path="contracts" element={<h1>Contracts</h1>} />
