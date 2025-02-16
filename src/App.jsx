@@ -8,6 +8,9 @@ import CarDetails from "./pages/admin/dashboard/cars/car details/CarDetails";
 import AddCar from "./pages/admin/dashboard/cars/add car/AddCar";
 import EditCar from "./pages/admin/dashboard/cars/modify car/EditCar";
 
+// users 
+import UsersDashboard from "./pages/admin/dashboard/users/UsersDashboard";
+import UsersList from "./pages/admin/dashboard/users/users list/UsersList"; 
 
 function App() {
   return (
@@ -21,13 +24,17 @@ function App() {
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<h1>Statistics</h1>} />
+          {/* cars */}
           <Route path="cars" element={<CarsDashboard />}>
             <Route index element={<CarsList />} />
             <Route path=":id" element={<CarDetails />} />
             <Route path="add" element={<AddCar/>} />
             <Route path="edit/:id" element={<EditCar/>} />
           </Route>
-          <Route path="users" element={<h1>Users</h1>} />
+          {/* users */}
+          <Route path="users" element={<UsersDashboard/>} >
+            <Route index element={<UsersList/>} />
+          </Route>
           <Route path="contracts" element={<h1>Contracts</h1>} />
         </Route>
       </Routes>
