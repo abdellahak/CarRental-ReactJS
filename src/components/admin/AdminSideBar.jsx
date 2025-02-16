@@ -49,14 +49,14 @@ function AdminSideBar({ isOpen, onToggle }) {
           </li>
           <li>
             <Link
-              to="/dashboard/clients"
+              to="/dashboard/users"
               className={`flex items-center gap-3 px-4 py-2 rounded-lg ${
-                isActive("/dashboard/clients") ? "bg-blue-600 text-white" : "hover:bg-gray-700/50"
+                isActive("/dashboard/users") ? "bg-blue-600 text-white" : "hover:bg-gray-700/50"
               } ${!isOpen && "justify-center"}`}
-              title={!isOpen ? "Clients" : undefined}
+              title={!isOpen ? "Users" : undefined}
             >
               <User className="w-5 h-5" />
-              {isOpen && "Clients"}
+              {isOpen && "Users"}
             </Link>
           </li>
           <li>
