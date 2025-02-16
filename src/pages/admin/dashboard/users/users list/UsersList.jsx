@@ -53,7 +53,7 @@ function UsersList() {
           className="flex items-center text-center mt-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
         >
           <Plus className="w-6 h-6 mr-2"></Plus>
-          Add Client
+          Add User
         </Link>
       </div>
       {/* search bar */}

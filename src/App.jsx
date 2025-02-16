@@ -11,6 +11,7 @@ import EditCar from "./pages/admin/dashboard/cars/modify car/EditCar";
 // users 
 import UsersDashboard from "./pages/admin/dashboard/users/UsersDashboard";
 import UsersList from "./pages/admin/dashboard/users/users list/UsersList"; 
+import AddUser from "./pages/admin/dashboard/users/add user/AddUser";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           {/* users */}
           <Route path="users" element={<UsersDashboard/>} >
             <Route index element={<UsersList/>} />
+            <Route path="add" element={<AddUser/>} />
           </Route>
           <Route path="contracts" element={<h1>Contracts</h1>} />
         </Route>
