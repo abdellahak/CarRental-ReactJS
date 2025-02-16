@@ -3,10 +3,10 @@ import { Link , useNavigate} from "react-router-dom";
 function Car({ car, deleteCar }) {
   const navigate = useNavigate();
   return (
-    <button
+    <div
       className="bg-white rounded-lg shadow-md overflow-hidden group cursor-pointer 
       hover:border-blue-600 border-2 border-transparent transition-colors ease-in-out duration-300"
-      to={`/dashboard/cars/${car.id}`}
+      // to={`/dashboard/cars/${car.id}`}
       onClick={() => navigate(`/dashboard/cars/${car.id}`)}
     >
       <div className="h-48 overflow-hidden relative">
@@ -40,7 +40,6 @@ function Car({ car, deleteCar }) {
             <span className="text-gray-500 text-sm block">per day</span>
           </div>
         </div>
-
         <div className="border-t border-gray-300 pt-4">
           <div className="flex justify-between">
             <p className="font-bold text-sm">Year : </p>
@@ -76,7 +75,7 @@ function Car({ car, deleteCar }) {
           </Link>
         </div>
       </div>
-    </button>
+    </div>
   );
 }
 

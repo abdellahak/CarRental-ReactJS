@@ -101,16 +101,6 @@
       "image": "/images/cars/default.jpg"
     },
     {
-      "id": "12",
-      "name": "fiat",
-      "model": "Corolla2",
-      "year": "2024",
-      "type": "diesel",
-      "price": "233",
-      "available": true,
-      "image": "https://images/cars.unsplash.com/photo-1514316454349-750a7fd3da3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgwODg1NzN8&ixlib=rb-4.0.3&q=80&w=1080"
-    },
-    {
       "id": "13",
       "name": "dacia",
       "model": "logan",

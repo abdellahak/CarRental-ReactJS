@@ -10,6 +10,7 @@ function CarsList() {
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
   const cars = useSelector((state) => state.cars);
+  const apiURL = import.meta.env.VITE_DATA_API_URL;
 
   const filteredCars = cars.filter((car) => {
     return (
@@ -21,7 +22,7 @@ function CarsList() {
   function deleteCar(id) {
     if (confirm("Are you sure you want to delete this car?")) {
       axios
-        .delete(`http://localhost:2001/cars/${id}`)
+        .delete(`${apiURL}/cars/${id}`)
         .then((res) => {
           dispatch({ type: "DELETE_CAR", payload: id });
         })
@@ -48,7 +49,7 @@ function CarsList() {
           <input
             type="search"
             placeholder="Search cars..."
-            className=" pl-8 pr-4 py-1 border rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 border-0 bg-white shadow-sm"
+            className=" pl-8 pr-4 py-1 rounded-sm focus:outline-none focus:ring-1 focus:ring-blue-500 border-0 bg-white shadow-sm"
             onChange={(e) => {
               setSearchQuery(e.target.value);
             }}
