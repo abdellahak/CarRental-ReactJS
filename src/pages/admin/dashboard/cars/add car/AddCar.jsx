@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
@@ -26,33 +26,35 @@ function AddCar() {
     if (e.currentTarget.image.files && e.currentTarget.image.files[0]) {
       image = URL.createObjectURL(e.currentTarget.image.files[0]);
     }
-    const data = { ...car, id: nextId.toString(), image : image};
+    const data = { ...car, id: nextId.toString(), image: image };
     axios
       .post(`${apiURL}/cars`, data)
       .then((res) => {
-        dispatch({ type: "ADD_CAR", payload: data });
-        navigate("/dashboard/cars");
-    })
-    .catch((err) => {
-      if (err.response && (err.response.status === 404 || err.response.status === 500)) {
-        console.log("API not valid or not working, ignoring error and dispatching action.");
+      dispatch({ type: "ADD_CAR", payload: data });
+      navigate("/dashboard/cars");
+      })
+      .catch((err) => {
+      if (err.code === "ERR_NETWORK") {
+        console.log(
+        "API not valid or not working, ignoring error and dispatching action."
+        );
         dispatch({ type: "ADD_CAR", payload: data });
         navigate("/dashboard/cars");
       } else {
-        console.log(err);
+        console.log(err); 
       }
-      })
+      });
   };
   return (
     <div className="p-4">
       <div className="max-w-4xl mx-auto">
-        <Link
-          to="/cars"
-          className="inline-flex items-center text-blue-600 hover:text-blue-800 my-6"
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center text-blue-600 hover:text-blue-800 my-6 cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 mr-2"></ArrowLeft>
           Back to car list
-        </Link>
+        </button>
         <div className="bg-white overflow-hidden shadow-lg rounded-lg mb-10 p-6">
           <form action="" onSubmit={handleSubmit} className="space-y-6">
             <div className="flex items-center justify-between mb-6">
@@ -175,14 +177,13 @@ function AddCar() {
                   name="image"
                   accept="image/*"
                   className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  
                 />
               </div>
             </div>
             <div className="flex justify-end pt-4">
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors cursor-pointer"
               >
                 Add Car
               </button>
