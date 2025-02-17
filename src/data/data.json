@@ -176,12 +176,23 @@
       "role": "client",
       "login": "alaoui",
       "password": "password123"
+    },
+    {
+      "id": "7",
+      "name": "zakariya",
+      "email": "zakariya@mail.com",
+      "phone": "067896789",
+      "address": "sidi mimoun",
+      "login": "",
+      "password": "123456789",
+      "image": "blob:http://localhost:5173/6557a5b1-6ffb-4e1a-8742-f9b59cb5b3cf",
+      "role": "client"
     }
   ],
   "contracts": [
     {
       "id": "1",
-      "clientId": "1",
+      "userId": "1",
       "carId": "1",
       "startDate": "2025-02-21",
       "endDate": "2025-03-31",
@@ -189,7 +200,7 @@
     },
     {
       "id": "2",
-      "clientId": "2",
+      "userId": "2",
       "carId": "2",
       "startDate": "2025-01-11",
       "endDate": "2025-01-30",
@@ -197,7 +208,7 @@
     },
     {
       "id": "3",
-      "clientId": "3",
+      "userId": "3",
       "carId": "3",
       "startDate": "2025-01-31",
       "endDate": "2025-02-21",
@@ -205,7 +216,7 @@
     },
     {
       "id": "4",
-      "clientId": "4",
+      "userId": "4",
       "carId": "4",
       "startDate": "2025-01-01",
       "endDate": "2025-02-30",
@@ -213,7 +224,7 @@
     },
     {
       "id": "5",
-      "clientId": "1fd3",
+      "userId": "6",
       "carId": "5",
       "startDate": "2025-02-01",
       "endDate": "2025-03-15",
@@ -221,7 +232,7 @@
     },
     {
       "id": "6",
-      "clientId": "9c15",
+      "userId": "5",
       "carId": "6",
       "startDate": "2025-04-01",
       "endDate": "2025-04-10",
@@ -229,7 +240,7 @@
     },
     {
       "id": "7",
-      "clientId": "1",
+      "userId": "1",
       "carId": "7",
       "startDate": "2025-01-01",
       "endDate": "2025-01-20",
@@ -237,7 +248,7 @@
     },
     {
       "id": "8",
-      "clientId": "2",
+      "userId": "2",
       "carId": "8",
       "startDate": "2025-02-01",
       "endDate": "2025-02-15",
