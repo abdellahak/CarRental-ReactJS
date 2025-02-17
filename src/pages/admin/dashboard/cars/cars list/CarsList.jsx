@@ -28,9 +28,9 @@ function CarsList() {
           dispatch({ type: "DELETE_CAR", payload: id });
         })
         .catch((err) => {
-          if (err.response && (err.response.status === 404 || err.response.status === 500)) {
+          if (err.code === "ERR_NETWORK") {
             console.log("API not valid or not working, ignoring error and dispatching action.");
-            dispatch({ type: "DELETE_CAR", payload: id });
+            dispatch({ type: "DELETE_USER", payload: id });
           } else {
             console.log(err);
           }
