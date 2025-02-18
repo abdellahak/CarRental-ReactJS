@@ -15,6 +15,10 @@ import UserDetails from "./pages/admin/dashboard/users/user details/UserDetails"
 import AddUser from "./pages/admin/dashboard/users/add user/AddUser";
 import EditUser from "./pages/admin/dashboard/users/modify user/EditUser";
 
+// contracts 
+import ContractsDashboard from "./pages/admin/dashboard/contracts/ContractsDashboard";
+import ContractsList from "./pages/admin/dashboard/contracts/contracts list/ContractsList";
+
 function App() {
   return (
     <BrowserRouter>
@@ -41,7 +45,9 @@ function App() {
             <Route path="add" element={<AddUser/>} />
             <Route path="edit/:id" element={<EditUser/>} />
           </Route>
-          <Route path="contracts" element={<h1>Contracts</h1>} />
+          <Route path="contracts" element={<ContractsDashboard/>}>
+            <Route index element={<ContractsList/>} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
