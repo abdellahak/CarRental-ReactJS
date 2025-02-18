@@ -7,7 +7,11 @@ export default function UserDetails() {
   const apiURL = import.meta.env.VITE_DATA_API_URL;
   const users = useSelector((state) => state.users);
   const cars = useSelector((state) => state.cars);
-  const contracts = useSelector((state) => state.contracts.sort((a, b) => new Date(b.startDate) - new Date(a.startDate)));
+  const contracts = useSelector((state) =>
+    state.contracts.sort(
+      (a, b) => new Date(b.startDate) - new Date(a.startDate)
+    )
+  );
   const [bookedCars, setBookedCars] = useState([]);
   const dispatch = useDispatch();
   const [user, setUser] = useState({
@@ -115,7 +119,7 @@ export default function UserDetails() {
         {bookedCars.length > 0 ? (
           bookedCars.map((car, index) => (
             <div
-              className="border-1 border-white rounded-xl shadow-md overflow-hidden cursor-pointer my-5"
+              className="overflow-hidden border-t border-t-gray-300 cursor-pointer my-5 hover:bg-gray-200"
               onClick={() => navigate(`/dashboard/cars/${car.id}`)}
               key={index}
             >
@@ -143,16 +147,33 @@ export default function UserDetails() {
                     </div>
                   </div>
                   <div className="mt-2 text-gray-500">
-                    {contracts.map(c => (
-                      c.carId === car.id && c.userId === user.id ? `${c.startDate} - ${c.endDate}` : null
-                    ))}
+                    {contracts.map((c) =>
+                      c.carId === car.id && c.userId === user.id
+                        ? `${c.startDate} - ${c.endDate}`
+                        : null
+                    )}
                   </div>
                   <div className={`text-gray-500`}>
-                    {contracts.map(c => (
-                      c.carId === car.id && c.userId === user.id ? `Status: ${
-                        new Date(c.endDate) < new Date() ? "Completed" : new Date(c.startDate) > new Date() ? "Upcoming" : "Active"
-                      }` : null
-                    ))}
+                    {contracts.map((c) =>
+                      c.carId === car.id && c.userId === user.id ? (
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                            new Date(c.endDate) < new Date()
+                              ? "bg-gray-100 text-gray-800"
+                              : new Date(c.startDate) > new Date()
+                              ? "bg-blue-100 text-blue-800"
+                              : "bg-green-100 text-green-800"
+                          }`}
+                        >
+                          Status:{" "}
+                          {new Date(c.endDate) < new Date()
+                            ? "Completed"
+                            : new Date(c.startDate) > new Date()
+                            ? "Upcoming"
+                            : "Active"}
+                        </span>
+                      ) : null
+                    )}
                   </div>
                 </div>
               </div>
