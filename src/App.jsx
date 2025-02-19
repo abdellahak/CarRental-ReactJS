@@ -18,6 +18,7 @@ import EditUser from "./pages/admin/dashboard/users/modify user/EditUser";
 // contracts 
 import ContractsDashboard from "./pages/admin/dashboard/contracts/ContractsDashboard";
 import ContractsList from "./pages/admin/dashboard/contracts/contracts list/ContractsList";
+import AddContract from "./pages/admin/dashboard/contracts/add contract/AddContract";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           </Route>
           <Route path="contracts" element={<ContractsDashboard/>}>
             <Route index element={<ContractsList/>} />
+            <Route path="add" element={<AddContract/>} />
           </Route>
         </Route>
       </Routes>
