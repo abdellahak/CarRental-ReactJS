@@ -97,7 +97,7 @@ export default function ContractsList() {
       </div>
       {/* contracts */}
       <div id="contracts" className="overflow-scroll lg:overflow-visible mt-6  ">
-        <table className="table-auto w-full mb-40">
+        <table className="table-auto w-full">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
