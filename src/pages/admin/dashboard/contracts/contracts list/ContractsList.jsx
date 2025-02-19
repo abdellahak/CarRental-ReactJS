@@ -289,7 +289,7 @@ export default function ContractsList() {
                     <div className="text-sm font-medium text-gray-900">
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-semibold whitespace-nowrap ${
-                          rentalDays <= 0
+                          rentalDays < 0
                             ? "bg-blue-100 text-blue-800"
                             : rentalDays === duration
                             ? "bg-gray-100 text-gray-800"
@@ -309,7 +309,7 @@ export default function ContractsList() {
                     {
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                          rentalDays <= 0
+                          rentalDays < 0
                             ? "bg-blue-100 text-blue-800"
                             : rentalDays === duration
                             ? "bg-gray-100 text-gray-800"
