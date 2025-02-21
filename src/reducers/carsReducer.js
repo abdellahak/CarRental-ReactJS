@@ -63,6 +63,14 @@ export default function carsReducer(state = init_state, action) {
       return state.map((car) =>
         car.id === action.payload.id ? action.payload : car
       );
+    case "RENT_CAR":
+      return state.map((car) =>
+        car.id === action.payload.id ? { ...car, available: false } : car
+      );
+    case "RETURN_CAR":
+      return state.map((car) =>
+        car.id === action.payload.id ? { ...car, available: true } : car
+      );
     default:
       return state;
   }

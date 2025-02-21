@@ -1,6 +1,7 @@
-
+import { Link } from "react-router-dom";
 
 export default function RentCarsList({filteredCars}) {
+  
   return (
     <>
       <div className="py-16 bg-gray-50">
@@ -8,7 +9,7 @@ export default function RentCarsList({filteredCars}) {
           <h2 className="text-4xl font-bold text-center mb-12">OUR BEST OFFERS</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center">
             {filteredCars.map((car) => (
-              <div key={car.id} className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 w-80 h-80    ">
+              <div key={car.id} className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-102 w-80 h-80 mt-4">
                 <div className="aspect-w-16 aspect-h-9">
                   <img 
                     src={car.image}
@@ -19,9 +20,12 @@ export default function RentCarsList({filteredCars}) {
                 <div className="p-6 flex flex-col items-center">
                   <h3 className="text-xl font-semibold text-center">{car.name}</h3>
                   <p className="text-blue-600 text-center text-lg">{car.model}</p>
-                  <button className="cursor-pointer mt-4 mx-auto bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">
+                  {
+                    car.available ? <Link to={`/car/${car.id}`} className="cursor-pointer mt-4 mx-auto bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300">
                     Rent Now
-                  </button>
+                  </Link> : 
+                  <Link to={`/car/${car.id}`} className="cursor-not-allowed mt-4 mx-auto border border-red-600 bg-red-200 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300" onClick={(e) => e.preventDefault()}>Not Available</Link>
+                  }
                 </div>
               </div>
             ))}

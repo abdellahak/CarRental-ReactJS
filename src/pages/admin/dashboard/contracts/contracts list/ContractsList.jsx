@@ -57,6 +57,10 @@ export default function ContractsList() {
       axios
         .delete(`${apiURL}/contracts/${id}`)
         .then(() => {
+          axios.patch(`${apiURL}/cars/${contracts.find((contract) => contract.id === id).carId}`, {
+            available: true,
+          });
+          dispatch({ type: "RETURN_CAR", payload: contracts.find((contract) => contract.id === id).carId });
           dispatch({ type: "DELETE_CONTRACT", payload: id });
         })
         .catch((err) => {

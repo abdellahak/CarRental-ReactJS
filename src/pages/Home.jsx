@@ -5,23 +5,24 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useEffect } from "react";
 export default function Home() {
-  const dispatch = useDispatch();
   const apiURL = import.meta.env.VITE_DATA_API_URL;
+  const dispatch = useDispatch(); 
   useEffect(() => {
-    axios.get(`${apiURL}/cars`)
-    .then((res) => {
-      dispatch({ type: "FETCH_CARS_DATA", payload: res.data });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    fetch(`${apiURL}/cars`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "FETCH_CARS_DATA", payload: data });
+      })
+      .catch(() => {
+        console.log("json-server is not running");
+      });
   }, []);
   return (
     <div className="flex min-h-screen bg-gray-100">
       <div className="flex-1 overflow-x-hidden relative">
         <Header/>
         <div className="mt-20">
-        <Outlet />
+        <Outlet />  
         </div>
         <AdminFooter />
       </div>
