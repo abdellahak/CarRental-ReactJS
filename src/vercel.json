@@ -1,0 +1,84 @@
+{
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/"
+    },
+    {
+      "src": "/car/:id",
+      "dest": "/car/:id"
+    },
+    {
+      "src": "/about",
+      "dest": "/about"
+    },
+    {
+      "src": "/contact",
+      "dest": "/contact"
+    },
+    {
+      "src": "/login",
+      "dest": "/login"
+    },
+    {
+      "src": "/register",
+      "dest": "/register"
+    },
+    {
+      "src": "/forgot-password",
+      "dest": "/forgot-password"
+    },
+    {
+      "src": "/reset-password",
+      "dest": "/reset-password"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/dashboard"
+    },
+    {
+      "src": "/dashboard/cars",
+      "dest": "/dashboard/cars"
+    },
+    {
+      "src": "/dashboard/cars/:id",
+      "dest": "/dashboard/cars/:id"
+    },
+    {
+      "src": "/dashboard/cars/add",
+      "dest": "/dashboard/cars/add"
+    },
+    {
+      "src": "/dashboard/cars/edit/:id",
+      "dest": "/dashboard/cars/edit/:id"
+    },
+    {
+      "src": "/dashboard/users",
+      "dest": "/dashboard/users"
+    },
+    {
+      "src": "/dashboard/users/:id",
+      "dest": "/dashboard/users/:id"
+    },
+    {
+      "src": "/dashboard/users/add",
+      "dest": "/dashboard/users/add"
+    },
+    {
+      "src": "/dashboard/users/edit/:id",
+      "dest": "/dashboard/users/edit/:id"
+    },
+    {
+      "src": "/dashboard/contracts",
+      "dest": "/dashboard/contracts"
+    },
+    {
+      "src": "/dashboard/contracts/:id",
+      "dest": "/dashboard/contracts/:id"
+    },
+    {
+      "src": "/dashboard/contracts/add",
+      "dest": "/dashboard/contracts/add"
+    }
+  ]
+}
