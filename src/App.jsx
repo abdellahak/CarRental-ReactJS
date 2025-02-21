@@ -24,13 +24,14 @@ import ContractDetails from "./pages/admin/dashboard/contracts/contract details/
 
 // home 
 import Home from "./pages/Home";
+import GuestPage from "./pages/users/guest page/GuestPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}>
-          <Route index element={<h1 className="h-screen">Home</h1>} />
+          <Route index element={<GuestPage/>} />
           <Route path="/cars" element={<h1>Cars</h1>} />
           <Route path="/login" element={<h1>Login</h1>} />
           <Route path="/register" element={<h1>Register</h1>} />
