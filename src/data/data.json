@@ -66,7 +66,7 @@
       "model": "Tesla",
       "year": "2020",
       "type": "petrol",
-      "price": "50",
+      "price": "500",
       "available": true,
       "image": "/images/cars/car7.jpeg"
     },
@@ -78,7 +78,7 @@
       "type": "diesel",
       "price": 220,
       "available": true,
-      "image": "/images/cars/default.jpg"
+      "image": "/images/cars/car11.jpg"
     },
     {
       "id": "9",
@@ -88,7 +88,7 @@
       "type": "petrol",
       "price": 250,
       "available": true,
-      "image": "/images/cars/default.jpg"
+      "image": "/images/cars/car9.jpeg"
     },
     {
       "id": "10",
@@ -98,16 +98,96 @@
       "type": "petrol",
       "price": 500,
       "available": true,
-      "image": "/images/cars/default.jpg"
+      "image": "/images/cars/car8.webp"
     },
     {
       "id": "13",
-      "name": "dacia",
-      "model": "logan",
+      "name": "logan",
+      "model": "dacia",
       "year": "2025",
       "type": "petrol",
       "price": "400",
-      "image": "https://images.unsplash.com/photo-1536909526839-8f10e29ba80c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0OTkyNDR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MzgwODg2Njl8&ixlib=rb-4.0.3&q=80&w=1080",
+      "image": "/images/cars/car10.jpg",
+      "available": true
+    },
+    {
+      "id": "14",
+      "name": "Syros",
+      "model": "Kia",
+      "year": "2024",
+      "type": "petrol",
+      "price": "400",
+      "image": "/images/cars/car12.jpg",
+      "available": true
+    },
+    {
+      "id": "15",
+      "name": "RS Q8",
+      "model": "Audi",
+      "year": "2024",
+      "type": "electric",
+      "price": "730",
+      "image": "/images/cars/car13.jpg",
+      "available": true
+    },
+    {
+      "id": "16",
+      "name": "Creta",
+      "model": "Hyundai",
+      "year": "2024",
+      "type": "petrol",
+      "price": "430",
+      "image": "/images/cars/car14.jpg",
+      "available": true
+    },
+    {
+      "id": "17",
+      "name": "XUV700",
+      "model": "Mahindra",
+      "year": "2021",
+      "type": "petrol",
+      "price": "600",
+      "image": "/images/cars/car15.jpg",
+      "available": true
+    },
+    {
+      "id": "18",
+      "name": "Suzuki",
+      "model": "Maruti",
+      "year": "2024",
+      "type": "petrol",
+      "price": "450",
+      "image": "/images/cars/car16.jpg",
+      "available": true
+    },
+    {
+      "id": "19",
+      "name": "Urban",
+      "model": "Toyota",
+      "year": "2022",
+      "type": "electric",
+      "price": "344",
+      "image": "/images/cars/car17.jpg",
+      "available": true
+    },
+    {
+      "id": "20",
+      "name": "Defender",
+      "model": "Land Rover",
+      "year": "2025",
+      "type": "electric",
+      "price": "650",
+      "image": "/images/cars/car18.jpg",
+      "available": true
+    },
+    {
+      "id": "21",
+      "name": "Thar",
+      "model": "Mahindra",
+      "year": "2020",
+      "type": "petrol",
+      "price": "650",
+      "image": "/images/cars/car19.jpg",
       "available": true
     }
   ],
@@ -245,7 +325,7 @@
       "carId": "7",
       "startDate": "2025-01-01",
       "endDate": "2025-01-20",
-      "price": 50
+      "price": 500
     },
     {
       "id": "8",

@@ -14,7 +14,7 @@ function CarsList() {
   const [viewMode, setViewMode] = useState("grid"); // State to track view mode
   const carsPerPage = 8; // Number of cars per page
   const dispatch = useDispatch();
-  const cars = useSelector((state) => state.cars);
+  const cars = useSelector((state) => state.cars).slice().sort((a, b) => b.id - a.id);
   const apiURL = import.meta.env.VITE_DATA_API_URL;
 
   const filteredCars = cars.filter((car) => {
@@ -148,45 +148,53 @@ function CarsList() {
             ))}
           </div>
         ) : (
-          <table className="min-w-full bg-white">
-            <thead>
-              <tr>
-                <th className="py-2"><CarIcon className="inline w-4 h-4 mr-1" />Model</th>
-                <th className="py-2"><CarIcon className="inline w-4 h-4 mr-1" />Name</th>
-                <th className="py-2"><Type className="inline w-4 h-4 mr-1" />Type</th>
-                <th className="py-2"><DollarSign className="inline w-4 h-4 mr-1" />Price</th>
-                <th className="py-2"><CheckCircle className="inline w-4 h-4 mr-1" />Availability</th>
-                <th className="py-2"><Image className="inline w-4 h-4 mr-1" />Image</th>
-                <th className="py-2"><Edit className="inline w-4 h-4 mr-1" />Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentCars.map((car) => (
-                <tr key={car.id}>
-                  <td className="py-2">{car.model}</td>
-                  <td className="py-2">{car.name}</td>
-                  <td className="py-2">{car.type}</td>
-                  <td className="py-2">{car.price}</td>
-                  <td className="py-2">{car.available ? "Available" : "Unavailable"}</td>
-                  <td className="py-2"><img src={car.image} alt={car.name} className="w-16 h-16 object-cover" /></td>
-                  <td className="py-2">
-                    <Link
-                      to={`/dashboard/cars/edit/${car.id}`}
-                      className="bg-yellow-500 text-white px-2 py-1 rounded-md mr-2"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => deleteCar(car.id)}
-                      className="bg-red-600 text-white px-2 py-1 rounded-md"
-                    >
-                      Delete
-                    </button>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white border border-gray-300">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="py-2 px-4 border-b"><CarIcon className="inline w-4 h-4 mr-1" />Model</th>
+                  <th className="py-2 px-4 border-b"><CarIcon className="inline w-4 h-4 mr-1" />Name</th>
+                  <th className="py-2 px-4 border-b"><Type className="inline w-4 h-4 mr-1" />Type</th>
+                  <th className="py-2 px-4 border-b"><DollarSign className="inline w-4 h-4 mr-1" />Price</th>
+                  <th className="py-2 px-4 border-b"><CheckCircle className="inline w-4 h-4 mr-1" />Availability</th>
+                  <th className="py-2 px-4 border-b"><Image className="inline w-4 h-4 mr-1" />Image</th>
+                  <th className="py-2 px-4 border-b"><Edit className="inline w-4 h-4 mr-1" />Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentCars.map((car, index) => (
+                  <tr key={car.id} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
+                    <td className="py-2 px-4 border-b">{car.model}</td>
+                    <td className="py-2 px-4 border-b">{car.name}</td>
+                    <td className="py-2 px-4 border-b">{car.type}</td>
+                    <td className="py-2 px-4 border-b">{car.price}</td>
+                    <td className="py-2 px-4 border-b">{car.available ? "Available" : "Unavailable"}</td>
+                    <td className="py-2 px-4 border-b"><img src={car.image} alt={car.name} className="w-16 h-16 object-cover" /></td>
+                    <td className="py-2 px-4 border-b">
+                      <Link
+                        to={`/dashboard/cars/edit/${car.id}`}
+                        className="bg-yellow-500 text-white px-2 py-1 rounded-md mr-2"
+                      >
+                        Edit
+                      </Link>
+                      <Link
+                        to={`/dashboard/cars/details/${car.id}`}
+                        className="bg-green-500 text-white px-2 py-1 rounded-md mr-2 cursor-pointer"
+                      >
+                        Details
+                      </Link>
+                      <button
+                        onClick={() => deleteCar(car.id)}
+                        className="bg-red-600 text-white px-2 py-1 rounded-md cursor-pointer"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )
       ) : (
         <div className="text-center text-3xl p-5">No cars found</div>
