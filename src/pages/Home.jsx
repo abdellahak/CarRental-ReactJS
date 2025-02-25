@@ -17,6 +17,16 @@ export default function Home() {
         console.log("json-server is not running");
       });
   }, []);
+  useEffect(() => {
+    fetch(`${apiURL}/users`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "FETCH_USERS_DATA", payload: data });
+      })
+      .catch(() => {
+        console.log("json-server is not running");
+      });
+  }, []);
   return (
     <div className="flex min-h-screen bg-gray-100">
       <div className="flex-1 overflow-x-hidden relative">

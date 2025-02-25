@@ -201,7 +201,8 @@
       "image": "/images/users/client1.jpg",
       "role": "client",
       "login": "johndoe",
-      "password": "password123"
+      "password": "password123",
+      "cin": "A123456"
     },
     {
       "id": "2",
@@ -212,7 +213,8 @@
       "image": "/images/users/client2.jpg",
       "role": "client",
       "login": "janesmith",
-      "password": "password123"
+      "password": "password123",
+      "cin": "B234567"
     },
     {
       "id": "3",
@@ -223,7 +225,8 @@
       "image": "/images/users/client3.jpg",
       "role": "client",
       "login": "alicejohnson",
-      "password": "password123"
+      "password": "password123",
+      "cin": "C345678"
     },
     {
       "id": "4",
@@ -234,7 +237,8 @@
       "image": "/images/users/client4.jpg",
       "role": "client",
       "login": "bobbrown",
-      "password": "password123"
+      "password": "password123",
+      "cin": "D456789"
     },
     {
       "id": "5",
@@ -245,7 +249,8 @@
       "image": "/images/users/client5.jpg",
       "role": "client",
       "login": "mohamedali",
-      "password": "password123"
+      "password": "password123",
+      "cin": "E567890"
     },
     {
       "id": "6",
@@ -256,7 +261,8 @@
       "image": "/images/users/client6.jpg",
       "role": "client",
       "login": "alaoui",
-      "password": "password123"
+      "password": "password123",
+      "cin": "F678901"
     },
     {
       "id": "7",
@@ -267,7 +273,32 @@
       "login": "",
       "password": "123456789",
       "image": "blob:http://localhost:5173/6557a5b1-6ffb-4e1a-8742-f9b59cb5b3cf",
-      "role": "client"
+      "role": "client",
+      "cin": "G789012"
+    },
+    {
+      "id": "8",
+      "name": "abdellah khouden",
+      "email": "admin@mail.com",
+      "phone": "234567890°",
+      "address": "lamzar \n",
+      "image": "",
+      "role": "admin",
+      "login": "admin",
+      "password": "admin",
+      "cin": "H890123"
+    },
+    {
+      "id": "9",
+      "name": "John Does",
+      "email": "brahim@mail.com",
+      "phone": "0123123123",
+      "address": "laayoune ",
+      "image": "",
+      "role": "client",
+      "userName": "brahim",
+      "cin": "dsf5678",
+      "password": "password123"
     }
   ],
   "contracts": [

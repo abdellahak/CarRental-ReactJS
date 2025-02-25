@@ -5,9 +5,8 @@ export default function ProtectedRoute({children}){
     if(!isAuthenticated){
         return <Navigate to="/login"/>
     }else{
-      const users = useSelector(state => state.users);
       const user = useSelector(state => state.auth.user);
-      if(users.find(u => u.id === user.id).role === "admin"){
+      if(user.role === "admin"){
         return <Navigate to="/dashboard"/>
       }
       return children;

@@ -1,4 +1,14 @@
-const init_state = [
+import axios from "axios";
+const apiURL = import.meta.env.VITE_DATA_API_URL;
+let init_state = [];
+
+async function fetchData() {
+  try {
+    const response = await axios.get(`${apiURL}/cars`);
+    init_state = response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    init_state = [
   {
     id: "1",
     name: "Toyota",
@@ -49,7 +59,11 @@ const init_state = [
     available: false,
     image: "/images/cars/car5.jpeg",
   },
-];
+    ];
+  }
+}
+
+await fetchData();
 
 export default function carsReducer(state = init_state, action) {
   switch (action.type) {

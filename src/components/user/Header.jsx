@@ -1,12 +1,17 @@
-import {Car} from "lucide-react";
-import { Link } from "react-router-dom";
+import { Car } from "lucide-react";
+import { Link, useLocation} from "react-router-dom";
+import { useSelector, useDispatch} from "react-redux";
+import { useState } from "react";
 
 const Header = () => {
+  const authentification = useSelector((state) => state.auth);
+  const location = useLocation();
+  const dispatch = useDispatch();
   return (
     <>
       <header className="lg:px-16 px-6 bg-[#1a2234] flex flex-wrap items-center lg:py-0 py-2 fixed w-full z-10 top-0">
         <div className="flex-1 flex justify-between items-center">
-          <Link className="text-white text-2xl md:text-4xl flex items-center gap-2 font-bold">
+          <Link to={"/"} className="text-white text-2xl md:text-4xl flex items-center gap-2 font-bold">
             <Car className="text-white h-12 w-12" />
             Mingo Cars
           </Link>
@@ -63,7 +68,49 @@ const Header = () => {
                 >
                   Support
                 </a>
-              </li> */}
+                </li> */}
+                {(authentification.isAuthenticated && authentification.user.role === "admin") && (
+                  <li>
+                    <Link
+                      to="/dashboard"
+                      className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 cursor-pointer"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                )}
+                {!authentification.isAuthenticated && (
+                  <li>
+                    <Link
+                      to="/login"
+                      className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 cursor-pointer"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                )}
+                {(!authentification.isAuthenticated && location.pathname != "/register" ) && (
+                  <li>
+                    <Link
+                      to="/register"
+                      className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 cursor-pointer"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                )}
+                {authentification.isAuthenticated && (
+                  <li>
+                    <button
+                      className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 cursor-pointer"
+                      onClick={() => {
+                        dispatch({ type: "LOGOUT" });
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                )}
             </ul>
           </nav>
           {/* <a
