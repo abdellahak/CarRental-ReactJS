@@ -30,7 +30,10 @@ import Home from "./pages/Home";
 import GuestPage from "./pages/users/guest page/GuestPage";
 import RentCar from "./pages/users/rent car page/RentCar";
 
-
+// Authentification
+import Login from "./pages/users/guest page/Login";
+import Register from "./pages/users/guest page/Register";
+import ProtectedRoute from "./components/context/ProtectedRoute";
 
 function App() {
   return (
@@ -39,29 +42,31 @@ function App() {
         <Route path="/" element={<Home />}>
           <Route index element={<GuestPage />} />
           <Route path="/car/:id" element={<RentCar />} />
-          <Route path="/login" element={<h1>Login</h1>} />
-          <Route path="/register" element={<h1>Register</h1>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route index element={<CarsList />} />
-          {/* cars */}
-          <Route path="cars" element={<CarsDashboard />}>
+          <Route element={<ProtectedRoute />}>
             <Route index element={<CarsList />} />
-            <Route path=":id" element={<CarDetails />} />
-            <Route path="add" element={<AddCar />} />
-            <Route path="edit/:id" element={<EditCar />} />
-          </Route>
-          {/* users */}
-          <Route path="users" element={<UsersDashboard />}>
-            <Route index element={<UsersList />} />
-            <Route path=":id" element={<UserDetails />} />
-            <Route path="add" element={<AddUser />} />
-            <Route path="edit/:id" element={<EditUser />} />
-          </Route>
-          <Route path="contracts" element={<ContractsDashboard />}>
-            <Route index element={<ContractsList />} />
-            <Route path="add" element={<AddContract />} />
-            <Route path=":id" element={<ContractDetails />} />
+            {/* cars */}
+            <Route path="cars" element={<CarsDashboard />}>
+              <Route index element={<CarsList />} />
+              <Route path=":id" element={<CarDetails />} />
+              <Route path="add" element={<AddCar />} />
+              <Route path="edit/:id" element={<EditCar />} />
+            </Route>
+            {/* users */}
+            <Route path="users" element={<UsersDashboard />}>
+              <Route index element={<UsersList />} />
+              <Route path=":id" element={<UserDetails />} />
+              <Route path="add" element={<AddUser />} />
+              <Route path="edit/:id" element={<EditUser />} />
+            </Route>
+            <Route path="contracts" element={<ContractsDashboard />}>
+              <Route index element={<ContractsList />} />
+              <Route path="add" element={<AddContract />} />
+              <Route path=":id" element={<ContractDetails />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
