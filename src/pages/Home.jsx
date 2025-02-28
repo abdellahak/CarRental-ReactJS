@@ -28,7 +28,7 @@ export default function Home() {
       });
   }, []);
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen dark:bg-gray-900">
       <div className="flex-1 overflow-x-hidden relative">
         <Header/>
         <div className="mt-20">

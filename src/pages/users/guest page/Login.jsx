@@ -18,12 +18,12 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("users", users);
     const user = users.find(u => 
       (u.email === identifier || u.login === identifier) && u.password === password
     );
     if (user) {
       dispatch({ type: "LOGIN_SUCCESS", payload: user });
-      
       if (user.role === "admin") {
         navigate("/dashboard");
         return;
@@ -32,6 +32,7 @@ export default function Login() {
         return;
       }
     }
+    alert("Invalid credentials");
   };
 
   return (

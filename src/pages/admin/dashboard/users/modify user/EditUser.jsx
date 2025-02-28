@@ -69,7 +69,7 @@ export default function EditUser() {
         <div className="bg-white overflow-hidden shadow-lg rounded-lg mb-10 p-6">
           <div className="w-full">
             <img
-              src={user.image}
+              src={user.image || "/images/users/defaultUser.jpg"}
               alt={user.name}
               className="mx-auto rounded-full max-h-96 aspect-square"
             />

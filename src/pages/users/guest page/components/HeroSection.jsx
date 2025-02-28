@@ -4,7 +4,7 @@ export default function HeroSection() {
   const isEnglish = language === "en";
   return (
     <>
-      <div className="relative isolate overflow-hidden bg-brand-300 dark:bg-gray-900">
+      <div className="relative isolate overflow-hidden bg-brand-300 dark:bg-gray-900" id="hero">
         <img
           src="/images/hero/heroGif.gif"
           alt={isEnglish ? "discover your car" : "اكتشف سيارتك"}

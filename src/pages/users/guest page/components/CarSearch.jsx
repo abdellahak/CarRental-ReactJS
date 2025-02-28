@@ -76,7 +76,7 @@ export default function CarSearch() {
                   </option>
                 ))}
               </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-500 pointer-events-none h-5 w-5" />
+              {/* <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-500 pointer-events-none h-5 w-5" /> */}
             </div>
 
             <div className="w-full md:w-64 relative">
@@ -94,7 +94,7 @@ export default function CarSearch() {
                   </option>
                 ))}
               </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-500 pointer-events-none h-5 w-5" />
+              {/* <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-500 pointer-events-none h-5 w-5" /> */}
             </div>
 
             <button

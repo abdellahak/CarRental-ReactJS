@@ -67,7 +67,7 @@ export default function UserDetails() {
           <div className="md:flex-shrink-0">
             <img
               className="h-60 w-full object-cover md:w-48 md:h-48"
-              src={user.image}
+              src={user.image || "/images/users/defaultUser.jpg"}
               alt="Event image"
             />
           </div>
@@ -157,6 +157,7 @@ export default function UserDetails() {
                     {contracts.map((c) =>
                       c.carId === car.id && c.userId === user.id ? (
                         <span
+                          key={c.id}
                           className={`px-3 py-1 rounded-full text-sm font-semibold ${
                             new Date(c.endDate) < new Date()
                               ? "bg-gray-100 text-gray-800"

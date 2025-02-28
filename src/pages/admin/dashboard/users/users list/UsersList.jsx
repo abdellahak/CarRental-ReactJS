@@ -100,7 +100,7 @@ function UsersList() {
               >
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900 flex items-center gap-2">
-                    <img src={client.image} alt="" className="h-10 w-10 rounded-full"/>
+                    <img src={client.image || "/images/users/defaultUser.jpg"} alt="" className="h-10 w-10 rounded-full"/>
                     <span>{client.name}</span>
                   </div>
                 </td>

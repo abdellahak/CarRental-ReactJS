@@ -12,7 +12,6 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [image, setImage] = useState(null);
   const [role, setRole] = useState("");
   const [userName, setUserName] = useState("");
   const [cin, setCin] = useState("");
@@ -56,15 +55,19 @@ export default function Register() {
     }
 
     const nextId = (Math.max(...users.map((user) => user.id)) + 1).toString();
+    let image = "";
+    if (e.currentTarget.image.files && e.currentTarget.image.files[0]) {
+      image = URL.createObjectURL(e.currentTarget.image.files[0]);
+    }
     const userData = {
       id: nextId,
       name,
       email,
       phone,
+      image,
       address,
-      image: image ? image : "",
       role: "client",
-      userName,
+      login : userName,
       cin,
       password,
     };
@@ -194,7 +197,6 @@ export default function Register() {
             <input
               type="file"
               id="image"
-              onChange={(e) => setImage(e.target.files[0])}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>

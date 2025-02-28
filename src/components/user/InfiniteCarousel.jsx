@@ -118,7 +118,7 @@ const InfiniteCarousel = () => {
       <h1 className="text-4xl font-bold text-gray-800 dark:text-white my-8 animate-bounce text-center">
         {isEnglish ? "Discover the best car brands available for booking" : "اكتشف أفضل ماركات السيارات المتاحة للحجز"}
       </h1>
-      <div className="w-full max-w-6xl">
+      <div className="w-full">
         <div className="w-full overflow-hidden">
           <div
             ref={carouselRef}
@@ -132,7 +132,7 @@ const InfiniteCarousel = () => {
                 relative before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(95deg,transparent_25%,theme(colors.white/.2)_50%,transparent_75%,transparent_100%)] dark:before:bg-[linear-gradient(95deg,transparent_25%,theme(colors.white)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:[transition:background-position_0s_ease] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1500ms] cursor-pointer"
               >
                 <div
-                  className={`shadow-lg p-6 w-48 aspect-square flex flex-col items-center justify-center transition-colors duration-300 dark:bg-gray-500 dark:text-white dark:shadow-gray-900/50 bg-brand-100 text-gray-800 shadow-gray-200/50`}
+                  className={`shadow-lg p-6 w-48 aspect-square flex flex-col items-center justify-center transition-colors duration-300 dark:bg-gray-500 dark:text-white dark:shadow-gray-900/50 bg-brand-200 text-gray-800 shadow-gray-200/50`}
                 >
                   <div
                     className={`aspect-square w-full flex items-center justify-center mb-2 rounded p-2`}

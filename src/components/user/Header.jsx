@@ -14,7 +14,7 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   return (
-    <div className="bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-900 lg:border-b fixed top-0 left-0 right-0 z-50">
+    <div dir="ltr" className="bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-900 lg:border-b fixed top-0 left-0 right-0 z-50">
       <Navbar className="bg-transparent">
         <Navbar.Brand href="/">
           <img
@@ -109,20 +109,20 @@ export default function Header() {
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>
-          <div className="flex flex-col md:flex-row md:ml-auto gap-5 text-[16px] font-bold">
-            <Navbar.Link href="/" active>
+          <div dir={isEnglish ? "ltr": "rtl"} className="flex flex-col md:flex-row md:ml-auto gap-5 text-[16px] font-bold">
+            <Navbar.Link href="/#hero" active={(location.hash === "#hero" || location.pathname === "/") && location.hash !== "#features"}>
               {isEnglish ? "Home" : "الرئيسية"}
             </Navbar.Link>
-            <Navbar.Link href="/cars">
+            <Navbar.Link href="/cars" active={location.pathname === "/cars"}>
               {isEnglish ? "Cars" : "السيارات"}
             </Navbar.Link>
-            <Navbar.Link href="#features">
+            <Navbar.Link href="/#features" active={location.hash === "#features"}>
               {isEnglish ? "Services" : "الخدمات"}
             </Navbar.Link>
-            <Navbar.Link href="/about">
+            <Navbar.Link href="#about" active={location.hash === "#about"}>
               {isEnglish ? "About" : "حول"}
             </Navbar.Link>
-            <Navbar.Link href="/contact">
+            <Navbar.Link href="/contact" active={location.pathname === "/contact"}>
               {isEnglish ? "Contact" : "اتصل بنا"}
             </Navbar.Link>
           </div>
