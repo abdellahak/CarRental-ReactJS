@@ -8,7 +8,8 @@
       "type": "petrol",
       "price": "300",
       "available": true,
-      "image": "/images/cars/car1.png"
+      "image": "/images/cars/car1.png",
+      "rating": 4.5
     },
     {
       "id": "2",
@@ -18,7 +19,8 @@
       "type": "diesel",
       "price": "160",
       "available": true,
-      "image": "/images/cars/car2.jpg"
+      "image": "/images/cars/car2.jpg",
+      "rating": 4.0
     },
     {
       "id": "3",
@@ -28,7 +30,8 @@
       "type": "petrol",
       "price": "140",
       "available": false,
-      "image": "/images/cars/car3.png"
+      "image": "/images/cars/car3.png",
+      "rating": 3.8
     },
     {
       "id": "4",
@@ -38,7 +41,8 @@
       "available": false,
       "image": "/images/cars/car4.JPG",
       "price": 170,
-      "type": "diesel"
+      "type": "diesel",
+      "rating": 4.2
     },
     {
       "id": "5",
@@ -48,7 +52,8 @@
       "type": "petrol",
       "price": "180",
       "available": false,
-      "image": "/images/cars/car5.jpeg"
+      "image": "/images/cars/car5.jpeg",
+      "rating": 4.1
     },
     {
       "id": "6",
@@ -58,17 +63,19 @@
       "type": "petrol",
       "price": "180",
       "available": true,
-      "image": "/images/cars/car6.jpg  "
+      "image": "/images/cars/car6.jpg",
+      "rating": 4.3
     },
     {
       "id": "7",
-      "name": "Cyber",
-      "model": "Tesla",
+      "name": "Tesla",
+      "model": "Cyber",
       "year": "2020",
       "type": "petrol",
       "price": "500",
       "available": true,
-      "image": "/images/cars/car7.jpeg"
+      "image": "/images/cars/car7.jpeg",
+      "rating": 4.7
     },
     {
       "id": "8",
@@ -78,7 +85,8 @@
       "type": "diesel",
       "price": 220,
       "available": true,
-      "image": "/images/cars/car11.jpg"
+      "image": "/images/cars/car11.jpg",
+      "rating": 4.4
     },
     {
       "id": "9",
@@ -88,7 +96,8 @@
       "type": "petrol",
       "price": 250,
       "available": true,
-      "image": "/images/cars/car9.jpeg"
+      "image": "/images/cars/car9.jpeg",
+      "rating": 4.5
     },
     {
       "id": "10",
@@ -98,97 +107,107 @@
       "type": "petrol",
       "price": 500,
       "available": true,
-      "image": "/images/cars/car8.webp"
+      "image": "/images/cars/car8.webp",
+      "rating": 4.8
     },
     {
       "id": "13",
-      "name": "logan",
-      "model": "dacia",
+      "name": "Dacia",
+      "model": "Logan",
       "year": "2025",
       "type": "petrol",
       "price": "400",
       "image": "/images/cars/car10.jpg",
-      "available": true
+      "available": true,
+      "rating": 4.0
     },
     {
       "id": "14",
-      "name": "Syros",
-      "model": "Kia",
+      "name": "Kia",
+      "model": "Syros",
       "year": "2024",
       "type": "petrol",
       "price": "400",
       "image": "/images/cars/car12.jpg",
-      "available": true
+      "available": true,
+      "rating": 4.2
     },
     {
       "id": "15",
-      "name": "RS Q8",
-      "model": "Audi",
+      "name": "Audi",
+      "model": "RS Q8",
       "year": "2024",
       "type": "electric",
       "price": "730",
       "image": "/images/cars/car13.jpg",
-      "available": true
+      "available": true,
+      "rating": 4.9
     },
     {
       "id": "16",
-      "name": "Creta",
-      "model": "Hyundai",
+      "name": "Hyundai",
+      "model": "Creta",
       "year": "2024",
       "type": "petrol",
       "price": "430",
       "image": "/images/cars/car14.jpg",
-      "available": true
+      "available": true,
+      "rating": 4.3
     },
     {
       "id": "17",
-      "name": "XUV700",
-      "model": "Mahindra",
+      "name": "Mahindra",
+      "model": "XUV700",
       "year": "2021",
       "type": "petrol",
       "price": "600",
       "image": "/images/cars/car15.jpg",
-      "available": true
+      "available": true,
+      "rating": 4.6
     },
     {
       "id": "18",
-      "name": "Suzuki",
-      "model": "Maruti",
+      "name": "Maruti",
+      "model": "Suzuki",
       "year": "2024",
       "type": "petrol",
       "price": "450",
       "image": "/images/cars/car16.jpg",
-      "available": true
+      "available": true,
+      "rating": 4.4
     },
     {
       "id": "19",
-      "name": "Urban",
-      "model": "Toyota",
+      "name": "Toyota",
+      "model": "Urban",
       "year": "2022",
       "type": "electric",
       "price": "344",
       "image": "/images/cars/car17.jpg",
-      "available": true
+      "available": true,
+      "rating": 4.5
     },
     {
       "id": "20",
-      "name": "Defender",
-      "model": "Land Rover",
+      "name": "Land Rover",
+      "model": "Defender",
       "year": "2025",
       "type": "electric",
       "price": "650",
       "image": "/images/cars/car18.jpg",
-      "available": true
+      "available": true,
+      "rating": 4.7
     },
     {
       "id": "21",
-      "name": "Thar",
-      "model": "Mahindra",
+      "name": "Mahindra",
+      "model": "Thar",
       "year": "2020",
       "type": "petrol",
       "price": "650",
       "image": "/images/cars/car19.jpg",
-      "available": true
+      "available": true,
+      "rating": 4.6
     }
   ],
   "users": [
@@ -296,9 +315,21 @@
       "address": "laayoune ",
       "image": "",
       "role": "client",
-      "userName": "brahim",
+      "login": "brahim",
       "cin": "dsf5678",
       "password": "password123"
+    },
+    {
+      "id": "10",
+      "name": "yassine alami",
+      "email": "yassine@mail.com",
+      "phone": "0123123123",
+      "image": "blob:http://localhost:5173/bfd96d5c-fb65-426c-983d-b9e24e767414",
+      "address": "laayoune ",
+      "role": "client",
+      "login": "yassine",
+      "cin": "Y5678",
+      "password": "yassineyassine"
     }
   ],
   "contracts": [
