@@ -1,132 +1,133 @@
-import { Car } from "lucide-react";
-import { Link, useLocation} from "react-router-dom";
-import { useSelector, useDispatch} from "react-redux";
-import { useState } from "react";
+"use client";
+import { Avatar, Dropdown, Navbar, Button } from "flowbite-react";
+import { useSelector, useDispatch } from "react-redux";
+import DarkModeToggle from "../context/DarkModeToggle";
+import LanguageToggle from "../context/LanguageToggle";
+import { UserPlus, LogIn } from "lucide-react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const Header = () => {
+export default function Header() {
   const authentification = useSelector((state) => state.auth);
-  const location = useLocation();
+  const language = useSelector((state) => state.language.language);
+  const isEnglish = language === "en";
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
-    <>
-      <header className="lg:px-16 px-6 bg-[#1a2234] flex flex-wrap items-center lg:py-0 py-2 fixed w-full z-10 top-0">
-        <div className="flex-1 flex justify-between items-center">
-          <Link to={"/"} className="text-white text-2xl md:text-4xl flex items-center gap-2 font-bold">
-            <Car className="text-white h-12 w-12" />
-            Mingo Cars
-          </Link>
+    <div className="bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-900 lg:border-b fixed top-0 left-0 right-0 z-50">
+      <Navbar className="bg-transparent">
+        <Navbar.Brand href="/">
+          <img
+            src="/images/logo/logo-black.png"
+            className="mr-3 h-12 sm:h-14 dark:hidden"
+            alt="Mingo Cars"
+          />
+          <img
+            src="/images/logo/logo-white.png"
+            className="mr-3 h-12 sm:h-14 hidden dark:block"
+            alt="Mingo Cars"
+          />
+        </Navbar.Brand>
+        <div className="flex md:order-2">
+          <div className="mx-2">
+            <DarkModeToggle />
+          </div>
+          <div className="mx-2">
+            <LanguageToggle />
+          </div>
+          {authentification.isAuthenticated && (
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar
+                  alt="User settings"
+                  img={authentification.user.image}
+                  rounded
+                />
+              }
+            >
+              <Dropdown.Header>
+                <span className="block text-lg">
+                  {authentification.user.name}
+                </span>
+                <span className="block truncate text-sm font-medium">
+                  {authentification.user.email}
+                </span>
+              </Dropdown.Header>
+              {authentification.user.role === "admin" && (
+                <Dropdown.Item>
+                  <Link to="/dashboard">
+                    {isEnglish ? "Dashboard" : "لوحة التحكم"}
+                  </Link>
+                </Dropdown.Item>
+              )}
+              <Dropdown.Item>
+                {isEnglish ? "Profile" : "الملف الشخصي"}
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item
+                color="red"
+                onClick={() => {
+                  dispatch({ type: "LOGOUT" });
+                }}
+              >
+                {isEnglish ? "Logout" : "تسجيل الخروج"}
+              </Dropdown.Item>
+            </Dropdown>
+          )}
+          {!authentification.isAuthenticated && (
+            <Button.Group className="mx-4">
+              {location.pathname !== "/login" && (
+                <Button
+                  color="gray"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  <div className="flex items-center gap-2">
+                    <LogIn className="h-5 w-5" />
+                    <span>{isEnglish ? "Login" : "تسجيل الدخول"}</span>
+                  </div>
+                </Button>
+              )}
+              {location.pathname !== "/register" && (
+                <Button
+                  color="gray"
+                  onClick={() => {
+                    navigate("/register");
+                  }}
+                >
+                  <div className="flex items-center gap-2">
+                    <UserPlus className="h-5 w-5" />
+                    <span>{isEnglish ? "Register" : "تسجيل"}</span>
+                  </div>
+                </Button>
+              )}
+            </Button.Group>
+          )}
+          <Navbar.Toggle />
         </div>
-
-        <label htmlFor="menu-toggle" className="pointer-cursor lg:hidden block">
-          <svg
-            className="fill-current text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-          >
-            <title>menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-          </svg>
-        </label>
-        <input className="hidden" type="checkbox" id="menu-toggle" />
-
-        <div
-          className="hidden lg:flex lg:items-center lg:w-auto w-full"
-          id="menu"
-        >
-          <nav>
-            <ul className="lg:flex items-center justify-between text-base text-gray-200 pt-4 lg:pt-0">
-              <li>
-                <a
-                  className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
-                  href="#"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
-                  href="#"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400"
-                  href="#"
-                >
-                  Contact
-                </a>
-              </li>
-              {/* <li>
-                <a
-                  className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 lg:mb-0 mb-2"
-                  href="#"
-                >
-                  Support
-                </a>
-                </li> */}
-                {(authentification.isAuthenticated && authentification.user.role === "admin") && (
-                  <li>
-                    <Link
-                      to="/dashboard"
-                      className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 cursor-pointer"
-                    >
-                      Dashboard
-                    </Link>
-                  </li>
-                )}
-                {!authentification.isAuthenticated && (
-                  <li>
-                    <Link
-                      to="/login"
-                      className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 cursor-pointer"
-                    >
-                      Login
-                    </Link>
-                  </li>
-                )}
-                {(!authentification.isAuthenticated && location.pathname != "/register" ) && (
-                  <li>
-                    <Link
-                      to="/register"
-                      className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 cursor-pointer"
-                    >
-                      Register
-                    </Link>
-                  </li>
-                )}
-                {authentification.isAuthenticated && (
-                  <li>
-                    <button
-                      className="lg:p-4 py-3 px-0 block border-b-2 border-transparent hover:border-indigo-400 cursor-pointer"
-                      onClick={() => {
-                        dispatch({ type: "LOGOUT" });
-                      }}
-                    >
-                      Logout
-                    </button>
-                  </li>
-                )}
-            </ul>
-          </nav>
-          {/* <a
-            href="#"
-            className="lg:ml-4 flex items-center justify-start lg:mb-0 mb-4 pointer-cursor"
-          >
-            <img
-              className="rounded-full w-10 h-10 border-2 border-transparent hover:border-indigo-400"
-              src="https://pbs.twimg.com/profile_images/1128143121475342337/e8tkhRaz_normal.jpg"
-              alt="Andy Leverenz"
-            />
-          </a> */}
-        </div>
-      </header>
-    </>
+        <Navbar.Collapse>
+          <div className="flex flex-col md:flex-row md:ml-auto gap-5 text-[16px] font-bold">
+            <Navbar.Link href="/" active>
+              {isEnglish ? "Home" : "الرئيسية"}
+            </Navbar.Link>
+            <Navbar.Link href="/cars">
+              {isEnglish ? "Cars" : "السيارات"}
+            </Navbar.Link>
+            <Navbar.Link href="#features">
+              {isEnglish ? "Services" : "الخدمات"}
+            </Navbar.Link>
+            <Navbar.Link href="/about">
+              {isEnglish ? "About" : "حول"}
+            </Navbar.Link>
+            <Navbar.Link href="/contact">
+              {isEnglish ? "Contact" : "اتصل بنا"}
+            </Navbar.Link>
+          </div>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
   );
-};
-
-export default Header;
+}
