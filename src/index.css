@@ -2,8 +2,6 @@
 @import "flowbite/src/themes/default";
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
-/* @plugin "flowbite/plugin";
-@source "../node_modules/flowbite"; */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
@@ -14,12 +12,16 @@
     direction: rtl;
     text-align: right;
   }
+  .arabic {
+    --font-family: 'Cairo', sans-serif;
+  }
 }
 
 @layer components {
   button {
     cursor: pointer;
   }
+
 }
 @layer utilities {
   @keyframes infiniteSlider {
@@ -71,8 +73,8 @@
 }
 
 @theme {
-  --font-family-outfit: "Outfit", sans-serif;
-  --font-family-cairo : "Cairo", sans-serif;
+  /* --font-family-outfit: "Outfit", sans-serif;
+  --font-family-cairo : "Cairo",; */
   --color-brand-25: #f2f7ff;
   --color-brand-50: #ecf3ff;
   --color-brand-100: #dde9ff;

@@ -1,20 +1,30 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import { Provider } from 'react-redux';
-import carsReducer from './reducers/carsReducer.js';
-import usersReducer from './reducers/usersReducer.js';
-import contractsReducer from './reducers/contractsReducer.js';
-import authReducer from './reducers/authReducer.js';
-import {createStore, combineReducers} from 'redux';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { Provider } from "react-redux";
+import carsReducer from "./reducers/carsReducer.js";
+import usersReducer from "./reducers/usersReducer.js";
 
-const store = createStore(combineReducers({cars : carsReducer, users : usersReducer, contracts : contractsReducer , auth : authReducer}));
+import contractsReducer from "./reducers/contractsReducer.js";
+import authReducer from "./reducers/authReducer.js";
+import languageReducer from "./reducers/languageReducer.js";
+import { createStore, combineReducers } from "redux";
 
-createRoot(document.getElementById('root')).render(
+const store = createStore(
+  combineReducers({
+    cars: carsReducer,
+    users: usersReducer,
+    contracts: contractsReducer,
+    auth: authReducer,
+    language: languageReducer,
+  })
+);
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
   </StrictMode>
-)
+);

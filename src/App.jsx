@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
+import { DarkThemeToggle, Flowbite } from "flowbite-react";
 
 import Dashboard from "./pages/admin/Dashboard";
 
@@ -29,6 +30,7 @@ import ContractDetails from "./pages/admin/dashboard/contracts/contract details/
 import Home from "./pages/Home";
 import GuestPage from "./pages/users/guest page/GuestPage";
 import RentCar from "./pages/users/rent car page/RentCar";
+import ContactUs from "./pages/users/other pages/ContactUs";
 
 // Authentification
 import Login from "./pages/users/guest page/Login";
@@ -36,40 +38,59 @@ import Register from "./pages/users/guest page/Register";
 import ProtectedRoute from "./components/context/ProtectedRoute";
 import AdminRoute from "./components/context/AdminRoute";
 
+// test
+import NavbarComponent from "./components/user/NavbarComponent";
+import InfiniteCarousel from "./components/user/InfiniteCarousel";
 function App() {
+  const language = useSelector((state) => state.language.language);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route index element={<GuestPage />} />
-          <Route path="/car/:id" element={<RentCar />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
-        <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>}>
-          <Route index element={<CarsList />} />
-          {/* cars */}
-          <Route path="cars" element={<CarsDashboard />}>
+    <div className={`${language === "ar"? "font-family-cairo": "font-family-outfit"}`}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/infinite"
+            element={<InfiniteCarousel brands={["toyota", "Renault"]} />}
+          />
+          <Route path="/navbar" element={<NavbarComponent />} />
+          <Route path="/" element={<Home />}>
+            <Route index element={<GuestPage />} />
+            <Route path="/car/:id" element={<RentCar />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/contact" element={<ContactUs />} />
+          </Route>
+          <Route
+            path="/dashboard"
+            element={
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            }
+          >
             <Route index element={<CarsList />} />
-            <Route path=":id" element={<CarDetails />} />
-            <Route path="add" element={<AddCar />} />
-            <Route path="edit/:id" element={<EditCar />} />
+            {/* cars */}
+            <Route path="cars" element={<CarsDashboard />}>
+              <Route index element={<CarsList />} />
+              <Route path=":id" element={<CarDetails />} />
+              <Route path="add" element={<AddCar />} />
+              <Route path="edit/:id" element={<EditCar />} />
+            </Route>
+            {/* users */}
+            <Route path="users" element={<UsersDashboard />}>
+              <Route index element={<UsersList />} />
+              <Route path=":id" element={<UserDetails />} />
+              <Route path="add" element={<AddUser />} />
+              <Route path="edit/:id" element={<EditUser />} />
+            </Route>
+            <Route path="contracts" element={<ContractsDashboard />}>
+              <Route index element={<ContractsList />} />
+              <Route path="add" element={<AddContract />} />
+              <Route path=":id" element={<ContractDetails />} />
+            </Route>
           </Route>
-          {/* users */}
-          <Route path="users" element={<UsersDashboard />}>
-            <Route index element={<UsersList />} />
-            <Route path=":id" element={<UserDetails />} />
-            <Route path="add" element={<AddUser />} />
-            <Route path="edit/:id" element={<EditUser />} />
-          </Route>
-          <Route path="contracts" element={<ContractsDashboard />}>
-            <Route index element={<ContractsList />} />
-            <Route path="add" element={<AddContract />} />
-            <Route path=":id" element={<ContractDetails />} />
-          </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
