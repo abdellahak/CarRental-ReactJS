@@ -31,6 +31,8 @@ import Home from "./pages/Home";
 import GuestPage from "./pages/users/guest page/GuestPage";
 import RentCar from "./pages/users/rent car page/RentCar";
 import ContactUs from "./pages/users/other pages/ContactUs";
+import AboutUs from "./pages/users/other pages/AboutUs";
+import CarsPage from "./pages/users/guest page/CarsPage";
 
 // Authentification
 import Login from "./pages/users/guest page/Login";
@@ -54,10 +56,12 @@ function App() {
           <Route path="/navbar" element={<NavbarComponent />} />
           <Route path="/" element={<Home />}>
             <Route index element={<GuestPage />} />
+            <Route path="/cars" element={<CarsPage />} />
             <Route path="/car/:id" element={<RentCar />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/about" element={<AboutUs />} />
           </Route>
           <Route
             path="/dashboard"

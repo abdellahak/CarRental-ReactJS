@@ -16,7 +16,6 @@ export default function GuestPage() {
   const cars = useSelector((state) => state.cars);
   
   const [filteredCars, setFilteredCars] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setFilteredCars(cars);

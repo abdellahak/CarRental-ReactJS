@@ -1,4 +1,7 @@
-const storedAuth = JSON.parse(localStorage.getItem("auth")) || { isAuthenticated: false, user: null };
+const storedAuth = JSON.parse(localStorage.getItem("auth")) || {
+  isAuthenticated: false,
+  user: null,
+};
 
 const initialState = {
   isAuthenticated: storedAuth.isAuthenticated || false,
@@ -8,11 +11,18 @@ const initialState = {
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case "LOGIN_SUCCESS":
-      localStorage.setItem("auth", JSON.stringify({ user: action.payload, isAuthenticated: true }));
+      const { password, ...userWithoutPassword } = action.payload;
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({
+          user: userWithoutPassword,
+          isAuthenticated: true,
+        })
+      );
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload,
+        user: userWithoutPassword,
       };
     case "LOGOUT":
       localStorage.removeItem("auth");
