@@ -55,7 +55,7 @@ export default function HeroSection() {
             }}
           ></div>
         </div>
-        <div className="mt-[-50px] flex h-screen items-center justify-center">
+        <div className="mt-[64px] flex h-screen items-center justify-center">
           <div className="max-w-full flex-shrink-0 px-4 text-center lg:mx-0 lg:max-w-3xl lg:pt-8">
             <h1 className="mt-10 text-5xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
               {isEnglish ? "Discover" : "اكتشف"}
@@ -72,7 +72,7 @@ export default function HeroSection() {
                 href="#search-car"
                 className="rounded-md px-3.5 py-2.5 text-lg font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brand-400 cursor-pointer bg-brand-600 hover:bg-brand-700"
               >
-                {isEnglish ? "Book your car →" : "احجز سيارتك →"}
+                {isEnglish ? "Book your car →" : "← احجز سيارتك"}
               </a>
             </div>
           </div>

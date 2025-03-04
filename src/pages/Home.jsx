@@ -6,7 +6,7 @@ import axios from "axios";
 import { useEffect } from "react";
 export default function Home() {
   const apiURL = import.meta.env.VITE_DATA_API_URL;
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   useEffect(() => {
     fetch(`${apiURL}/cars`)
       .then((res) => res.json())
@@ -30,10 +30,10 @@ export default function Home() {
   return (
     <div className="flex min-h-screen dark:bg-gray-900">
       <div className="flex-1 overflow-x-hidden relative">
-        <Header/>
-        <div className="mt-20">
-        <Outlet />  
+        <div className="fixed top-0 left-0 w-full z-50">
+        <Header />
         </div>
+        <Outlet />
         <AdminFooter />
       </div>
     </div>

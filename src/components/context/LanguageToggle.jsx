@@ -6,7 +6,7 @@ export default function LanguageToggle(){
   function handleLanguage() {
     const newLanguage = language === "ar" ? "en" : "ar";
     dispatch({ type: "SWITCH_LANGUAGE", payload: newLanguage });
-    document.documentElement.dir = newLanguage === "ar" ? "rtl" : "ltr";
+    document.documentElement.dir = newLanguage === "ar" ? "rtl" : "";
   }
 
   return (
