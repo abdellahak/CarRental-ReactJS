@@ -11,7 +11,7 @@ export default function HeroSection() {
           className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)] object-cover"
         />
         <svg
-          className="absolute inset-0 -z-10 h-full w-full stroke-gray-900 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)] dark:stroke-white"
+          className="absolute inset-0 -z-10 h-full w-full stroke-gray-700 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)] dark:stroke-white"
           aria-hidden="true"
         >
           <defs>
