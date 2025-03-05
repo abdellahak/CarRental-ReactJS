@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import { FileInput } from "flowbite-react";
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function Register() {
   const language = useSelector((state) => state.language.language);
@@ -87,7 +89,7 @@ export default function Register() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 mb-12 mt-24">
       <div className="w-full max-w-[584px] p-8 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg transform transition-all duration-500 hover:scale-105">
         <h2 className="text-3xl font-extrabold text-center text-gray-900 dark:text-gray-100">
           {isEnglish ? "Register" : "تسجيل"}
@@ -202,7 +204,7 @@ export default function Register() {
             >
               {isEnglish ? "Image:" : "صورة:"}
             </label>
-            <FileInput id="file-upload" />
+            <Input id="file-upload" type="file" className="border border-gray-300 dark:border-gray-600 shadow-sm dark:bg-gray-700 dark:text-gray-100"/>
           </div>
           <div className="space-y-1">
             <label

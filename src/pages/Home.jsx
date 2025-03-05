@@ -33,7 +33,9 @@ export default function Home() {
         <div className="fixed top-0 left-0 w-full z-50">
         <Header />
         </div>
+        <div className="mt-[65px]">
         <Outlet />
+        </div>
         <AdminFooter />
       </div>
     </div>

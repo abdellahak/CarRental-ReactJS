@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Button } from "flowbite-react";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 const DarkModeToggle = () => {

@@ -1,9 +1,5 @@
 @import "tailwindcss";
-@import "flowbite/src/themes/default";
-@plugin "flowbite/plugin";
-
 @plugin "tailwindcss-animate";
-@source "../node_modules/flowbite/";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -20,6 +16,18 @@
   }
   a {
     direction: ltr;
+  }
+  .item-ribbon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90px;
+    text-align: center;
+    padding: 4px 8px;
+    background-color: gold;
+    font-size: 1rem;
+    color: white;
+    transform: rotate(-45deg) translateX(-20%) translateY(-50%);
   }
 }
 

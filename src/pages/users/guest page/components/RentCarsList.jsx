@@ -60,7 +60,7 @@ export default function RentCarsList({ filteredCars }) {
                       {car.name} {car.model}
                     </span>
                     <span className="inline-flex items-center justify-center gap-1 rounded-full bg-blue-light-500 px-2.5 py-0.5 text-sm font-medium text-white">
-                      {car.price} MAD
+                      {car.price} {isEnglish ? "MAD/Day" : "درهم/يوم"}
                     </span>
                   </div>
                   <div className="h-12 w-12 rounded-full bg-brand-600 flex items-center justify-center">

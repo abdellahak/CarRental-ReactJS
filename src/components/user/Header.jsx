@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Disclosure,
   DisclosureButton,
@@ -11,19 +12,34 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import DarkModeToggle from "../context/DarkModeToggle";
 import LanguageToggle from "../context/LanguageToggle";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ConfirmAlert from "../context/ConfirmAlert";
 
 export default function Header() {
   const [showConfirmAlert, setShowConfirmAlert] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const authentification = useSelector((state) => state.auth);
   const language = useSelector((state) => state.language.language);
   const isEnglish = language === "en";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleScrollToFeatures = () => {
     const element = document.getElementById("features");
@@ -47,7 +63,14 @@ export default function Header() {
 
   return (
     <>
-      <Disclosure as="nav" className="bg-white border-b dark:bg-gray-900">
+      <Disclosure
+        as="nav"
+        className={`${
+          isScrolled
+            ? "bg-transparent backdrop-blur-md"
+            : "bg-white dark:bg-gray-900"
+        } border-b transition-colors duration-300`}
+      >
         <div dir="ltr" className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -65,17 +88,17 @@ export default function Header() {
                 />
               </DisclosureButton>
             </div>
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div className="flex flex-1 items-center justify-center sm:justify-start">
               <div className="flex shrink-0 items-center">
                 <img
                   alt="Mingo Cars"
-                  src="/images/logo/logo-black.png"
-                  className="h-8 w-auto dark:hidden"
+                  src="/images/logo/mingo cars logo.png"
+                  className="h-12 w-auto bg-gray-900 rounded-md shadow-gray-900 p-1 dark:hidden"
                 />
                 <img
                   alt="Mingo Cars"
-                  src="/images/logo/logo-white.png"
-                  className="h-8 w-auto hidden dark:block"
+                  src="/images/logo/mingo cars logo.png"
+                  className="h-12 w-auto hidden dark:block"
                 />
               </div>
               <div className="hidden sm:ml-6 sm:block">

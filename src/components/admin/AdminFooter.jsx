@@ -13,7 +13,7 @@ export default function AdminFooter() {
       <div className="md:flex md:justify-between">
       <div className="mb-6 md:mb-0">
         <Link to="/" className="flex items-center">
-        <Car className="h-12 w-12 me-3 text-gray-900 dark:text-white" alt="FlowBite Logo" />
+        <Car className="h-12 w-12 me-3 text-gray-900 dark:text-white" alt="Mingo Car" />
         <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">
           Mingo Cars
         </span>

@@ -81,7 +81,8 @@ export default function CarSearch() {
 
             <div className="w-full md:w-64 relative">
               <select
-                className="w-full px-4 py-3 rounded-md bg-gray-200 dark:bg-gray-800 appearance-none cursor-pointer pr-10 text-black dark:text-white"
+                className={`w-full px-4 py-3 rounded-md bg-gray-200 dark:bg-gray-800 appearance-none pr-10 text-black dark:text-white ${carsModels.length === 0 ? "cursor-not-allowed" : "cursor-pointer"}`}
+                disabled={carsModels.length === 0}
                 value={selectedModel}
                 onChange={(e) => setSelectedModel(e.target.value)}
               >

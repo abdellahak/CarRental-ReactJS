@@ -1,15 +1,47 @@
 import { useSelector } from "react-redux";
+import { useState, useRef } from "react";
+import { VolumeOff, Volume2Icon } from "lucide-react";
+
 export default function HeroSection() {
   const language = useSelector((state) => state.language.language);
   const isEnglish = language === "en";
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef(null);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
   return (
     <>
-      <div className="relative isolate overflow-hidden bg-brand-300 dark:bg-gray-900" id="hero">
+      <div
+        className="relative isolate overflow-hidden bg-brand-300 dark:bg-gray-900"
+        id="hero"
+      >
         <img
           src="/images/hero/heroGif.gif"
           alt={isEnglish ? "discover your car" : "اكتشف سيارتك"}
           className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)] object-cover"
         />
+        <div>
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted={isMuted}
+            playsInline
+            className="absolute inset-0 -z-10 h-full w-full object-cover"
+          >
+            <source src="/images/hero/heroVideo.mp4" type="video/mp4" />
+            <img src="/images/hero/heroGif.gif" alt={isEnglish ? "discover your car" : "اكتشف سيارتك"} />
+            {isEnglish
+              ? "Your browser does not support the video tag."
+              : "متصفحك لا يدعم علامة الفيديو."}
+          </video>
+        </div>
         <svg
           className="absolute inset-0 -z-10 h-full w-full stroke-gray-700 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)] dark:stroke-white"
           aria-hidden="true"
@@ -55,19 +87,24 @@ export default function HeroSection() {
             }}
           ></div>
         </div>
-        <div className="mt-[64px] flex h-screen items-center justify-center">
-          <div className="max-w-full flex-shrink-0 px-4 text-center lg:mx-0 lg:max-w-3xl lg:pt-8">
-            <h1 className="mt-10 text-5xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
-              {isEnglish ? "Discover" : "اكتشف"}
-              <span className="text-brand-500"> {isEnglish ? "Your Next Car" : "سيارتك التالية"}</span> {isEnglish ? "with" : "مع"}
+        <div className="mt-[64px] flex h-screen items-end py-40 justify-start">
+          <div className="max-w-full flex-shrink-0 px-4 text-start lg:mx-0 lg:max-w-3xl lg:pt-8">
+            <h1 className="mt-10 text-5xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl flex items-center">
               <span className="text-brand-500"> Mingo Cars</span>
+              <button
+                onClick={toggleMute}
+                className="mx-4 rounded-full px-3 py-3 text-lg font-semibold text-white bg-gray-200/20 hover:text-brand-600"
+              >
+
+                {isMuted ? <VolumeOff/>: <Volume2Icon/>}
+              </button>
             </h1>
-            <p className="mt-6 text-lg leading-8 font-bold text-gray-900 dark:text-gray-300">
+            <p className="mt-6 text-lg leading-8 font-bold text-gray-300">
               {isEnglish
                 ? "Whether you're planning a weekend getaway, a business trip, or need a reliable vehicle for daily use, Mingo Cars offers a wide range of cars to suit your needs. Enjoy competitive rates, flexible rental options, and exceptional customer service. Book your car today and experience the freedom of the open road with Mingo Cars."
                 : "سواء كنت تخطط لقضاء عطلة نهاية الأسبوع، أو رحلة عمل، أو تحتاج إلى سيارة موثوقة للاستخدام اليومي، تقدم Mingo Cars مجموعة واسعة من السيارات لتلبية احتياجاتك. استمتع بأسعار تنافسية، وخيارات تأجير مرنة، وخدمة عملاء استثنائية. احجز سيارتك اليوم واستمتع بحرية الطريق المفتوح مع Mingo Cars."}
             </p>
-            <div className="mt-5 flex items-center justify-center gap-x-6">
+            <div className="mt-5 flex items-center justify-start gap-x-6">
               <a
                 href="#search-car"
                 className="rounded-md px-3.5 py-2.5 text-lg font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-brand-400 cursor-pointer bg-brand-600 hover:bg-brand-700"

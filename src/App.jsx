@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { DarkThemeToggle, Flowbite } from "flowbite-react";
 
 import Dashboard from "./pages/admin/Dashboard";
 
@@ -32,7 +31,7 @@ import GuestPage from "./pages/users/guest page/GuestPage";
 import RentCar from "./pages/users/rent car page/RentCar";
 import ContactUs from "./pages/users/other pages/ContactUs";
 import AboutUs from "./pages/users/other pages/AboutUs";
-import CarsPage from "./pages/users/guest page/CarsPage";
+import CarsPage from "./pages/users/cars page/CarsPage";
 
 // Authentification
 import Login from "./pages/users/guest page/Login";
