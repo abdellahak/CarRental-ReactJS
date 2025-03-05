@@ -1,268 +1,50 @@
+import * as React from "react";
+import Autoplay from "embla-carousel-autoplay";
+
+import { Card, CardContent } from "@/components/ui/card";
 import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import DarkModeToggle from "../context/DarkModeToggle";
-import LanguageToggle from "../context/LanguageToggle";
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import ConfirmAlert from "../context/ConfirmAlert";
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+const slideImages = [
+  "images/slider/urban-slider.png",
+  "images/slider/defender-slider.png",
+  "images/slider/thar-slider.png",
+  "images/slider/syros-slider.png",
+  "images/slider/rsq8-slider.png",
+];
 
-export default function NavbarComponent() {
-  const [showConfirmAlert, setShowConfirmAlert] = useState(false);
-  const authentification = useSelector((state) => state.auth);
-  const language = useSelector((state) => state.language.language);
-  const isEnglish = language === "en";
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+export default function NavBarComponent() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  );
 
-  const handleScrollToFeatures = () => {
-    const element = document.getElementById("features");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleLogout = () => {
-    setShowConfirmAlert(true);
-  };
-
-  const handleConfirmLogout = () => {
-    dispatch({ type: "LOGOUT" });
-    setShowConfirmAlert(false);
-  };
-
-  const handleCloseAlert = () => {
-    setShowConfirmAlert(false);
-  };
   return (
-    <>
-      <Disclosure as="nav" className="bg-white border-b dark:bg-gray-900">
-        <div dir="ltr" className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              {/* Mobile menu button*/}
-              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-none focus:ring-inset dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">
-                <span className="absolute -inset-0.5" />
-                <span className="sr-only">Open main menu</span>
-                <Bars3Icon
-                  aria-hidden="true"
-                  className="block size-6 group-data-open:hidden"
-                />
-                <XMarkIcon
-                  aria-hidden="true"
-                  className="hidden size-6 group-data-open:block"
-                />
-              </DisclosureButton>
-            </div>
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex shrink-0 items-center">
-                <img
-                  alt="Your Company"
-                  src="/images/logo/logo-black.png"
-                  className="h-8 w-auto dark:hidden"
-                />
-                <img
-                  alt="Your Company"
-                  src="/images/logo/logo-white.png"
-                  className="h-8 w-auto hidden dark:block"
-                />
-              </div>
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                  <Link
-                    to="/dashboard"
-                    aria-current="page"
-                    className={classNames(
-                      "bg-gray-900 text-white dark:bg-gray-700",
-                      "rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105"
-                    )}
-                  >
-                    {isEnglish ? "Dashboard" : "لوحة التحكم"}
-                  </Link>
-                  <Link
-                    to="#"
-                    className={classNames(
-                      "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white",
-                      "rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105"
-                    )}
-                  >
-                    {isEnglish ? "My rented cars" : "سياراتي المستأجرة"}
-                  </Link>
-                  <Link
-                    to="#"
-                    className={classNames(
-                      "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white",
-                      "rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105"
-                    )}
-                  >
-                    {isEnglish ? "Calendar" : "التقويم"}
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <div className="mx-2">
-                <DarkModeToggle />
-              </div>
-              <div className="mx-2">
-                <LanguageToggle />
-              </div>
-              {authentification.isAuthenticated && (
-                <>
-                  <button
-                    type="button"
-                    className="relative rounded-full bg-white p-1 text-gray-700 hover:text-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none dark:bg-gray-900 dark:text-gray-300 dark:hover:text-white"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon aria-hidden="true" className="size-6" />
-                  </button>
-
-                  <Menu as="div" className="relative ml-3">
-                    <div>
-                      <MenuButton className="relative flex rounded-full bg-white text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none dark:bg-gray-900">
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">Open user menu</span>
-                        <img
-                          alt={authentification.user.name}
-                          src={
-                            authentification.user.image ||
-                            "/images/users/defaultUser.jpg"
-                          }
-                          className="size-8 rounded-full"
-                        />
-                      </MenuButton>
-                    </div>
-                    <MenuItems
-                      transition
-                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-none data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:bg-gray-800 dark:ring-white/10"
-                    >
-                      <MenuItem>
-                        <div className="px-4 py-2">
-                          <span className="block text-lg ">
-                            {authentification.user.name}
-                          </span>
-                          <span className="block truncate text-sm font-medium">
-                            {authentification.user.email}
-                          </span>
-                        </div>
-                      </MenuItem>
-                      <MenuItem>
-                        <Link
-                          to="#"
-                          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
-                        >
-                          {isEnglish ? "Your Profile" : "ملفك الشخصي"}
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <Link
-                          to="#"
-                          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
-                        >
-                          {isEnglish ? "Settings" : "الإعدادات"}
-                        </Link>
-                      </MenuItem>
-                      <MenuItem>
-                        <button
-                          onClick={handleLogout}
-                          className="block w-full text-start px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
-                        >
-                          {isEnglish ? "Sign out" : "تسجيل الخروج"}
-                        </button>
-                      </MenuItem>
-                    </MenuItems>
-                  </Menu>
-                </>
-              )}
-              {!authentification.isAuthenticated && (
-                <div className="flex gap-2">
-                  {location.pathname !== "/login" && (
-                    <Button asChild>
-                      <Link to="/login">
-                        {isEnglish ? "Login" : "تسجيل الدخول"}
-                      </Link>
-                    </Button>
-                  )}
-                  {location.pathname !== "/register" && (
-                    <Button
-                      asChild
-                      className={
-                        "bg-gray-700 text-white hover:bg-white hover:text-black transition duration-300 ease-in-out transform hover:scale-105"
-                      }
-                    >
-                      <Link to="/register">
-                        {isEnglish ? "Register" : "تسجيل جديد"}
-                      </Link>
-                    </Button>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <DisclosurePanel className="sm:hidden">
-          <div className="space-y-1 px-2 pt-2 pb-3">
-            <DisclosureButton
-              as={Link}
-              to="/dashboard"
-              aria-current="page"
-              className={
-                "bg-gray-900 text-white dark:bg-gray-700 block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-105"
-              }
-            >
-              {isEnglish ? "Dashboard" : "لوحة التحكم"}
-            </DisclosureButton>
-            <DisclosureButton
-              as={Link}
-              to="#"
-              className={classNames(
-                "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white",
-                "block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-105"
-              )}
-            >
-              {isEnglish ? "My rented cars" : "سياراتي المستأجرة"}
-            </DisclosureButton>
-            <DisclosureButton
-              as={Link}
-              to="#"
-              className={classNames(
-                "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white",
-                "block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-105"
-              )}
-            >
-              {isEnglish ? "Calendar" : "التقويم"}
-            </DisclosureButton>
-          </div>
-        </DisclosurePanel>
-      </Disclosure>
-      {showConfirmAlert && (
-        <ConfirmAlert
-          onClose={handleCloseAlert}
-          onConfirm={handleConfirmLogout}
-          title={isEnglish ? "Confirm Logout" : "تأكيد تسجيل الخروج"}
-          message={
-            isEnglish
-              ? "Are you sure you want to logout?"
-              : "هل أنت متأكد أنك تريد تسجيل الخروج؟"
-          }
-        />
-      )}
-    </>
+    <div className="w-full flex justify-center">
+      <Carousel
+        plugins={[plugin.current]}
+        className="w-full h-full relative"
+        onMouseEnter={plugin.current.stop}
+        onMouseLeave={plugin.current.reset}
+      >
+        <CarouselContent>
+          {slideImages.map((item, index) => (
+            <CarouselItem key={index} className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+                <Card className="p-0 h-full w-full  flex justify-center items-center">
+                  <CardContent className="p-0">
+                    <img src={item} alt="..." className="w-full h-full object-cover" />
+                  </CardContent>
+                </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="absolute left-5 top-1/2 transform -translate-y-1/2 h-16 w-16" />
+        <CarouselNext className="absolute right-5 top-1/2 transform -translate-y-1/2 h-16 w-16" />
+      </Carousel>
+    </div>
   );
 }
