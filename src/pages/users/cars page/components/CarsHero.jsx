@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 import HeroCarCard from "./HeroCarCard";
 
 export default function CarsHero() {
+  const language = useSelector((state) => state.language.language);
+  const isEnglish = language === "en";
   const cars = useSelector((state) => state.cars);
   const lastCars = cars.sort((a, b) => b.id - a.id).slice(0, 4);
 
   return (
     <>
-      <h2 className="text-3xl font-bold text-center mt-6">Our Best Cars</h2>
+      <h2 className="text-6xl brightness-100 font-bold text-center mb-10">
+        {isEnglish ? "Our Best Cars" : "أفضل سياراتنا"}
+      </h2>
       <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
         <Link to={`/car/${lastCars[0].id}`}>
           <HeroCarCard

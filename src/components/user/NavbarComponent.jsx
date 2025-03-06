@@ -1,97 +1,74 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { ArrowUpLeft } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import Header from "./Header";
 
-
-export default function NavbarComponent() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const itemsToShow = 5;
-  const cars = useSelector(state => state.cars);
-  const lastCars = cars.slice(0,10);
-  const navigate = useNavigate();
-
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex + 1 >= lastCars.length - itemsToShow + 1 ? 0 : prevIndex + 1
-    );
-  }, []);
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex - 1 < 0 ? lastCars.length - itemsToShow : prevIndex - 1
-    );
-  };
-
-  useEffect(() => {
-    let interval;
-    if (!isPaused) {
-      interval = setInterval(() => {
-        nextSlide();
-      }, 3000); // Change slide every 3 seconds
-    }
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
-  }, [isPaused, nextSlide]);
-
-  return (
-    <div
-      className="relative w-full mx-auto px-4 py-8 bg-gray-900"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <div className="flex items-center">
-        <button
-          onClick={prevSlide}
-          className="absolute left-0 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+export default function CarsList() {
+  const language = useSelector((state) => state.language.language);
+  const isEnglish = language === "en";
+  const cars = useSelector((state) => state.cars);
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <svg
+          key={i}
+          className={`w-4 h-4 ${
+            i <= rating ? "text-yellow-300" : "text-gray-200 dark:text-gray-600"
+          }`}
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 22 20"
         >
-          <FaChevronLeft className="text-white text-xl dark:text-gray-300" />
-        </button>
-
-        <div className="overflow-hidden mx-8">
+          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+        </svg>
+      );
+    }
+    return stars;
+  };
+  return (
+    <>
+    <Header />
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
+        {cars.map((car) => (
           <div
-            className="flex transition-transform duration-500 ease-out"
-            style={{
-              transform: `translateX(-${currentIndex * (100 / itemsToShow)}%)`,
+            key={car.id}
+            className="relative rounded-lg group overflow-hidden w-full h-48"
+            onClick={() => {
+              navigate(`/car/${car.id}`);
             }}
           >
-            {lastCars.map((item) => (
-              <div key={item.id} className="flex-none w-1/5">
-                <div className="relative group cursor-pointer mx-2" onClick={() => {
-                  navigate(`/car/${item.id}`)
-                }}>
-                  <div className="relative overflow-hidden rounded-lg">
-                    {item.rating && <div className="absolute top-6 -left-4 w-[150px] text-center px-4 py-2 bg-amber-300 text-white text-base transform -rotate-45 -translate-x-1/5 -translate-y-1/2">{item.rating}</div>}
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-[400px] object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                      <div className="p-4 w-full">
-                        <h3 className="text-white text-lg font-bold text-center">
-                          {item.name} {" "} {item.model}
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <img
+              className="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-500 linear"
+              src={car.image}
+              alt={`${car.brand} : ${car.model}`}
+            />
+            <div className="absolute bottom-0 left-0 right-0 top-0 backdrop-blur-sm cursor-pointer opacity-0 group-hover:opacity-100 p-4 flex items-center justify-center">
+              <div className="absolute top-4 left-4 text-white flex gap-2">
+                <span className="inline-flex items-center justify-center gap-1 rounded-full bg-gray-400 px-2.5 py-0.5 text-sm font-medium text-white dark:bg-gray-900 dark:text-white/80">
+                  {car.name} {car.model}
+                </span>
+                <span className="inline-flex items-center justify-center gap-1 rounded-full bg-blue-light-500 px-2.5 py-0.5 text-sm font-medium text-white">
+                  {car.price} {isEnglish ? "MAD/Day" : "درهم/يوم"}
+                </span>
               </div>
-            ))}
+              <div className="h-12 w-12 rounded-full bg-brand-600 flex items-center justify-center">
+                <ArrowUpRight className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex items-center mt-2.5 absolute bottom-4 left-4 bg-brand-500 dark:bg-gray-900 rounded-md p-1">
+                <div className="flex items-center space-x-1 rtl:space-x-reverse">
+                  {renderStars(car.rating)}
+                </div>
+                <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">
+                  {car.rating}
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <button
-          onClick={nextSlide}
-          className="absolute right-0 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
-        >
-          <FaChevronRight className="text-white text-xl dark:text-gray-300" />
-        </button>
+        ))}
       </div>
-    </div>
+    </>
   );
 }

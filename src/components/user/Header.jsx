@@ -67,8 +67,8 @@ export default function Header() {
         as="nav"
         className={`${
           isScrolled
-            ? "bg-transparent backdrop-blur-md"
-            : "bg-white dark:bg-gray-900"
+            ? "bg-white/50 dark:bg-gray-900/50 backdrop-blur-md bg-gradient-to-r from-gray-900 to-40% to-transparent"
+            : "bg-gradient-to-r from-brand-900 to-40% to-white dark:bg-gray-900 dark:from-gray-900 dark:to-gray-900"
         } border-b transition-colors duration-300`}
       >
         <div dir="ltr" className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -93,12 +93,7 @@ export default function Header() {
                 <img
                   alt="Mingo Cars"
                   src="/images/logo/mingo cars logo.png"
-                  className="h-12 w-auto bg-gray-900 rounded-md shadow-gray-900 p-1 dark:hidden"
-                />
-                <img
-                  alt="Mingo Cars"
-                  src="/images/logo/mingo cars logo.png"
-                  className="h-12 w-auto hidden dark:block"
+                  className="h-12 w-auto"
                 />
               </div>
               <div className="hidden sm:ml-6 sm:block">

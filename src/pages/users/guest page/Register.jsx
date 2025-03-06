@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate, Navigate, Link } from "react-router-dom";
-import { FileInput } from "flowbite-react";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
