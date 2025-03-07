@@ -38,6 +38,7 @@ export default function RentCar() {
   const [endDate, setEndDate] = useState("");
   const [alert, setAlert] = useState(false);
   const [dangerAlert, setDangerAlert] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
 
   const isDateOverlap = (start1, end1, start2, end2) => {
@@ -74,6 +75,20 @@ export default function RentCar() {
         }
       });
   };
+
+  const calculateTotalPrice = (start, end) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const diffTime = Math.abs(endDate - startDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    setTotalPrice(diffDays * car.price);
+  };
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      calculateTotalPrice(startDate, endDate);
+    }
+  }, [startDate, endDate]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -168,6 +183,26 @@ export default function RentCar() {
     <>
       <div className="pt-24 pb-16 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {user && (
+            <div className="mb-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg flex items-center space-x-4">
+              <img
+                src={user.image}
+                alt={user.name}
+                className="w-16 h-16 rounded-full object-cover"
+              />
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                  {isEnglish ? "User Information" : "معلومات المستخدم"}
+                </h2>
+                <p className="text-gray-900 dark:text-gray-100">
+                  {isEnglish ? "Name:" : "الاسم:"} {user.name}
+                </p>
+                <p className="text-gray-900 dark:text-gray-100">
+                  {isEnglish ? "Email:" : "البريد الإلكتروني:"} {user.email}
+                </p>
+              </div>
+            </div>
+          )}
           <button
             onClick={() => navigate(-1)}
             className="inline-flex items-center text-brand-600 dark:text-brand-400 hover:text-brand-800 dark:hover:text-brand-600 my-6 cursor-pointer"
@@ -236,6 +271,9 @@ export default function RentCar() {
                     <div className="pt-4">
                       <p className="text-2xl font-bold text-brand-600 dark:text-brand-400">
                         {car.price || 100} {isEnglish ? "MAD/day" : "درهم/يوم"}
+                      </p>
+                      <p className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                        {isEnglish ? "Total Price:" : "السعر الإجمالي:"} {totalPrice} {isEnglish ? "MAD" : "درهم"}
                       </p>
                     </div>
 

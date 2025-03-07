@@ -198,7 +198,7 @@ export default function Header() {
                             authentification.user.image ||
                             "/images/users/defaultUser.jpg"
                           }
-                          className="size-8 rounded-full"
+                          className="size-8 rounded-full object-cover"
                         />
                       </MenuButton>
                     </div>

@@ -25,6 +25,10 @@ import ContractsList from "./pages/admin/dashboard/contracts/contracts list/Cont
 import AddContract from "./pages/admin/dashboard/contracts/add contract/AddContract";
 import ContractDetails from "./pages/admin/dashboard/contracts/contract details/ContractDetails";
 
+// orders
+import OrdersDashboard from "./pages/admin/dashboard/orders/OrdersDashboard";
+import OrdersList from "./pages/admin/dashboard/orders/orders list/OrdersList";
+
 // statistics
 import StatisticsPage from "./pages/admin/dashboard/statistics/StatisticsPage";
 
@@ -94,11 +98,17 @@ function App() {
               <Route path="add" element={<AddUser />} />
               <Route path="edit/:id" element={<EditUser />} />
             </Route>
+            {/* contracts */}
             <Route path="contracts" element={<ContractsDashboard />}>
               <Route index element={<ContractsList />} />
               <Route path="add" element={<AddContract />} />
               <Route path=":id" element={<ContractDetails />} />
             </Route>
+            {/* orders */}
+            <Route path="orders" element={<OrdersDashboard />} >
+              <Route index element={<OrdersList />} />
+            </Route>
+
           </Route>
         </Routes>
       </BrowserRouter>

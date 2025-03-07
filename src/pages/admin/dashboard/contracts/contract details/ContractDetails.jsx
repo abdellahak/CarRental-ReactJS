@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   MapPin,
@@ -19,25 +19,35 @@ import {
   Component,
 } from "lucide-react";
 import { useSelector } from "react-redux";
+import { PDFDownloadLink, BlobProvider } from "@react-pdf/renderer";
+import { ExternalLink } from "lucide-react";
+import ContractPDF from "../components/contract-attachement-pdf";
 
 export default function ContractDetails() {
   const { id } = useParams();
-  const contract = useSelector(state => state.contracts.find(contract => contract.id === id));
-  const car = useSelector(state => state.cars.find(car => car.id === contract.carId));
-  const user = useSelector(state => state.users.find(user => user.id === contract.userId));
-
+  const contract = useSelector((state) =>
+    state.contracts.find((contract) => contract.id === id)
+  );
+  const car = useSelector((state) =>
+    state.cars.find((car) => car.id === contract.carId)
+  );
+  const user = useSelector((state) =>
+    state.users.find((user) => user.id === contract.userId)
+  );
 
   const navigate = useNavigate();
 
   if (!contract.id) {
-    return <h2>Contract not found</h2>;
+    return (
+      <h2 className="text-gray-900 dark:text-gray-100">Contract not found</h2>
+    );
   }
 
   const getStatus = () => {
     const now = new Date();
     const startDate = new Date(contract.startDate);
     const endDate = new Date(contract.endDate);
-    now.setHours(0,0,0);
+    now.setHours(0, 0, 0);
     if (now < startDate) return "Upcoming";
     if (now > endDate) return "Completed";
     return "Active";
@@ -49,7 +59,9 @@ export default function ContractDetails() {
   );
 
   const calculateRentalDays = (startDate, duration) => {
-    const days = Math.floor((new Date() - new Date(startDate)) / (1000 * 60 * 60 * 24));
+    const days = Math.floor(
+      (new Date() - new Date(startDate)) / (1000 * 60 * 60 * 24)
+    );
     if (days < 0) return 0;
     if (days > duration) return duration;
     return days;
@@ -57,24 +69,60 @@ export default function ContractDetails() {
 
   const rentalDays = calculateRentalDays(contract.startDate, duration);
   const totalPrice = duration * contract.price;
-
+  const openPdfInNewTab = (blob) => {
+    const url = URL.createObjectURL(blob);
+    window.open(url, "_blank");
+  };
   return (
-    <div className="max-w-4xl mx-auto py-2 relative">
+    <div className="max-w-4xl mx-auto py-2 relative text-gray-900 dark:text-gray-100">
       <button
         onClick={() => navigate(-1)}
-        className="inline-flex items-center text-blue-600 hover:text-blue-800 my-6"
+        className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 my-6"
       >
         <ArrowLeft className="w-4 h-4 mr-2"></ArrowLeft>
         Back
       </button>
-      <div className="bg-white overflow-hidden shadow-lg rounded-lg mb-10 p-6">
+
+      <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg mb-10 p-6">
+        {contract && (
+          <div className="flex items-center justify-end gap-4">
+            <PDFDownloadLink
+              document={
+                <ContractPDF contract={contract} car={car} user={user} />
+              }
+              fileName={`contract_${contract.id}.pdf`}
+              className="btn btn-primary inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+            >
+              {({ loading }) => (
+                <div className="flex items-center gap-2">
+                  {loading ? "Generating PDF..." : "Download Contract as PDF"}
+                </div>
+              )}
+            </PDFDownloadLink>
+            <BlobProvider
+              document={
+                <ContractPDF contract={contract} user={user} car={car} />
+              }
+            >
+              {({ blob, loading }) => (
+                <button
+                  className="btn btn-primary inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                  disabled={loading}
+                  onClick={() => blob && openPdfInNewTab(blob)}
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  {loading ? "Preparing PDF..." : "Open in New Tab"}
+                </button>
+              )}
+            </BlobProvider>
+          </div>
+        )}
         {car && user ? (
           <div>
             <div className="mb-6 flex justify-between items-center">
               <h1 className="text-4xl font-bold mb-6 text-start">
                 Contract Details
               </h1>
-              
             </div>
             <div className="relative flex flex-col md:flex-row items-center justify-around my-24">
               <img
@@ -82,7 +130,7 @@ export default function ContractDetails() {
                 alt={user.name}
                 className="w-44 h-44 object-cover rounded-full"
               />
-              <Link2 className="h-24 w-24 text-[#1a2234]"></Link2>
+              <Link2 className="h-24 w-24 text-[#1a2234] dark:text-gray-100"></Link2>
               <img
                 src={car.image}
                 alt={car.model}
@@ -91,44 +139,37 @@ export default function ContractDetails() {
             </div>
             <div className="mb-6">
               <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold mb-4">
-                <Calendar className="inline-block mr-2" />
-                Progress
-              </h2>
-              <h2
-                className={`text-xl px-3 py-1 rounded-full font-semibold ${
-                  getStatus() === "Upcoming"
-                    ? "bg-blue-100 text-blue-800"
-                    : getStatus() === "Completed"
-                    ? "bg-gray-100 text-gray-800"
-                    : "bg-green-100 text-green-800"
-                }`}
-              >
-                {getStatus()}
-              </h2>
+                <h2 className="text-2xl font-bold mb-4">
+                  <Calendar className="inline-block mr-2" />
+                  Progress
+                </h2>
+                <h2
+                  className={`text-xl px-3 py-1 rounded-full font-semibold ${
+                    getStatus() === "Upcoming"
+                      ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+                      : getStatus() === "Completed"
+                      ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200"
+                      : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                  }`}
+                >
+                  {getStatus()}
+                </h2>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-4 my-6">
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 my-6">
                 <div
-                  className="bg-blue-600 h-4 rounded-full relative"
+                  className="bg-blue-600 dark:bg-blue-400 h-4 rounded-full relative"
                   style={{
-                    width: `${
-                      (rentalDays /
-                        duration) *
-                      100
-                    }%`,
+                    width: `${(rentalDays / duration) * 100}%`,
                   }}
                 >
                   <div className={`absolute -right-3 -top-7`}>
-                    <Car className="h-8 w-8 text-[#1a2234]"></Car>
+                    <Car className="h-8 w-8 text-[#1a2234] dark:text-gray-100"></Car>
                   </div>
-                  <div className="inline-block h-full w-16 bg-gradient-to-l from-gray-300 rounded-full float-end ">
-
-                  </div>
+                  <div className="inline-block h-full w-16 bg-gradient-to-l from-gray-300 dark:from-gray-600 rounded-full float-end "></div>
                 </div>
               </div>
               <p className="text-right mt-2">
-                {rentalDays} /{" "}
-                {duration} days
+                {rentalDays} / {duration} days
               </p>
             </div>
             <div className="mb-6">
@@ -136,7 +177,7 @@ export default function ContractDetails() {
                 <KeySquare className="inline-block mr-2" />
                 Contract Details
               </h2>
-              <table className="min-w-full bg-white">
+              <table className="min-w-full bg-white dark:bg-gray-800">
                 <tbody>
                   <tr>
                     <td className="border px-4 py-2 font-bold">Contract ID</td>
@@ -173,7 +214,7 @@ export default function ContractDetails() {
                 <User className="inline-block mr-2" />
                 User Information
               </h2>
-              <table className="min-w-full bg-white">
+              <table className="min-w-full bg-white dark:bg-gray-800">
                 <tbody>
                   <tr>
                     <td className="border px-4 py-2 font-bold">Name</td>
@@ -208,7 +249,7 @@ export default function ContractDetails() {
                 <Car className="inline-block mr-2" />
                 Car Information
               </h2>
-              <table className="min-w-full bg-white">
+              <table className="min-w-full bg-white dark:bg-gray-800">
                 <tbody>
                   <tr>
                     <td className="border px-4 py-2 font-bold">
@@ -255,7 +296,7 @@ export default function ContractDetails() {
         ) : (
           <div className="flex items-center justify-center h-96">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
-            <p className="ml-4 text-lg text-gray-500">
+            <p className="ml-4 text-lg text-gray-500 dark:text-gray-300">
               Loading contract details...
             </p>
           </div>
@@ -263,4 +304,4 @@ export default function ContractDetails() {
       </div>
     </div>
   );
-};
+}

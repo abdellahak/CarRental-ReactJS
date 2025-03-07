@@ -1,5 +1,5 @@
 import React from "react";
-import { Car, User, FileText, BarChart2 } from "lucide-react";
+import { Car, User, FileText, BarChart2, ShoppingCart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -108,6 +108,23 @@ function AdminSideBar({ isOpen, onToggle }) {
               >
                 <FileText className="w-5 h-5" />
                 {isOpen && (isEnglish ? "Contracts" : "العقود")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/orders"
+                className={`flex items-center gap-3 p-2 rounded-lg ${
+                  isActive("/dashboard/orders")
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-gray-200 dark:hover:bg-gray-700/50"
+                } ${!isOpen && "justify-center"}`}
+                title={
+                  !isOpen ? (isEnglish ? "Orders" : "الطلبات") : undefined
+                }
+                dir={language === "ar" ? "rtl" : ""}
+              >
+                <ShoppingCart className="w-5 h-5" />
+                {isOpen && (isEnglish ? "Orders" : "الطلبات")}
               </Link>
             </li>
           </ul>
