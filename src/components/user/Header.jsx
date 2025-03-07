@@ -146,6 +146,26 @@ export default function Header() {
                   >
                     {isEnglish ? "Cars" : "السيارات"}
                   </Link>
+                  <Link
+                    to="/about"
+                    className={`${
+                      location.pathname === "/about"
+                        ? "bg-gray-200 text-black dark:bg-gray-600 dark:text-white"
+                        : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                    } rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105`}
+                  >
+                    {isEnglish ? "About Us" : "معلومات عنا"}
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className={`${
+                      location.pathname === "/contact"
+                        ? "bg-gray-200 text-black dark:bg-gray-600 dark:text-white"
+                        : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                    } rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105`}
+                  >
+                    {isEnglish ? "Contact Us" : "اتصل بنا"}
+                  </Link>
                 </div>
               </div>
             </div>
@@ -287,6 +307,28 @@ export default function Header() {
               } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
             >
               {isEnglish ? "Cars" : "السيارات"}
+            </DisclosureButton>
+            <DisclosureButton
+              as={Link}
+              to="/about"
+              className={`${
+                location.pathname === "/about"
+                  ? "bg-gray-900 text-white dark:bg-gray-700"
+                  : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+              } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
+            >
+              {isEnglish ? "About Us" : "معلومات عنا"}
+            </DisclosureButton>
+            <DisclosureButton
+              as={Link}
+              to="/contact"
+              className={`${
+                location.pathname === "/contact"
+                  ? "bg-gray-900 text-white dark:bg-gray-700"
+                  : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+              } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
+            >
+              {isEnglish ? "Contact Us" : "اتصل بنا"}
             </DisclosureButton>
           </div>
         </DisclosurePanel>

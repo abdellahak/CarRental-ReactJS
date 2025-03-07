@@ -59,7 +59,7 @@ export default function Register() {
 
     const nextId = (Math.max(...users.map((user) => user.id)) + 1).toString();
     let image = "";
-    if (e.currentTarget.image.files && e.currentTarget.image.files[0]) {
+    if (e.currentTarget.image && e.currentTarget.image.files && e.currentTarget.image.files[0]) {
       image = URL.createObjectURL(e.currentTarget.image.files[0]);
     }
     const userData = {

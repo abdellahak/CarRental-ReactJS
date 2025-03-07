@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   Users,
   Settings,
@@ -41,7 +42,7 @@ export default function RentCar() {
 
   const isDateOverlap = (start1, end1, start2, end2) => {
     return (
-      (new Date(start1) <= new Date(end2) && new Date(end1) >= new Date(start2))
+      new Date(start1) <= new Date(end2) && new Date(end1) >= new Date(start2)
     );
   };
 
@@ -51,7 +52,7 @@ export default function RentCar() {
     ).toString();
     axios
       .post(`${apiURL}/orders`, { ...order, id: nextId })
-      .then((res) => {
+      .then(() => {
         dispatch({
           type: "ADD_ORDER",
           payload: { ...order, id: nextId },
@@ -60,34 +61,53 @@ export default function RentCar() {
       .catch((err) => {
         if (err.code === "ERR_NETWORK") {
           console.log(
-            isEnglish ? "API not valid or not working, ignoring error and dispatching action." : "واجهة برمجة التطبيقات غير صالحة أو لا تعمل، يتم تجاهل الخطأ وتنفيذ الإجراء."
+            isEnglish
+              ? "API not valid or not working, ignoring error and dispatching action."
+              : "واجهة برمجة التطبيقات غير صالحة أو لا تعمل، يتم تجاهل الخطأ وتنفيذ الإجراء."
           );
           dispatch({
             type: "ADD_ORDER",
             payload: { ...order, id: nextId },
           });
-          navigate("/dashboard/contracts");
         } else {
           console.log(err);
         }
       });
-  }
+  };
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
+    if (!user) {
+      setDangerAlert(
+        isEnglish
+          ? "Please login to reserve a car"
+          : "يرجى تسجيل الدخول لحجز سيارة"
+      );
+      return;
+    }
     const today = new Date();
     if (new Date(startDate) <= today) {
-      setDangerAlert(isEnglish ? "The start date should be greater than today" : "يجب أن يكون تاريخ البدء أكبر من اليوم");
+      setDangerAlert(
+        isEnglish
+          ? "The start date should be greater than today"
+          : "يجب أن يكون تاريخ البدء أكبر من اليوم"
+      );
       return;
     }
 
     if (new Date(endDate) <= new Date(startDate)) {
-      setDangerAlert(isEnglish ? "The end date should be greater than the start date" : "يجب أن يكون تاريخ الانتهاء أكبر من تاريخ البدء");
+      setDangerAlert(
+        isEnglish
+          ? "The end date should be greater than the start date"
+          : "يجب أن يكون تاريخ الانتهاء أكبر من تاريخ البدء"
+      );
       return;
     }
 
     if (!startDate || !endDate) {
-      setDangerAlert(isEnglish ? "Please fill in all fields" : "يرجى ملء جميع الحقول");
+      setDangerAlert(
+        isEnglish ? "Please fill in all fields" : "يرجى ملء جميع الحقول"
+      );
       return;
     }
 
@@ -96,22 +116,48 @@ export default function RentCar() {
     );
 
     if (isOverlap) {
-      setDangerAlert(isEnglish ? "The car is already reserved for this period" : "السيارة محجوزة بالفعل لهذه الفترة");
+      setDangerAlert(
+        isEnglish
+          ? "The car is already reserved for this period"
+          : "السيارة محجوزة بالفعل لهذه الفترة"
+      );
       return;
     }
-    addOrder({
+    const order = {
       userId: user.id,
       carId: id,
-      startDate : new Date(startDate).toISOString().split("T")[0],
-      endDate : new Date(endDate).toISOString().split("T")[0],
+      startDate: new Date(startDate).toISOString().split("T")[0],
+      endDate: new Date(endDate).toISOString().split("T")[0],
       price: car.price,
       status: "pending",
-    });
+    };
+    const nextId = (
+      Math.max(...orders.map((order) => parseInt(order.id))) + 1
+    ).toString();
+    addOrder({ ...order, id: nextId });
+    sendEmail();
     setAlert(isEnglish ? "Car reserved successfully" : "تم حجز السيارة بنجاح");
-  };
+  }
+
+  function sendEmail() {
+    emailjs.send(
+      "service_nc8s3il",
+      "template_bgkwtgh",
+      {
+        to_name: user.name,
+        from_name: "Mingo Cars",
+        message: `Congratulations you have reserved your car ${car.model} ${car.name} successfully`,
+        reply_to: user.email,
+        email: user.email,
+      },
+      { publicKey: "OvJKWrIx6UW3XbnQa" }
+    );
+  }
 
   const handleWhatsAppOrder = () => {
-    const message = isEnglish ? `I would like to order the car ${car.name} ${car.model} from ${startDate} to ${endDate}.` : `أود طلب السيارة ${car.name} ${car.model} من ${startDate} إلى ${endDate}.`;
+    const message = isEnglish
+      ? `I would like to order the car ${car.name} ${car.model} from ${startDate} to ${endDate}.`
+      : `أود طلب السيارة ${car.name} ${car.model} من ${startDate} إلى ${endDate}.`;
     const whatsappUrl = `https://wa.me/212762377545?text=${encodeURIComponent(
       message
     )}`;
@@ -126,13 +172,11 @@ export default function RentCar() {
             onClick={() => navigate(-1)}
             className="inline-flex items-center text-brand-600 dark:text-brand-400 hover:text-brand-800 dark:hover:text-brand-600 my-6 cursor-pointer"
           >
-            {
-              isEnglish ? (
-                <ArrowLeft className="w-4 h-4 mr-2"></ArrowLeft>
-              ): (
-                <ArrowRight className="w-4 h-4 mr-2"></ArrowRight>
-              )
-            }
+            {isEnglish ? (
+              <ArrowLeft className="w-4 h-4 mr-2"></ArrowLeft>
+            ) : (
+              <ArrowRight className="w-4 h-4 mr-2"></ArrowRight>
+            )}
             {isEnglish ? "Back" : "رجوع"}
           </button>
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
@@ -170,7 +214,7 @@ export default function RentCar() {
                   <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
                     {isEnglish ? "Rental Information" : "معلومات الإيجار"}
                   </h2>
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         {isEnglish ? "Pick-up Date" : "تاريخ الاستلام"}
@@ -197,7 +241,8 @@ export default function RentCar() {
 
                     <div className="flex flex-col sm:flex-row gap-4">
                       <button
-                        type="submit"
+                        type="button"
+                        onClick={handleSubmit}
                         className="w-full bg-brand-600 dark:bg-brand-500 text-white py-3 px-4 rounded-md hover:bg-brand-700 dark:hover:bg-brand-600 transition duration-300 cursor-pointer"
                       >
                         {isEnglish ? "Reserve Now" : "احجز الآن"}
@@ -210,7 +255,7 @@ export default function RentCar() {
                         {isEnglish ? "Order from WhatsApp" : "اطلب من واتساب"}
                       </button>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -222,11 +267,15 @@ export default function RentCar() {
               </h2>
               <div className="mb-4">
                 <span className="inline-block w-4 h-4 bg-red-500/70 rounded-full mr-2"></span>
-                <span className="text-gray-900 dark:text-gray-100">{isEnglish ? "Reserved Days" : "الأيام المحجوزة"}</span>
+                <span className="text-gray-900 dark:text-gray-100">
+                  {isEnglish ? "Reserved Days" : "الأيام المحجوزة"}
+                </span>
               </div>
               <div className="mb-4">
                 <span className="inline-block w-4 h-4 bg-white border rounded-full mr-2"></span>
-                <span className="text-gray-900 dark:text-gray-100">{isEnglish ? "Available Days" : "الأيام المتاحة"}</span>
+                <span className="text-gray-900 dark:text-gray-100">
+                  {isEnglish ? "Available Days" : "الأيام المتاحة"}
+                </span>
               </div>
               <Calendar events={carBookedDates} />
             </div>
@@ -243,7 +292,12 @@ export default function RentCar() {
           <DangerAlert
             message={dangerAlert}
             setMessage={setDangerAlert}
-            onClose={() => setDangerAlert(false)}
+            onClose={() => {
+              if (!user) {
+                navigate("/login");
+              }
+              setDangerAlert(false);
+            }}
           />
         )}
       </div>

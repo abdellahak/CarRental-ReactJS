@@ -57,10 +57,10 @@ export default function ordersReducer(state = init_state, action) {
     case "ADD_ORDER":
       return [...state, action.payload];
     case "DELETE_ORDER":
-      return state.filter((car) => car.id !== action.payload);
+      return state.filter((order) => order.id !== action.payload);
     case "UPDATE_ORDER":
-      return state.map((car) =>
-        car.id === action.payload.id ? action.payload : car
+      return state.map((order) =>
+        order.id === action.payload.id ? action.payload : order
       );
     default:
       return state;
