@@ -25,6 +25,9 @@ import ContractsList from "./pages/admin/dashboard/contracts/contracts list/Cont
 import AddContract from "./pages/admin/dashboard/contracts/add contract/AddContract";
 import ContractDetails from "./pages/admin/dashboard/contracts/contract details/ContractDetails";
 
+// statistics
+import StatisticsPage from "./pages/admin/dashboard/statistics/StatisticsPage";
+
 // home
 import Home from "./pages/Home";
 import GuestPage from "./pages/users/guest page/GuestPage";
@@ -45,7 +48,11 @@ import InfiniteCarousel from "./components/user/InfiniteCarousel";
 function App() {
   const language = useSelector((state) => state.language.language);
   return (
-    <div className={`${language === "ar"? "font-family-cairo": "font-family-outfit"}`}>
+    <div
+      className={`${
+        language === "ar" ? "font-family-cairo" : "font-family-outfit"
+      }`}
+    >
       <BrowserRouter>
         <Routes>
           <Route
@@ -70,7 +77,9 @@ function App() {
               </AdminRoute>
             }
           >
-            <Route index element={<CarsList />} />
+            <Route index element={<StatisticsPage />} />
+            {/* statistics */}
+            <Route path="statistics" element={<StatisticsPage />} />
             {/* cars */}
             <Route path="cars" element={<CarsDashboard />}>
               <Route index element={<CarsList />} />

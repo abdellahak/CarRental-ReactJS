@@ -1,5 +1,5 @@
 import React from "react";
-import { Car, User, FileText } from "lucide-react";
+import { Car, User, FileText, BarChart2 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -33,15 +33,34 @@ function AdminSideBar({ isOpen, onToggle }) {
               className="h-12 w-auto invert dark:invert-0"
             />
             {isOpen && (
-              <span className="text-gray-900 dark:text-white">
-                Mingo Cars
-              </span>
+              <span className="text-gray-900 dark:text-white">Mingo Cars</span>
             )}
           </Link>
         </div>
 
-        <nav className="mt-10" >
+        <nav className="mt-10">
           <ul className="space-y-2">
+            <li>
+              <Link
+                to="/dashboard/statistics"
+                className={`flex items-center gap-3 p-2 rounded-lg ${
+                  isActive("/dashboard/statistics") || location.pathname === "/dashboard"
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-gray-200 dark:hover:bg-gray-700/50"
+                } ${!isOpen && "justify-center"}`}
+                title={
+                  !isOpen
+                    ? isEnglish
+                      ? "Statistics"
+                      : "الإحصائيات"
+                    : undefined
+                }
+                dir={language === "ar" ? "rtl" : ""}
+              >
+                <BarChart2 className="w-5 h-5" />
+                {isOpen && (isEnglish ? "Statistics" : "الإحصائيات")}
+              </Link>
+            </li>
             <li>
               <Link
                 to="/dashboard/cars"
@@ -65,7 +84,9 @@ function AdminSideBar({ isOpen, onToggle }) {
                     ? "bg-blue-600 text-white"
                     : "hover:bg-gray-200 dark:hover:bg-gray-700/50"
                 } ${!isOpen && "justify-center"}`}
-                title={!isOpen ? (isEnglish ? "Users" : "المستخدمين") : undefined}
+                title={
+                  !isOpen ? (isEnglish ? "Users" : "المستخدمين") : undefined
+                }
                 dir={language === "ar" ? "rtl" : ""}
               >
                 <User className="w-5 h-5" />
@@ -80,7 +101,9 @@ function AdminSideBar({ isOpen, onToggle }) {
                     ? "bg-blue-600 text-white"
                     : "hover:bg-gray-200 dark:hover:bg-gray-700/50"
                 } ${!isOpen && "justify-center"}`}
-                title={!isOpen ? (isEnglish ? "Contracts" : "العقود") : undefined}
+                title={
+                  !isOpen ? (isEnglish ? "Contracts" : "العقود") : undefined
+                }
                 dir={language === "ar" ? "rtl" : ""}
               >
                 <FileText className="w-5 h-5" />
