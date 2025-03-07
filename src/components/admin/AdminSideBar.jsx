@@ -15,12 +15,6 @@ function AdminSideBar({ isOpen, onToggle }) {
       } bg-[#1a2234] text-gray-300 transition-all duration-300 ease-in-out relative`}
     >
       <div className={`py-4 sticky top-0 z-50 ${isOpen ? "px-2  py-4":""}`}>
-        <button
-          onClick={onToggle}
-          className="absolute top-6 -right-14 bg-[#1a2234] p-2 rounded-full shadow-lg hover:bg-gray-700 transition-colors z-50 border border-gray-700 cursor-pointer"
-        >
-          <Menu size={24} />
-        </button>
         <div className="my-10">
           <h2
             className={`text-xl font-bold text-white flex items-center gap-2 ${
