@@ -105,7 +105,7 @@ export default function AdminFooter() {
         </a>
         <a
         href="https://twitter.com/AbdellahKhouden"
-        className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white ms-5"
+        className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mx-3"
         target="_blank"
         >
         <svg

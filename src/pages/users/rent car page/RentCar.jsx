@@ -1,109 +1,252 @@
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Users, Settings, Fuel, Gauge, Calendar, Clock, ArrowLeft } from "lucide-react";
-import { useSelector } from "react-redux";
+import {
+  Users,
+  Settings,
+  Fuel,
+  Gauge,
+  Calendar as CalendarIcon,
+  Clock,
+  ArrowLeft,
+  ArrowRight,
+} from "lucide-react";
+import { useSelector, useDispatch } from "react-redux";
+import InfoAlert from "@/components/context/InfoAlert";
+import { DatePicker } from "@/components/context/DatePicker";
+import Calendar from "./components/Calendar";
+import DangerAlert from "@/components/context/DangerAlert";
+import axios from "axios";
 
-export default function RentCar(){
+export default function RentCar() {
+  const language = useSelector((state) => state.language.language);
+  const isEnglish = language === "en";
   const { id } = useParams();
-  const cars = useSelector(state => state.cars);
-  const car = cars.find(car => car.id === id);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const orders = useSelector((state) => state.orders);
+  const cars = useSelector((state) => state.cars);
+  const car = cars.find((car) => car.id === id);
+  const contracts = useSelector((state) => state.contracts);
+  const apiURL = import.meta.env.VITE_DATA_API_URL;
+  const carContracts = contracts.filter((contract) => contract.carId === id);
+  const carBookedDates = carContracts.map((contract) => ({
+    start: contract.startDate,
+    end: contract.endDate,
+  }));
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [alert, setAlert] = useState(false);
+  const [dangerAlert, setDangerAlert] = useState(false);
   const navigate = useNavigate();
 
+  const isDateOverlap = (start1, end1, start2, end2) => {
+    return (
+      (new Date(start1) <= new Date(end2) && new Date(end1) >= new Date(start2))
+    );
+  };
+
+  const addOrder = (order) => {
+    const nextId = (
+      Math.max(...orders.map((order) => parseInt(order.id))) + 1
+    ).toString();
+    axios
+      .post(`${apiURL}/orders`, { ...order, id: nextId })
+      .then((res) => {
+        dispatch({
+          type: "ADD_ORDER",
+          payload: { ...order, id: nextId },
+        });
+      })
+      .catch((err) => {
+        if (err.code === "ERR_NETWORK") {
+          console.log(
+            isEnglish ? "API not valid or not working, ignoring error and dispatching action." : "واجهة برمجة التطبيقات غير صالحة أو لا تعمل، يتم تجاهل الخطأ وتنفيذ الإجراء."
+          );
+          dispatch({
+            type: "ADD_ORDER",
+            payload: { ...order, id: nextId },
+          });
+          navigate("/dashboard/contracts");
+        } else {
+          console.log(err);
+        }
+      });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!startDate || !endDate) {
-      alert("Please fill all the fields.");
+    const today = new Date();
+    if (new Date(startDate) <= today) {
+      setDangerAlert(isEnglish ? "The start date should be greater than today" : "يجب أن يكون تاريخ البدء أكبر من اليوم");
       return;
     }
-    alert("Car reserved successfully");
-  }
+
+    if (new Date(endDate) <= new Date(startDate)) {
+      setDangerAlert(isEnglish ? "The end date should be greater than the start date" : "يجب أن يكون تاريخ الانتهاء أكبر من تاريخ البدء");
+      return;
+    }
+
+    if (!startDate || !endDate) {
+      setDangerAlert(isEnglish ? "Please fill in all fields" : "يرجى ملء جميع الحقول");
+      return;
+    }
+
+    const isOverlap = carBookedDates.some((booked) =>
+      isDateOverlap(startDate, endDate, booked.start, booked.end)
+    );
+
+    if (isOverlap) {
+      setDangerAlert(isEnglish ? "The car is already reserved for this period" : "السيارة محجوزة بالفعل لهذه الفترة");
+      return;
+    }
+    addOrder({
+      userId: user.id,
+      carId: id,
+      startDate : new Date(startDate).toISOString().split("T")[0],
+      endDate : new Date(endDate).toISOString().split("T")[0],
+      price: car.price,
+      status: "pending",
+    });
+    setAlert(isEnglish ? "Car reserved successfully" : "تم حجز السيارة بنجاح");
+  };
+
+  const handleWhatsAppOrder = () => {
+    const message = isEnglish ? `I would like to order the car ${car.name} ${car.model} from ${startDate} to ${endDate}.` : `أود طلب السيارة ${car.name} ${car.model} من ${startDate} إلى ${endDate}.`;
+    const whatsappUrl = `https://wa.me/212762377545?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <>
-      <div className="pt-24 pb-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <button
-        onClick={() => navigate(-1)}
-        className="inline-flex items-center text-blue-600 hover:text-blue-800 my-6 cursor-pointer"
-      >
-        <ArrowLeft className="w-4 h-4 mr-2"></ArrowLeft>
-        Back
-      </button>
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-            <div className="space-y-6">
-              <h1 className="text-3xl font-bold">{car.name} {car.model}</h1>
-              <div className="aspect-w-16 aspect-h-9">
-                <img 
-                  src={car.image} 
-                  alt={`${car.name} ${car.model}`}
-                  className="w-full h-96 object-cover rounded-lg"
-                />
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center space-x-2">
-                  <Calendar className="text-blue-600" />
-                  <span>{car.year}</span>
+      <div className="pt-24 pb-16 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <button
+            onClick={() => navigate(-1)}
+            className="inline-flex items-center text-brand-600 dark:text-brand-400 hover:text-brand-800 dark:hover:text-brand-600 my-6 cursor-pointer"
+          >
+            {
+              isEnglish ? (
+                <ArrowLeft className="w-4 h-4 mr-2"></ArrowLeft>
+              ): (
+                <ArrowRight className="w-4 h-4 mr-2"></ArrowRight>
+              )
+            }
+            {isEnglish ? "Back" : "رجوع"}
+          </button>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+              <div className="space-y-6">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                  {car.name} {car.model}
+                </h1>
+                <div className="aspect-w-16 aspect-h-9">
+                  <img
+                    src={car.image}
+                    alt={`${car.name} ${car.model}`}
+                    className="w-full h-96 object-cover rounded-lg"
+                  />
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Fuel className="text-blue-600" />
-                  <span>{car.type }</span>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center space-x-2">
+                    <CalendarIcon className="text-brand-600 dark:text-brand-400" />
+                    <span className="text-gray-900 dark:text-gray-100">
+                      {car.year}
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Fuel className="text-brand-600 dark:text-brand-400" />
+                    <span className="text-gray-900 dark:text-gray-100">
+                      {car.type}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="space-y-6">
-              <div className="bg-gray-50 p-6 rounded-lg h-full flex flex-col justify-between">
-                <h2 className="text-2xl font-semibold mb-4">Rental Information</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Pick-up Date</label>
-                    <div className="mt-1 relative">
-                      <input
-                        type="date"
-                        required
-                        value={startDate}
-                        onChange={(e) => setStartDate(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-600 focus:border-blue-600"
-                      />
-                      <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <div className="space-y-6">
+                <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg h-full flex flex-col justify-between">
+                  <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+                    {isEnglish ? "Rental Information" : "معلومات الإيجار"}
+                  </h2>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {isEnglish ? "Pick-up Date" : "تاريخ الاستلام"}
+                      </label>
+                      <div className="mt-1 relative">
+                        <DatePicker date={startDate} setDate={setStartDate} />
+                      </div>
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Return Date</label>
-                    <div className="mt-1 relative">
-                      <input
-                        type="date"
-                        required
-                        value={endDate}
-                        onChange={(e) => setEndDate(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-600 focus:border-blue-600"
-                      />
-                      <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {isEnglish ? "Return Date" : "تاريخ العودة"}
+                      </label>
+                      <div className="mt-1 relative">
+                        <DatePicker date={endDate} setDate={setEndDate} />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="pt-4">
-                    <p className="text-2xl font-bold text-blue-600">${car.price || 100}/day</p>
-                  </div>
+                    <div className="pt-4">
+                      <p className="text-2xl font-bold text-brand-600 dark:text-brand-400">
+                        {car.price || 100} {isEnglish ? "MAD/day" : "درهم/يوم"}
+                      </p>
+                    </div>
 
-                  <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-300 cursor-pointer"
-                  >
-                    Reserve Now
-                  </button>
-                </form>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button
+                        type="submit"
+                        className="w-full bg-brand-600 dark:bg-brand-500 text-white py-3 px-4 rounded-md hover:bg-brand-700 dark:hover:bg-brand-600 transition duration-300 cursor-pointer"
+                      >
+                        {isEnglish ? "Reserve Now" : "احجز الآن"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleWhatsAppOrder}
+                        className="w-full bg-green-600 dark:bg-green-500 text-white py-3 px-4 rounded-md hover:bg-green-700 dark:hover:bg-green-600 transition duration-300 cursor-pointer"
+                      >
+                        {isEnglish ? "Order from WhatsApp" : "اطلب من واتساب"}
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
+          <div className="my-10 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <div className="mt-8 p-8">
+              <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+                {isEnglish ? "Unavailable Dates" : "التواريخ غير المتاحة"}
+              </h2>
+              <div className="mb-4">
+                <span className="inline-block w-4 h-4 bg-red-500/70 rounded-full mr-2"></span>
+                <span className="text-gray-900 dark:text-gray-100">{isEnglish ? "Reserved Days" : "الأيام المحجوزة"}</span>
+              </div>
+              <div className="mb-4">
+                <span className="inline-block w-4 h-4 bg-white border rounded-full mr-2"></span>
+                <span className="text-gray-900 dark:text-gray-100">{isEnglish ? "Available Days" : "الأيام المتاحة"}</span>
+              </div>
+              <Calendar events={carBookedDates} />
+            </div>
+          </div>
         </div>
+        {alert && (
+          <InfoAlert
+            message={alert}
+            setMessage={setAlert}
+            onClose={() => setAlert(false)}
+          />
+        )}
+        {dangerAlert && (
+          <DangerAlert
+            message={dangerAlert}
+            setMessage={setDangerAlert}
+            onClose={() => setDangerAlert(false)}
+          />
+        )}
       </div>
-    </div>
     </>
-  )
+  );
 }

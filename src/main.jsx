@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import carsReducer from "./reducers/carsReducer.js";
 import usersReducer from "./reducers/usersReducer.js";
-
+import ordersReducer from "./reducers/ordersReducer";
 import contractsReducer from "./reducers/contractsReducer.js";
 import authReducer from "./reducers/authReducer.js";
 import languageReducer from "./reducers/languageReducer.js";
@@ -15,6 +15,7 @@ const store = createStore(
   combineReducers({
     cars: carsReducer,
     users: usersReducer,
+    orders: ordersReducer,
     contracts: contractsReducer,
     auth: authReducer,
     language: languageReducer,

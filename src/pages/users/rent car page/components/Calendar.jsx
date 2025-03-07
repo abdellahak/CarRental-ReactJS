@@ -2,12 +2,7 @@ import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
-export default function Calendar() {
-  const events = [
-    { start: "2025-12-01", end: "2025-12-05" },
-    { start: "2025-12-10", end: "2025-12-12" },
-    { start: "2025-12-15", end: "2025-12-18" },
-  ];
+export default function Calendar({events}) {
 
   const eventDates = events.flatMap((event) => {
     const startDate = new Date(event.start);
