@@ -104,4 +104,11 @@
     },
     {
       "src": "/dashboard/orders",
-      "
+      "dest": "/dashboard/orders"
+    },
+    {
+      "src": "/dashboard/orders/orders list",
+      "dest": "/dashboard/orders/orders list"
+    }
+  ]
+}
