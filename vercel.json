@@ -3,10 +3,6 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "index.html",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist"
@@ -15,100 +11,8 @@
   ],
   "routes": [
     {
-      "src": "/infinite",
-      "dest": "/infinite"
-    },
-    {
-      "src": "/navbar",
-      "dest": "/navbar"
-    },
-    {
-      "src": "/",
-      "dest": "/"
-    },
-    {
-      "src": "/cars",
-      "dest": "/cars"
-    },
-    {
-      "src": "/car/:id",
-      "dest": "/car/:id"
-    },
-    {
-      "src": "/login",
-      "dest": "/login"
-    },
-    {
-      "src": "/register",
-      "dest": "/register"
-    },
-    {
-      "src": "/contact",
-      "dest": "/contact"
-    },
-    {
-      "src": "/about",
-      "dest": "/about"
-    },
-    {
-      "src": "/dashboard",
-      "dest": "/dashboard"
-    },
-    {
-      "src": "/dashboard/statistics",
-      "dest": "/dashboard/statistics"
-    },
-    {
-      "src": "/dashboard/cars",
-      "dest": "/dashboard/cars"
-    },
-    {
-      "src": "/dashboard/cars/:id",
-      "dest": "/dashboard/cars/:id"
-    },
-    {
-      "src": "/dashboard/cars/add",
-      "dest": "/dashboard/cars/add"
-    },
-    {
-      "src": "/dashboard/cars/edit/:id",
-      "dest": "/dashboard/cars/edit/:id"
-    },
-    {
-      "src": "/dashboard/users",
-      "dest": "/dashboard/users"
-    },
-    {
-      "src": "/dashboard/users/:id",
-      "dest": "/dashboard/users/:id"
-    },
-    {
-      "src": "/dashboard/users/add",
-      "dest": "/dashboard/users/add"
-    },
-    {
-      "src": "/dashboard/users/edit/:id",
-      "dest": "/dashboard/users/edit/:id"
-    },
-    {
-      "src": "/dashboard/contracts",
-      "dest": "/dashboard/contracts"
-    },
-    {
-      "src": "/dashboard/contracts/add",
-      "dest": "/dashboard/contracts/add"
-    },
-    {
-      "src": "/dashboard/contracts/:id",
-      "dest": "/dashboard/contracts/:id"
-    },
-    {
-      "src": "/dashboard/orders",
-      "dest": "/dashboard/orders"
-    },
-    {
-      "src": "/dashboard/orders/orders list",
-      "dest": "/dashboard/orders/orders list"
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ]
 }
