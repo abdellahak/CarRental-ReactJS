@@ -101,9 +101,6 @@
   .animate-infinite-slider {
     animation: infiniteSlider 20s linear infinite;
   }
-}
-
-@layer utilities {
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -123,8 +120,10 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-gray-200 rounded-full dark:bg-gray-700;
+    background-color: #e5e7eb; /* bg-gray-200 */
+    border-radius: 9999px; /* rounded-full */
   }
+
   @keyframes slide-left {
     from {
       transform: translateX(0);

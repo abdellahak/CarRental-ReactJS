@@ -19,6 +19,8 @@ import { CarAvailability } from "./components/car-availability";
 import { DateRangePicker } from "./components/date-range-picker";
 
 export default function StatisticsPage() {
+  const language = useSelector((state) => state.language.language);
+  const isEnglish = language === "en";
   const users = useSelector((state) => state.users);
   const orders = useSelector((state) => state.orders);
   const contracts = useSelector((state) => state.contracts);
@@ -34,9 +36,13 @@ export default function StatisticsPage() {
           <div className="container mx-auto p-4 md:p-6 lg:p-8">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+                <h1 className="text-3xl font-bold tracking-tight">
+                  {isEnglish ? "Dashboard" : "لوحة التحكم"}
+                </h1>
                 <p className="text-gray-500">
-                  Analytics and statistics for your car rental business
+                  {isEnglish
+                    ? "Analytics and statistics for your car rental business"
+                    : "تحليلات وإحصاءات لأعمال تأجير السيارات الخاصة بك"}
                 </p>
               </div>
               <DateRangePicker
@@ -47,10 +53,18 @@ export default function StatisticsPage() {
 
             <Tabs defaultValue="overview" className="mt-6">
               <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="cars">Cars</TabsTrigger>
-                <TabsTrigger value="users">Users</TabsTrigger>
-                <TabsTrigger value="orders">Orders</TabsTrigger>
+                <TabsTrigger value="overview">
+                  {isEnglish ? "Overview" : "نظرة عامة"}
+                </TabsTrigger>
+                <TabsTrigger value="cars">
+                  {isEnglish ? "Cars" : "السيارات"}
+                </TabsTrigger>
+                <TabsTrigger value="users">
+                  {isEnglish ? "Users" : "المستخدمين"}
+                </TabsTrigger>
+                <TabsTrigger value="orders">
+                  {isEnglish ? "Orders" : "الطلبات"}
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="overview" className="space-y-4 mt-4">
@@ -58,7 +72,7 @@ export default function StatisticsPage() {
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Total Revenue
+                        {isEnglish ? "Total Revenue" : "إجمالي الإيرادات"}
                       </CardTitle>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +90,9 @@ export default function StatisticsPage() {
                     <CardContent>
                       <div className="text-2xl font-bold">$45,231.89</div>
                       <p className="text-xs text-gray-500">
-                        +20.1% from last month
+                        {isEnglish
+                          ? "+20.1% from last month"
+                          : "+20.1% من الشهر الماضي"}
                       </p>
                     </CardContent>
                   </Card>
@@ -84,7 +100,7 @@ export default function StatisticsPage() {
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Active Rentals
+                        {isEnglish ? "Active Rentals" : "الإيجارات النشطة"}
                       </CardTitle>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +120,9 @@ export default function StatisticsPage() {
                     <CardContent>
                       <div className="text-2xl font-bold">+2350</div>
                       <p className="text-xs text-gray-500">
-                        +180.1% from last month
+                        {isEnglish
+                          ? "+180.1% from last month"
+                          : "+180.1% من الشهر الماضي"}
                       </p>
                     </CardContent>
                   </Card>
@@ -112,7 +130,7 @@ export default function StatisticsPage() {
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Available Cars
+                        {isEnglish ? "Available Cars" : "السيارات المتاحة"}
                       </CardTitle>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +149,7 @@ export default function StatisticsPage() {
                     <CardContent>
                       <div className="text-2xl font-bold">7</div>
                       <p className="text-xs text-gray-500">
-                        +19% from last month
+                        {isEnglish ? "+19% from last month" : "+19% من الشهر الماضي"}
                       </p>
                     </CardContent>
                   </Card>
@@ -139,7 +157,7 @@ export default function StatisticsPage() {
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                       <CardTitle className="text-sm font-medium">
-                        Pending Orders
+                        {isEnglish ? "Pending Orders" : "الطلبات المعلقة"}
                       </CardTitle>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +175,7 @@ export default function StatisticsPage() {
                     <CardContent>
                       <div className="text-2xl font-bold">4</div>
                       <p className="text-xs text-gray-500">
-                        +201 since last hour
+                        {isEnglish ? "+201 since last hour" : "+201 منذ الساعة الماضية"}
                       </p>
                     </CardContent>
                   </Card>
@@ -166,7 +184,9 @@ export default function StatisticsPage() {
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                   <Card className="col-span-4">
                     <CardHeader>
-                      <CardTitle>Revenue Overview</CardTitle>
+                      <CardTitle>
+                        {isEnglish ? "Revenue Overview" : "نظرة عامة على الإيرادات"}
+                      </CardTitle>
                     </CardHeader>
                     <CardContent className="pl-2">
                       <RevenueOverview
@@ -178,9 +198,13 @@ export default function StatisticsPage() {
 
                   <Card className="col-span-3">
                     <CardHeader>
-                      <CardTitle>Revenue by Car Type</CardTitle>
+                      <CardTitle>
+                        {isEnglish ? "Revenue by Car Type" : "الإيرادات حسب نوع السيارة"}
+                      </CardTitle>
                       <CardDescription>
-                        Distribution of revenue across different car types
+                        {isEnglish
+                          ? "Distribution of revenue across different car types"
+                          : "توزيع الإيرادات عبر أنواع السيارات المختلفة"}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -192,9 +216,13 @@ export default function StatisticsPage() {
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   <Card className="col-span-1">
                     <CardHeader>
-                      <CardTitle>Top Performing Cars</CardTitle>
+                      <CardTitle>
+                        {isEnglish ? "Top Performing Cars" : "أفضل السيارات أداءً"}
+                      </CardTitle>
                       <CardDescription>
-                        Cars with the highest rental frequency
+                        {isEnglish
+                          ? "Cars with the highest rental frequency"
+                          : "السيارات ذات أعلى تردد للإيجار"}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -204,9 +232,15 @@ export default function StatisticsPage() {
 
                   <Card className="col-span-2">
                     <CardHeader>
-                      <CardTitle>Rental Duration Statistics</CardTitle>
+                      <CardTitle>
+                        {isEnglish
+                          ? "Rental Duration Statistics"
+                          : "إحصاءات مدة الإيجار"}
+                      </CardTitle>
                       <CardDescription>
-                        Average rental duration by car model
+                        {isEnglish
+                          ? "Average rental duration by car model"
+                          : "متوسط مدة الإيجار حسب طراز السيارة"}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -220,9 +254,13 @@ export default function StatisticsPage() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <Card className="col-span-1">
                     <CardHeader>
-                      <CardTitle>Car Availability</CardTitle>
+                      <CardTitle>
+                        {isEnglish ? "Car Availability" : "توفر السيارات"}
+                      </CardTitle>
                       <CardDescription>
-                        Current availability status of your fleet
+                        {isEnglish
+                          ? "Current availability status of your fleet"
+                          : "حالة التوفر الحالية لأسطولك"}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -232,9 +270,13 @@ export default function StatisticsPage() {
 
                   <Card className="col-span-1">
                     <CardHeader>
-                      <CardTitle>Car Statistics</CardTitle>
+                      <CardTitle>
+                        {isEnglish ? "Car Statistics" : "إحصاءات السيارات"}
+                      </CardTitle>
                       <CardDescription>
-                        Distribution by type, year, and model
+                        {isEnglish
+                          ? "Distribution by type, year, and model"
+                          : "التوزيع حسب النوع والسنة والطراز"}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -247,9 +289,13 @@ export default function StatisticsPage() {
               <TabsContent value="users" className="mt-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>User Statistics</CardTitle>
+                    <CardTitle>
+                      {isEnglish ? "User Statistics" : "إحصاءات المستخدمين"}
+                    </CardTitle>
                     <CardDescription>
-                      User demographics and activity
+                      {isEnglish
+                        ? "User demographics and activity"
+                        : "التركيبة السكانية للمستخدمين والنشاط"}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -261,8 +307,12 @@ export default function StatisticsPage() {
               <TabsContent value="orders" className="mt-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Order Statistics</CardTitle>
-                    <CardDescription>Order status and trends</CardDescription>
+                    <CardTitle>
+                      {isEnglish ? "Order Statistics" : "إحصاءات الطلبات"}
+                    </CardTitle>
+                    <CardDescription>
+                      {isEnglish ? "Order status and trends" : "حالة الطلبات والاتجاهات"}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <OrderStatistics orders={orders} />

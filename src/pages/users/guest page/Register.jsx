@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate, Navigate, Link } from "react-router-dom";
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function Register() {
   const language = useSelector((state) => state.language.language);
@@ -23,13 +23,15 @@ export default function Register() {
   const apiURL = import.meta.env.VITE_DATA_API_URL;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const users = useSelector(state => state.users);
+  const users = useSelector((state) => state.users);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long. كلمة المرور يجب أن تكون على الأقل 8 أحرف.");
+      alert(
+        "Password must be at least 8 characters long. كلمة المرور يجب أن تكون على الأقل 8 أحرف."
+      );
       return;
     }
 
@@ -38,28 +40,38 @@ export default function Register() {
       return;
     }
 
-    const isCinUsed = users.some(user => user.cin === cin);
-    const isUserNameUsed = users.some(user => user.userName === userName);
-    const isEmailUsed = users.some(user => user.email === email);
+    const isCinUsed = users.some((user) => user.cin === cin);
+    const isUserNameUsed = users.some((user) => user.userName === userName);
+    const isEmailUsed = users.some((user) => user.email === email);
 
     if (isCinUsed) {
-      alert("CIN is already used by another user. رقم الهوية مستخدم بالفعل من قبل مستخدم آخر.");
+      alert(
+        "CIN is already used by another user. رقم الهوية مستخدم بالفعل من قبل مستخدم آخر."
+      );
       return;
     }
 
     if (isUserNameUsed) {
-      alert("Username is already used by another user. اسم المستخدم مستخدم بالفعل من قبل مستخدم آخر.");
+      alert(
+        "Username is already used by another user. اسم المستخدم مستخدم بالفعل من قبل مستخدم آخر."
+      );
       return;
     }
 
     if (isEmailUsed) {
-      alert("Email is already used by another user. البريد الإلكتروني مستخدم بالفعل من قبل مستخدم آخر.");
+      alert(
+        "Email is already used by another user. البريد الإلكتروني مستخدم بالفعل من قبل مستخدم آخر."
+      );
       return;
     }
 
     const nextId = (Math.max(...users.map((user) => user.id)) + 1).toString();
     let image = "";
-    if (e.currentTarget.image && e.currentTarget.image.files && e.currentTarget.image.files[0]) {
+    if (
+      e.currentTarget.image &&
+      e.currentTarget.image.files &&
+      e.currentTarget.image.files[0]
+    ) {
       image = URL.createObjectURL(e.currentTarget.image.files[0]);
     }
     const userData = {
@@ -70,18 +82,19 @@ export default function Register() {
       image,
       address,
       role: "client",
-      login : userName,
+      login: userName,
       cin,
       password,
     };
 
     try {
-      const response = await axios.post(`${apiURL}/users`, userData);
-      if (response.status === 201) {
-        dispatch({ type: "ADD_USER", payload: response.data });
-        console.log("User registered successfully:", response.data);
-        navigate("/login");
-      }
+      axios.post(`${apiURL}/users`, userData).then((response) => {
+        if (response.status === 201) {
+          dispatch({ type: "ADD_USER", payload: response.data });
+          console.log("User registered successfully:", response.data);
+          navigate("/login");
+        }
+      });
     } catch (error) {
       console.error("Error registering user:", error);
     }
@@ -93,7 +106,10 @@ export default function Register() {
         <h2 className="text-3xl font-extrabold text-center text-gray-900 dark:text-gray-100">
           {isEnglish ? "Register" : "تسجيل"}
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-6 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2"
+        >
           <div className="space-y-1">
             <label
               htmlFor="userName"
@@ -106,7 +122,9 @@ export default function Register() {
               id="userName"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              placeholder={isEnglish ? "Enter your username" : "أدخل اسم المستخدم"}
+              placeholder={
+                isEnglish ? "Enter your username" : "أدخل اسم المستخدم"
+              }
               required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 dark:bg-gray-700 dark:text-gray-100"
             />
@@ -140,7 +158,9 @@ export default function Register() {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder={isEnglish ? "Enter your full name" : "أدخل اسمك الكامل"}
+              placeholder={
+                isEnglish ? "Enter your full name" : "أدخل اسمك الكامل"
+              }
               required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 dark:bg-gray-700 dark:text-gray-100"
             />
@@ -157,7 +177,9 @@ export default function Register() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder={isEnglish ? "Enter your email" : "أدخل بريدك الإلكتروني"}
+              placeholder={
+                isEnglish ? "Enter your email" : "أدخل بريدك الإلكتروني"
+              }
               required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 dark:bg-gray-700 dark:text-gray-100"
             />
@@ -174,9 +196,13 @@ export default function Register() {
               id="phone"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder={isEnglish ? "Enter your phone number" : "أدخل رقم هاتفك"}
+              placeholder={
+                isEnglish ? "Enter your phone number" : "أدخل رقم هاتفك"
+              }
               required
-              className={` ${isEnglish&& "text-end"}w-full text-end px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 dark:bg-gray-700 dark:text-gray-100`}
+              className={` ${
+                isEnglish && "text-end"
+              }w-full text-end px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 dark:bg-gray-700 dark:text-gray-100`}
             />
           </div>
           <div className="space-y-1">
@@ -203,7 +229,11 @@ export default function Register() {
             >
               {isEnglish ? "Image:" : "صورة:"}
             </label>
-            <Input id="file-upload" type="file" className="border border-gray-300 dark:border-gray-600 shadow-sm dark:bg-gray-700 dark:text-gray-100"/>
+            <Input
+              id="file-upload"
+              type="file"
+              className="border border-gray-300 dark:border-gray-600 shadow-sm dark:bg-gray-700 dark:text-gray-100"
+            />
           </div>
           <div className="space-y-1">
             <label
@@ -217,7 +247,9 @@ export default function Register() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder={isEnglish ? "Enter your password" : "أدخل كلمة المرور"}
+              placeholder={
+                isEnglish ? "Enter your password" : "أدخل كلمة المرور"
+              }
               required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 dark:bg-gray-700 dark:text-gray-100"
             />
@@ -234,7 +266,9 @@ export default function Register() {
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder={isEnglish ? "Confirm your password" : "أكد كلمة المرور"}
+              placeholder={
+                isEnglish ? "Confirm your password" : "أكد كلمة المرور"
+              }
               required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 dark:bg-gray-700 dark:text-gray-100"
             />
@@ -248,7 +282,10 @@ export default function Register() {
         </form>
         <div className="text-center">
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            {isEnglish ? "Have an account?" : "هل لديك حساب؟"} <Link to="/login" className="text-brand-600 hover:text-brand-500">{isEnglish ? "Login" : "تسجيل الدخول"}</Link>
+            {isEnglish ? "Have an account?" : "هل لديك حساب؟"}{" "}
+            <Link to="/login" className="text-brand-600 hover:text-brand-500">
+              {isEnglish ? "Login" : "تسجيل الدخول"}
+            </Link>
           </p>
         </div>
       </div>

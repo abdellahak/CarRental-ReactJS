@@ -3,7 +3,7 @@ import { Car, User, FileText, BarChart2, ShoppingCart } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function AdminSideBar({ isOpen, onToggle }) {
+function AdminSideBar({ isOpen }) {
   const location = useLocation();
   const language = useSelector((state) => state.language.language);
   const isEnglish = language === "en";

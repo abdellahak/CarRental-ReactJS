@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from "react"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
+import { useSelector } from "react-redux"
 
 export function CarStatistics({ cars }) {
+  const language = useSelector((state) => state.language.language)
+  const isEnglish = language === "en";
   const [typeData, setTypeData] = useState([])
   const [yearData, setYearData] = useState([])
 
@@ -46,14 +49,14 @@ export function CarStatistics({ cars }) {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-sm font-medium mb-2">Distribution by Type</h3>
+        <h3 className="text-sm font-medium mb-2">{isEnglish ? "Distribution by Type" : "التوزيع حسب النوع"}</h3>
         <div className="h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={typeData}>
               <XAxis dataKey="name" tickLine={false} axisLine={false} />
               <YAxis tickLine={false} axisLine={false} />
               <Tooltip
-                formatter={(value) => [value, "Count"]}
+                formatter={(value) => [value, isEnglish ? "Count" : "العدد"]}
                 contentStyle={{
                   backgroundColor: "white",
                   border: "1px solid #e5e7eb",
@@ -68,14 +71,14 @@ export function CarStatistics({ cars }) {
       </div>
 
       <div>
-        <h3 className="text-sm font-medium mb-2">Distribution by Year</h3>
+        <h3 className="text-sm font-medium mb-2">{isEnglish ? "Distribution by Year" : "التوزيع حسب السنة"}</h3>
         <div className="h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={yearData}>
               <XAxis dataKey="name" tickLine={false} axisLine={false} />
               <YAxis tickLine={false} axisLine={false} />
               <Tooltip
-                formatter={(value) => [value, "Count"]}
+                formatter={(value) => [value, isEnglish ? "Count" : "العدد"]}
                 contentStyle={{
                   backgroundColor: "white",
                   border: "1px solid #e5e7eb",
@@ -91,4 +94,3 @@ export function CarStatistics({ cars }) {
     </div>
   )
 }
-
