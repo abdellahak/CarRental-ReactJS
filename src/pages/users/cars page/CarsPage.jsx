@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import CarsHero from "./components/carsHero";
+import CarsHero from "./components/CarsHero";
 import CarsPageList from "./components/CarsPageList";
 import FiltersSettings from "./components/FiltersSettings";
 import PaginationControls from "./components/PaginationControls";
