@@ -1,19 +1,31 @@
-{ "routes": [
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/**/*",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/infinite",
+      "dest": "/infinite"
+    },
+    {
+      "src": "/navbar",
+      "dest": "/navbar"
+    },
     {
       "src": "/",
       "dest": "/"
     },
     {
+      "src": "/cars",
+      "dest": "/cars"
+    },
+    {
       "src": "/car/:id",
       "dest": "/car/:id"
-    },
-    {
-      "src": "/about",
-      "dest": "/about"
-    },
-    {
-      "src": "/contact",
-      "dest": "/contact"
     },
     {
       "src": "/login",
@@ -24,16 +36,20 @@
       "dest": "/register"
     },
     {
-      "src": "/forgot-password",
-      "dest": "/forgot-password"
+      "src": "/contact",
+      "dest": "/contact"
     },
     {
-      "src": "/reset-password",
-      "dest": "/reset-password"
+      "src": "/about",
+      "dest": "/about"
     },
     {
       "src": "/dashboard",
       "dest": "/dashboard"
+    },
+    {
+      "src": "/dashboard/statistics",
+      "dest": "/dashboard/statistics"
     },
     {
       "src": "/dashboard/cars",
@@ -72,12 +88,20 @@
       "dest": "/dashboard/contracts"
     },
     {
+      "src": "/dashboard/contracts/add",
+      "dest": "/dashboard/contracts/add"
+    },
+    {
       "src": "/dashboard/contracts/:id",
       "dest": "/dashboard/contracts/:id"
     },
     {
-      "src": "/dashboard/contracts/add",
-      "dest": "/dashboard/contracts/add"
+      "src": "/dashboard/orders",
+      "dest": "/dashboard/orders"
+    },
+    {
+      "src": "/dashboard/orders/orders list",
+      "dest": "/dashboard/orders/orders list"
     }
   ]
 }
