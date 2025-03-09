@@ -31,7 +31,7 @@ export default function StatisticsPage() {
   });
   return (
     <>
-      <div className="flex min-h-screen flex-col bg-gray-100">
+      <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-900">
         <div className="flex-1">
           <div className="container mx-auto p-4 md:p-6 lg:p-8">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -45,14 +45,10 @@ export default function StatisticsPage() {
                     : "تحليلات وإحصاءات لأعمال تأجير السيارات الخاصة بك"}
                 </p>
               </div>
-              <DateRangePicker
-                dateRange={dateRange}
-                setDateRange={setDateRange}
-              />
             </div>
 
             <Tabs defaultValue="overview" className="mt-6">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-4 dark:bg-white/[0.03]">
                 <TabsTrigger value="overview">
                   {isEnglish ? "Overview" : "نظرة عامة"}
                 </TabsTrigger>
