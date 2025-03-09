@@ -90,11 +90,13 @@ export default function Header() {
             </div>
             <div className="flex flex-1 items-center justify-center sm:justify-start">
               <div className="flex shrink-0 items-center">
-                <img
-                  alt="Mingo Cars"
-                  src="/images/logo/mingo cars logo.png"
-                  className="h-12 w-auto"
-                />
+                <Link to="/">
+                  <img
+                    alt="Mingo Cars"
+                    src="/images/logo/mingo cars logo.png"
+                    className="h-12 w-auto"
+                  />
+                </Link>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
@@ -247,7 +249,7 @@ export default function Header() {
               {!authentification.isAuthenticated && (
                 <div className="flex gap-2">
                   {location.pathname !== "/login" && (
-                    <Button asChild>
+                    <Button asChild className={"hidden sm:block"}>
                       <Link to="/login">
                         {isEnglish ? "Login" : "تسجيل الدخول"}
                       </Link>
@@ -256,7 +258,7 @@ export default function Header() {
                   {location.pathname !== "/register" && (
                     <Button
                       asChild
-                      className="bg-gray-700 text-white hover:bg-white hover:text-black transition duration-300 ease-in-out transform hover:scale-105"
+                      className="hidden sm:block bg-gray-700 text-white hover:bg-white hover:text-black transition duration-300 ease-in-out transform hover:scale-105"
                     >
                       <Link to="/register">
                         {isEnglish ? "Register" : "تسجيل جديد"}
@@ -330,6 +332,30 @@ export default function Header() {
             >
               {isEnglish ? "Contact Us" : "اتصل بنا"}
             </DisclosureButton>
+            {location.pathname !== "/login" && (
+              <DisclosureButton
+                as={Link}
+                to="/login"
+                className={`${
+                  location.pathname ===
+                  "block sm:hidden text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
+              >
+                {isEnglish ? "Login" : "تسجيل الدخول"}
+              </DisclosureButton>
+            )}
+            {location.pathname !== "/register" && (
+              <DisclosureButton
+                as={Link}
+                to="/register"
+                className={`${
+                  location.pathname ===
+                  "block sm:hidden text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
+              >
+                {isEnglish ? "Register" : "تسجيل جديد"}
+              </DisclosureButton>
+            )}
           </div>
         </DisclosurePanel>
       </Disclosure>
