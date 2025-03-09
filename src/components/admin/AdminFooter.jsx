@@ -11,7 +11,16 @@ export default function AdminFooter() {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link to="/" className="flex items-center">
-              <Car className="h-12 w-12 me-3 text-gray-900 dark:text-white" alt="Mingo Car" />
+              <img
+                alt="Mingo Cars"
+                src="/images/logo/mingo cars logo.png"
+                className="h-12 mx-2 w-auto hidden dark:block"
+              />
+              <img
+                alt="Mingo Cars"
+                src="/images/logo/mingo cars logo light.png"
+                className="h-12 mx-2 w-auto block dark:hidden"
+              />
               <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">
                 Mingo Cars
               </span>
@@ -24,12 +33,20 @@ export default function AdminFooter() {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="https://React.dev/" className="hover:underline" target="_blank">
+                  <a
+                    href="https://React.dev/"
+                    className="hover:underline"
+                    target="_blank"
+                  >
                     ReactJS
                   </a>
                 </li>
                 <li>
-                  <a href="https://tailwindcss.com/" className="hover:underline" target="_blank">
+                  <a
+                    href="https://tailwindcss.com/"
+                    className="hover:underline"
+                    target="_blank"
+                  >
                     Tailwind CSS
                   </a>
                 </li>
@@ -41,12 +58,19 @@ export default function AdminFooter() {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="https://github.com/abdellahak" className="hover:underline" target="_blank">
+                  <a
+                    href="https://github.com/abdellahak"
+                    className="hover:underline"
+                    target="_blank"
+                  >
                     Github
                   </a>
                 </li>
                 <li>
-                  <a href="linkedin.com/in/abdellah-khouden/" className="hover:underline">
+                  <a
+                    href="linkedin.com/in/abdellah-khouden/"
+                    className="hover:underline"
+                  >
                     LinkedIn
                   </a>
                 </li>
@@ -74,8 +98,13 @@ export default function AdminFooter() {
         <hr className="my-6 border-gray-200 dark:border-gray-700 sm:mx-auto lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
-            © {new Date().getFullYear()} {isEnglish ? "Created By" : "تم الإنشاء بواسطة"}{" "}
-            <a href="https://github.com/abdellahak" className="hover:underline" target="_blank">
+            © {new Date().getFullYear()}{" "}
+            {isEnglish ? "Created By" : "تم الإنشاء بواسطة"}{" "}
+            <a
+              href="https://github.com/abdellahak"
+              className="hover:underline"
+              target="_blank"
+            >
               Abdellah Khouden
             </a>
             . {isEnglish ? "All Rights Reserved." : "جميع الحقوق محفوظة."}
@@ -83,7 +112,7 @@ export default function AdminFooter() {
           <div className="flex mt-4 sm:justify-center sm:mt-0">
             <a
               href="https://www.facebook.com/abdellah.khouden.50"
-              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mx-3"
               target="_blank"
             >
               <svg
@@ -99,7 +128,9 @@ export default function AdminFooter() {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="sr-only">{isEnglish ? "Facebook page" : "صفحة الفيسبوك"}</span>
+              <span className="sr-only">
+                {isEnglish ? "Facebook page" : "صفحة الفيسبوك"}
+              </span>
             </a>
             <a
               href="https://twitter.com/AbdellahKhouden"
@@ -119,11 +150,13 @@ export default function AdminFooter() {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="sr-only">{isEnglish ? "Twitter page" : "صفحة تويتر"}</span>
+              <span className="sr-only">
+                {isEnglish ? "Twitter page" : "صفحة تويتر"}
+              </span>
             </a>
             <a
               href="https://github.com/abdellahak"
-              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mx-3"
             >
               <svg
                 className="w-4 h-4"
@@ -138,7 +171,9 @@ export default function AdminFooter() {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="sr-only">{isEnglish ? "GitHub account" : "حساب جيت هب"}</span>
+              <span className="sr-only">
+                {isEnglish ? "GitHub account" : "حساب جيت هب"}
+              </span>
             </a>
           </div>
         </div>

@@ -67,8 +67,8 @@ export default function Header() {
         as="nav"
         className={`${
           isScrolled
-            ? "bg-white/50 dark:bg-gray-900/50 backdrop-blur-md bg-gradient-to-r from-gray-900 to-40% to-transparent"
-            : "bg-gradient-to-r from-brand-900 to-40% to-white dark:bg-gray-900 dark:from-gray-900 dark:to-gray-900"
+            ? "bg-white/50 dark:bg-gray-900/50 backdrop-blur-md"
+            : " dark:bg-gray-900 dark:from-gray-900 dark:to-gray-900"
         } border-b transition-colors duration-300`}
       >
         <div dir="ltr" className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -94,7 +94,12 @@ export default function Header() {
                   <img
                     alt="Mingo Cars"
                     src="/images/logo/mingo cars logo.png"
-                    className="h-12 w-auto"
+                    className="h-12 w-auto hidden dark:block"
+                  />
+                  <img
+                    alt="Mingo Cars"
+                    src="/images/logo/mingo cars logo light.png"
+                    className="h-12 w-auto block dark:hidden"
                   />
                 </Link>
               </div>
@@ -106,7 +111,7 @@ export default function Header() {
                     className={`${
                       location.pathname === "/"
                         ? "bg-gray-200 text-black dark:bg-gray-600 dark:text-white"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                        : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     } rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105`}
                   >
                     {isEnglish ? "Home" : "الرئيسية"}
@@ -119,7 +124,7 @@ export default function Header() {
                         className={`${
                           location.pathname === "/dashboard"
                             ? "bg-gray-200 text-black dark:bg-gray-600 dark:text-white"
-                            : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                            : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                         } rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105`}
                       >
                         {isEnglish ? "Dashboard" : "لوحة التحكم"}
@@ -132,7 +137,7 @@ export default function Header() {
                         className={`${
                           location.pathname === "/myCars"
                             ? "bg-gray-200 text-black dark:bg-gray-600 dark:text-white"
-                            : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                            : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                         } rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105`}
                       >
                         {isEnglish ? "My rented cars" : "سياراتي المستأجرة"}
@@ -143,7 +148,7 @@ export default function Header() {
                     className={`${
                       location.pathname === "/cars"
                         ? "bg-gray-200 text-black dark:bg-gray-600 dark:text-white"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                        : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     } rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105`}
                   >
                     {isEnglish ? "Cars" : "السيارات"}
@@ -153,7 +158,7 @@ export default function Header() {
                     className={`${
                       location.pathname === "/about"
                         ? "bg-gray-200 text-black dark:bg-gray-600 dark:text-white"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                        : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     } rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105`}
                   >
                     {isEnglish ? "About Us" : "معلومات عنا"}
@@ -163,7 +168,7 @@ export default function Header() {
                     className={`${
                       location.pathname === "/contact"
                         ? "bg-gray-200 text-black dark:bg-gray-600 dark:text-white"
-                        : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                        : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     } rounded-md px-3 py-2 text-sm font-medium transition duration-300 ease-in-out transform hover:scale-105`}
                   >
                     {isEnglish ? "Contact Us" : "اتصل بنا"}
@@ -182,7 +187,7 @@ export default function Header() {
                 <>
                   <button
                     type="button"
-                    className="relative rounded-full bg-white p-1 text-gray-700 hover:text-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none dark:bg-gray-900 dark:text-gray-300 dark:hover:text-white"
+                    className="relative rounded-full bg-white p-1 text-gray-900 hover:text-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none dark:bg-gray-900 dark:text-gray-300 dark:hover:text-white"
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
@@ -221,7 +226,7 @@ export default function Header() {
                       <MenuItem>
                         <Link
                           to="#"
-                          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
+                          className="block px-4 py-2 text-sm text-gray-900 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
                         >
                           {isEnglish ? "Your Profile" : "ملفك الشخصي"}
                         </Link>
@@ -229,7 +234,7 @@ export default function Header() {
                       <MenuItem>
                         <Link
                           to="#"
-                          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
+                          className="block px-4 py-2 text-sm text-gray-900 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
                         >
                           {isEnglish ? "Settings" : "الإعدادات"}
                         </Link>
@@ -237,7 +242,7 @@ export default function Header() {
                       <MenuItem>
                         <button
                           onClick={handleLogout}
-                          className="block w-full text-start px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
+                          className="block w-full text-start px-4 py-2 text-sm text-gray-900 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
                         >
                           {isEnglish ? "Sign out" : "تسجيل الخروج"}
                         </button>
@@ -280,7 +285,7 @@ export default function Header() {
               className={`${
                 location.pathname === "/"
                   ? "bg-gray-900 text-white dark:bg-gray-700"
-                  : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
               } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
             >
               {isEnglish ? "Home" : "الرئيسية"}
@@ -293,7 +298,7 @@ export default function Header() {
                   className={`${
                     location.pathname === "/myCars"
                       ? "bg-gray-900 text-white dark:bg-gray-700"
-                      : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                      : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                   } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
                 >
                   {isEnglish ? "My rented cars" : "سياراتي المستأجرة"}
@@ -305,7 +310,7 @@ export default function Header() {
               className={`${
                 location.pathname === "/cars"
                   ? "bg-gray-900 text-white dark:bg-gray-700"
-                  : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
               } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
             >
               {isEnglish ? "Cars" : "السيارات"}
@@ -316,7 +321,7 @@ export default function Header() {
               className={`${
                 location.pathname === "/about"
                   ? "bg-gray-900 text-white dark:bg-gray-700"
-                  : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
               } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
             >
               {isEnglish ? "About Us" : "معلومات عنا"}
@@ -327,7 +332,7 @@ export default function Header() {
               className={`${
                 location.pathname === "/contact"
                   ? "bg-gray-900 text-white dark:bg-gray-700"
-                  : "text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  : "text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
               } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
             >
               {isEnglish ? "Contact Us" : "اتصل بنا"}
@@ -338,7 +343,7 @@ export default function Header() {
                 to="/login"
                 className={`${
                   location.pathname ===
-                  "block sm:hidden text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  "block sm:hidden text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                 } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
               >
                 {isEnglish ? "Login" : "تسجيل الدخول"}
@@ -350,7 +355,7 @@ export default function Header() {
                 to="/register"
                 className={`${
                   location.pathname ===
-                  "block sm:hidden text-gray-700 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  "block sm:hidden text-gray-900 hover:bg-gray-200 hover:text-black dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                 } block rounded-md px-3 py-2 text-base font-medium transition duration-300 ease-in-out transform hover:scale-102`}
               >
                 {isEnglish ? "Register" : "تسجيل جديد"}

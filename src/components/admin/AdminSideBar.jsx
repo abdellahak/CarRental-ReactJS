@@ -28,10 +28,15 @@ function AdminSideBar({ isOpen }) {
             dir={language === "ar" ? "rtl" : ""}
           >
             <img
-              alt={isEnglish ? "Mingo Cars" : "مينجو كارز"}
-              src="/images/logo/mingo cars logo.png"
-              className="h-12 w-auto invert dark:invert-0"
-            />
+                    alt="Mingo Cars"
+                    src="/images/logo/mingo cars logo.png"
+                    className="h-12 w-auto hidden dark:block"
+                  />
+                  <img
+                    alt="Mingo Cars"
+                    src="/images/logo/mingo cars logo light.png"
+                    className="h-12 w-auto block dark:hidden"
+                  />
             {isOpen && (
               <span className="text-gray-900 dark:text-white">Mingo Cars</span>
             )}
