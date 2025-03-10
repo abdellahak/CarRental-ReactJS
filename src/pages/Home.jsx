@@ -42,6 +42,9 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: "FETCH_ORDERS_DATA", payload: data });
+      })
+      .catch(() => {
+        console.log("json-server is not running");
       });
   }, []);
   return (

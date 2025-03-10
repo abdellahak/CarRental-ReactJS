@@ -14,6 +14,9 @@ export default defineConfig({
       ignored: ["**/data/**"],
     },
   },
+  optimizeDeps: {
+    include: ["jspdf", "jspdf-autotable"],
+  },
   build: {
     target: "esnext",
     chunkSizeWarningLimit: 1000,

@@ -14,8 +14,10 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import InfoAlert from "@/components/context/InfoAlert";
 import { DatePicker } from "@/components/context/DatePicker";
+import { DateRangePicker } from "@/pages/admin/dashboard/statistics/components/date-range-picker";
 import Calendar from "./components/Calendar";
 import DangerAlert from "@/components/context/DangerAlert";
+import { generateInvoicePDF } from "./OrderFacture";
 import axios from "axios";
 
 export default function RentCar() {
@@ -39,6 +41,8 @@ export default function RentCar() {
   const [alert, setAlert] = useState(false);
   const [dangerAlert, setDangerAlert] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+
+  const [invoiceUrl, setInvoiceUrl] = useState("");
   const navigate = useNavigate();
 
   const isDateOverlap = (start1, end1, start2, end2) => {
@@ -58,6 +62,7 @@ export default function RentCar() {
           type: "ADD_ORDER",
           payload: { ...order, id: nextId },
         });
+        generateInvoice(nextId);
       })
       .catch((err) => {
         if (err.code === "ERR_NETWORK") {
@@ -70,6 +75,7 @@ export default function RentCar() {
             type: "ADD_ORDER",
             payload: { ...order, id: nextId },
           });
+          generateInvoice(nextId);
         } else {
           console.log(err);
         }
@@ -179,6 +185,43 @@ export default function RentCar() {
     window.open(whatsappUrl, "_blank");
   };
 
+  const generateInvoice = (orderId) => {
+    if (!user || !car) return;
+
+    const startDateObj = new Date(startDate);
+    const endDateObj = new Date(endDate);
+    const diffTime = Math.abs(endDateObj - startDateObj);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    const invoiceData = {
+      invoiceNumber: `INV-${orderId}`,
+      customerName: user.name,
+      customerEmail: user.email,
+      carName: car.name,
+      carModel: car.model,
+      startDate: new Date(startDate).toLocaleDateString(),
+      endDate: new Date(endDate).toLocaleDateString(),
+      pricePerDay: car.price,
+      totalPrice: totalPrice,
+      companyName: "Mingo Cars",
+      companyAddress: "123 Car Rental St., Agadir, Morocco",
+      companyPhone: "+212 680 696 199",
+      companyEmail: "info@mingocars.com",
+      companyLogo: "/images/logo/mingo cars logo.png", // Assuming you have a logo
+    };
+
+    const pdfDataUrl = generateInvoicePDF(invoiceData);
+    setInvoiceUrl(pdfDataUrl);
+
+    // Open the PDF in a new tab
+    const newTab = window.open();
+    if (newTab) {
+      newTab.document.write(
+        `<iframe width="100%" height="100%" src="${pdfDataUrl}"></iframe>`
+      );
+    }
+  };
+
   return (
     <>
       <div className="pt-24 pb-16 bg-gray-50 dark:bg-gray-900">
@@ -254,8 +297,11 @@ export default function RentCar() {
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         {isEnglish ? "Pick-up Date" : "تاريخ الاستلام"}
                       </label>
-                      <div className="mt-1 relative">
-                        <DatePicker date={startDate} setDate={setStartDate} />
+                      <div className="mt-1">
+                        <DatePicker
+                          selectedDate={startDate}
+                          setSelectedDate={setStartDate}
+                        />
                       </div>
                     </div>
 
@@ -264,7 +310,10 @@ export default function RentCar() {
                         {isEnglish ? "Return Date" : "تاريخ العودة"}
                       </label>
                       <div className="mt-1 relative">
-                        <DatePicker date={endDate} setDate={setEndDate} />
+                        <DatePicker
+                          selectedDate={endDate}
+                          setSelectedDate={setEndDate}
+                        />
                       </div>
                     </div>
 
@@ -273,7 +322,8 @@ export default function RentCar() {
                         {car.price || 100} {isEnglish ? "MAD/day" : "درهم/يوم"}
                       </p>
                       <p className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-                        {isEnglish ? "Total Price:" : "السعر الإجمالي:"} {totalPrice} {isEnglish ? "MAD" : "درهم"}
+                        {isEnglish ? "Total Price:" : "السعر الإجمالي:"}{" "}
+                        {totalPrice} {isEnglish ? "MAD" : "درهم"}
                       </p>
                     </div>
 
@@ -310,7 +360,7 @@ export default function RentCar() {
                 </span>
               </div>
               <div className="mb-4">
-                <span className="inline-block w-4 h-4 bg-white border rounded-full mr-2"></span>
+                <span className="inline-block w-4 h-4  border border-black dark:border-white rounded-full mr-2"></span>
                 <span className="text-gray-900 dark:text-gray-100">
                   {isEnglish ? "Available Days" : "الأيام المتاحة"}
                 </span>
