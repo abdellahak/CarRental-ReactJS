@@ -9,6 +9,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    watch: {
+      ignored: ["**/data/**"],
+    },
+  },
   build: {
     target: "esnext",
     chunkSizeWarningLimit: 1000,
