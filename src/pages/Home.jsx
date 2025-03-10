@@ -27,14 +27,31 @@ export default function Home() {
         console.log("json-server is not running");
       });
   }, []);
+  useEffect(() => {
+    fetch(`${apiURL}/contracts`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "FETCH_CONTRACTS_DATA", payload: data });
+      })
+      .catch(() => {
+        console.log("json-server is not running");
+      });
+  }, []);
+  useEffect(() => {
+    fetch(`${apiURL}/orders`)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: "FETCH_ORDERS_DATA", payload: data });
+      });
+  }, []);
   return (
     <div className="flex min-h-screen dark:bg-gray-900">
       <div className="flex-1 overflow-x-hidden relative">
         <div className="fixed top-0 left-0 w-full z-50">
-        <Header />
+          <Header />
         </div>
         <div className="mt-[65px]">
-        <Outlet />
+          <Outlet />
         </div>
         <AdminFooter />
       </div>

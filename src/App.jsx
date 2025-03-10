@@ -51,6 +51,7 @@ import NavbarComponent from "./components/user/NavbarComponent";
 import InfiniteCarousel from "./components/user/InfiniteCarousel";
 function App() {
   const language = useSelector((state) => state.language.language);
+  const apiURL = import.meta.env.VITE_DATA_API_URL;
   return (
     <div
       className={`${
@@ -105,10 +106,9 @@ function App() {
               <Route path=":id" element={<ContractDetails />} />
             </Route>
             {/* orders */}
-            <Route path="orders" element={<OrdersDashboard />} >
+            <Route path="orders" element={<OrdersDashboard />}>
               <Route index element={<OrdersList />} />
             </Route>
-
           </Route>
         </Routes>
       </BrowserRouter>

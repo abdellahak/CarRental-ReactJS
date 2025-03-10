@@ -233,7 +233,7 @@ export default function OrdersList() {
                 </p>
               </div>
             ) : (
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto dark:bg-[#1a2234]">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -267,7 +267,7 @@ export default function OrdersList() {
                           <TableCell>
                           {days} {language === "en" ? "days" : "أيام"}
                           </TableCell>
-                          <TableCell className="font-medium">${totalPrice}</TableCell>
+                          <TableCell className="font-medium">{totalPrice} MAD</TableCell>
                           <TableCell>
                           <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100">
                             {language === "en" ? "Pending" : "قيد الانتظار"}

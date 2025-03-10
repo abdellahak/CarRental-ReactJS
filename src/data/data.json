@@ -579,24 +579,6 @@
       "endDate": "2025-03-31",
       "price": "650",
       "status": "pending"
-    },
-    {
-      "id": "13",
-      "userId": "11",
-      "carId": "20",
-      "startDate": "2025-03-18",
-      "endDate": "2025-03-24",
-      "price": "650",
-      "status": "pending"
-    },
-    {
-      "id": "15",
-      "userId": "11",
-      "carId": "20",
-      "startDate": "2025-03-18",
-      "endDate": "2025-03-28",
-      "price": "650",
-      "status": "pending"
     }
   ]
 }

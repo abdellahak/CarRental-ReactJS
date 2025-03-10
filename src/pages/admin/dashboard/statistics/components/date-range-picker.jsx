@@ -1,4 +1,3 @@
-"use client"
 import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
 
