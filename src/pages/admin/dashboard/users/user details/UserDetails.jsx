@@ -4,7 +4,8 @@ import { EllipsisVertical, ArrowLeft } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function UserDetails() {
-  const apiURL = import.meta.env.VITE_DATA_API_URL;
+  const language = useSelector((state) => state.language.language);
+  const isEnglish = language === "en";
   const users = useSelector((state) => state.users);
   const cars = useSelector((state) => state.cars);
   const contracts = useSelector((state) =>
@@ -54,39 +55,39 @@ export default function UserDetails() {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto dark:bg-gray-900 dark:text-white">
       <button
         onClick={() => navigate(-1)}
-        className="inline-flex items-center text-blue-600 hover:text-blue-800 my-6 cursor-pointer"
+        className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 my-6 cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4 mr-2"></ArrowLeft>
-        Back
+        {isEnglish ? "Back" : "رجوع"}
       </button>
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5">
+      <div className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden md:max-w-2xl m-5">
         <div className="md:flex relative">
           <div className="md:flex-shrink-0">
             <img
               className="h-60 w-full object-cover md:w-48 md:h-48"
               src={user.image || "/images/users/defaultUser.jpg"}
-              alt="Event image"
+              alt={isEnglish ? "User image" : "صورة المستخدم"}
             />
           </div>
           <div className="p-8">
-            <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+            <div className="uppercase tracking-wide text-sm text-indigo-500 dark:text-indigo-300 font-semibold">
               {user.email}
             </div>
-            <p className="block mt-1 text-lg leading-tight font-medium text-black">
+            <p className="block mt-1 text-lg leading-tight font-medium text-black dark:text-white">
               {user.name}
             </p>
-            <p className="mt-2 text-gray-500">{user.phone}</p>
-            <p className="mt-2 text-gray-500">{user.address}</p>
+            <p className="mt-2 text-gray-500 dark:text-gray-400">{user.phone}</p>
+            <p className="mt-2 text-gray-500 dark:text-gray-400">{user.address}</p>
           </div>
           <button
             onClick={(e) => {
               e.stopPropagation();
               setIsDropdownOpen(!isDropdownOpen);
             }}
-            className="flex items-center justify-center w-10 h-10 hover:text-gray-800 transition-colors absolute right-3 top-3 cursor-pointer"
+            className="flex items-center justify-center w-10 h-10 hover:text-gray-800 dark:hover:text-gray-200 transition-colors absolute right-3 top-3 cursor-pointer"
           >
             <EllipsisVertical className="w-6 h-6"></EllipsisVertical>
           </button>
@@ -95,31 +96,31 @@ export default function UserDetails() {
               data-dropdown-content
               className={`${
                 isDropdownOpen ? "block" : "hidden"
-              } bg-white w-32 py-2 absolute z-10 rounded-lg shadow-md top-12 right-1  `}
+              } bg-white dark:bg-gray-700 w-32 py-2 absolute z-10 rounded-lg shadow-md top-12 right-1`}
             >
               <Link
                 href="#"
-                className="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white"
+                className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-blue-500 dark:hover:bg-blue-600 hover:text-white"
                 to={`/dashboard/users/edit/${user.id}`}
               >
-                Edit
+                {isEnglish ? "Edit" : "تعديل"}
               </Link>
               <a
                 href="#"
-                className="block px-4 py-2 text-red-600 hover:bg-red-100"
+                className="block px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-600"
               >
-                Delete
+                {isEnglish ? "Delete" : "حذف"}
               </a>
             </div>
           </div>
         </div>
       </div>
       <div className="max-w-md mx-auto md:max-w-2xl m-5">
-        <h2 className="text-2xl my-3">Booked Cars history : </h2>
+        <h2 className="text-2xl my-3">{isEnglish ? "Booked Cars history :" : "تاريخ السيارات المحجوزة :"}</h2>
         {bookedCars.length > 0 ? (
           bookedCars.map((car, index) => (
             <div
-              className="overflow-hidden border-t border-t-gray-300 cursor-pointer my-5 hover:bg-gray-200"
+              className="overflow-hidden border-t border-t-gray-300 dark:border-t-gray-600 cursor-pointer my-5 hover:bg-gray-200 dark:hover:bg-gray-700"
               onClick={() => navigate(`/dashboard/cars/${car.id}`)}
               key={index}
             >
@@ -128,50 +129,50 @@ export default function UserDetails() {
                   <img
                     className="aspect-video h-full object-cover md:w-48"
                     src={car.image}
-                    alt="Car image"
+                    alt={isEnglish ? "Car image" : "صورة السيارة"}
                   />
                 </div>
                 <div className="p-4 w-full">
                   <div className="flex justify-between w-full">
                     <div>
-                      <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                      <div className="uppercase tracking-wide text-sm text-indigo-500 dark:text-indigo-300 font-semibold">
                         {car.model}
                       </div>
-                      <p className="block mt-1 text-lg leading-tight font-medium text-black">
+                      <p className="block mt-1 text-lg leading-tight font-medium text-black dark:text-white">
                         {car.name}
                       </p>
                     </div>
                     <div>
-                      <p className=" text-gray-500">{car.year}</p>
-                      <p className=" text-gray-500">{car.type}</p>
+                      <p className="text-gray-500 dark:text-gray-400">{car.year}</p>
+                      <p className="text-gray-500 dark:text-gray-400">{car.type}</p>
                     </div>
                   </div>
-                  <div className="mt-2 text-gray-500">
+                  <div className="mt-2 text-gray-500 dark:text-gray-400">
                     {contracts.map((c) =>
                       c.carId === car.id && c.userId === user.id
                         ? `${c.startDate} - ${c.endDate}`
                         : null
                     )}
                   </div>
-                  <div className={`text-gray-500`}>
+                  <div className="text-gray-500 dark:text-gray-400">
                     {contracts.map((c) =>
                       c.carId === car.id && c.userId === user.id ? (
                         <span
                           key={c.id}
                           className={`px-3 py-1 rounded-full text-sm font-semibold ${
                             new Date(c.endDate) < new Date()
-                              ? "bg-gray-100 text-gray-800"
+                              ? "bg-gray-100 dark:bg-gray-600 text-gray-800 dark:text-gray-200"
                               : new Date(c.startDate) > new Date()
-                              ? "bg-blue-100 text-blue-800"
-                              : "bg-green-100 text-green-800"
+                              ? "bg-blue-100 dark:bg-blue-600 text-blue-800 dark:text-blue-200"
+                              : "bg-green-100 dark:bg-green-600 text-green-800 dark:text-green-200"
                           }`}
                         >
-                          Status:{" "}
+                          {isEnglish ? "Status: " : "الحالة: "}
                           {new Date(c.endDate) < new Date()
-                            ? "Completed"
+                            ? isEnglish ? "Completed" : "مكتمل"
                             : new Date(c.startDate) > new Date()
-                            ? "Upcoming"
-                            : "Active"}
+                            ? isEnglish ? "Upcoming" : "قادم"
+                            : isEnglish ? "Active" : "نشط"}
                         </span>
                       ) : null
                     )}
@@ -181,7 +182,7 @@ export default function UserDetails() {
             </div>
           ))
         ) : (
-          <p>No cars booked</p>
+          <p>{isEnglish ? "No cars booked" : "لا توجد سيارات محجوزة"}</p>
         )}
       </div>
     </div>

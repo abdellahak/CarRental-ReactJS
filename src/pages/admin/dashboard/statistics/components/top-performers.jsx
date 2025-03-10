@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export function TopPerformers({ contracts, cars }) {
-  const language = useSelector((state) => state.language);
+  const language = useSelector((state) => state.language.language);
   const isEnglish = language === "en";
   const [data, setData] = useState([]);
 

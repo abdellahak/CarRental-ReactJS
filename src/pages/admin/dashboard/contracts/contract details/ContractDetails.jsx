@@ -1,7 +1,5 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   MapPin,
@@ -17,10 +15,10 @@ import {
   CalendarClock,
   CarFront,
   Component,
+  ExternalLink,
 } from "lucide-react";
 import { useSelector } from "react-redux";
 import { PDFDownloadLink, BlobProvider } from "@react-pdf/renderer";
-import { ExternalLink } from "lucide-react";
 import ContractPDF from "../components/contract-attachement-pdf";
 
 export default function ContractDetails() {
@@ -36,6 +34,18 @@ export default function ContractDetails() {
   );
 
   const navigate = useNavigate();
+  const [progressWidth, setProgressWidth] = useState(0);
+
+  useEffect(() => {
+    if (contract) {
+      const duration = Math.floor(
+        (new Date(contract.endDate) - new Date(contract.startDate)) /
+          (1000 * 60 * 60 * 24)
+      );
+      const rentalDays = calculateRentalDays(contract.startDate, duration);
+      setProgressWidth((rentalDays / duration) * 100);
+    }
+  }, [contract]);
 
   if (!contract.id) {
     return (
@@ -53,11 +63,6 @@ export default function ContractDetails() {
     return "Active";
   };
 
-  const duration = Math.floor(
-    (new Date(contract.endDate) - new Date(contract.startDate)) /
-      (1000 * 60 * 60 * 24)
-  );
-
   const calculateRentalDays = (startDate, duration) => {
     const days = Math.floor(
       (new Date() - new Date(startDate)) / (1000 * 60 * 60 * 24)
@@ -67,12 +72,18 @@ export default function ContractDetails() {
     return days;
   };
 
+  const duration = Math.floor(
+    (new Date(contract.endDate) - new Date(contract.startDate)) /
+      (1000 * 60 * 60 * 24)
+  );
+
   const rentalDays = calculateRentalDays(contract.startDate, duration);
   const totalPrice = duration * contract.price;
   const openPdfInNewTab = (blob) => {
     const url = URL.createObjectURL(blob);
     window.open(url, "_blank");
   };
+
   return (
     <div className="max-w-4xl mx-auto py-2 relative text-gray-900 dark:text-gray-100">
       <button
@@ -111,7 +122,7 @@ export default function ContractDetails() {
                   onClick={() => blob && openPdfInNewTab(blob)}
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
-                  {loading ? "Preparing PDF..." : "Open in New Tab"}
+                  {loading ? "Preparing PDF..." : "Open PDF in New Tab"}
                 </button>
               )}
             </BlobProvider>
@@ -157,9 +168,9 @@ export default function ContractDetails() {
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 my-6">
                 <div
-                  className="bg-blue-600 dark:bg-blue-400 h-4 rounded-full relative"
+                  className="bg-blue-600 dark:bg-blue-400 h-4 rounded-full relative transition-all duration-1000"
                   style={{
-                    width: `${(rentalDays / duration) * 100}%`,
+                    width: `${progressWidth}%`,
                   }}
                 >
                   <div className={`absolute -right-3 -top-7`}>
@@ -180,29 +191,29 @@ export default function ContractDetails() {
               <table className="min-w-full bg-white dark:bg-gray-800">
                 <tbody>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">Contract ID</td>
-                    <td className="border px-4 py-2">{contract.id}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">Contract ID</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{contract.id}</td>
                   </tr>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <Calendar className="inline-block mr-2" />
                       Start Date
                     </td>
-                    <td className="border px-4 py-2">{contract.startDate}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{contract.startDate}</td>
                   </tr>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <Calendar className="inline-block mr-2" />
                       End Date
                     </td>
-                    <td className="border px-4 py-2">{contract.endDate}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{contract.endDate}</td>
                   </tr>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <DollarSign className="inline-block mr-2" />
                       Price
                     </td>
-                    <td className="border px-4 py-2">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">
                       {contract.price} DH / Day
                     </td>
                   </tr>
@@ -217,29 +228,29 @@ export default function ContractDetails() {
               <table className="min-w-full bg-white dark:bg-gray-800">
                 <tbody>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">Name</td>
-                    <td className="border px-4 py-2">{user.name}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">Name</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{user.name}</td>
                   </tr>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <Mail className="inline-block mr-2" />
                       Email
                     </td>
-                    <td className="border px-4 py-2">{user.email}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{user.email}</td>
                   </tr>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <Phone className="inline-block mr-2" />
                       Phone
                     </td>
-                    <td className="border px-4 py-2">{user.phone}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{user.phone}</td>
                   </tr>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <MapPin className="inline-block mr-2" />
                       Address
                     </td>
-                    <td className="border px-4 py-2">{user.address}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{user.address}</td>
                   </tr>
                 </tbody>
               </table>
@@ -252,42 +263,42 @@ export default function ContractDetails() {
               <table className="min-w-full bg-white dark:bg-gray-800">
                 <tbody>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <Component className="inline-block mr-2"></Component>
                       Model
                     </td>
-                    <td className="border px-4 py-2">{car.model}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{car.model}</td>
                   </tr>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <CarFront className="inline-block mr-2"></CarFront>
                       Brand
                     </td>
-                    <td className="border px-4 py-2">{car.name}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{car.name}</td>
                   </tr>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <CalendarClock className="inline-block mr-2"></CalendarClock>
                       Year
                     </td>
-                    <td className="border px-4 py-2">{car.year}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{car.year}</td>
                   </tr>
                   <tr>
-                    <td className="border px-4 py-2 font-bold">
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2 font-bold">
                       <Fuel className="inline-block mr-2" />
                       Fuel Type
                     </td>
-                    <td className="border px-4 py-2">{car.type}</td>
+                    <td className="border border-gray-900 dark:border-gray-200 px-4 py-2">{car.type}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div className="mt-6">
               <h2 className="text-xl font-bold mb-4 overflow-hidden rounded-sm shadow-sm text-end">
-                <span className="inline-block rounded-s-sm border px-2">
+                <span className="inline-block rounded-s-sm border border-gray-900 dark:border-gray-200 px-2">
                   Total Price:{" "}
                 </span>
-                <span className="inline-block rounded-e-sm border px-2">
+                <span className="inline-block rounded-e-sm border border-gray-900 dark:border-gray-200 px-2">
                   {totalPrice} DH
                 </span>
               </h2>
