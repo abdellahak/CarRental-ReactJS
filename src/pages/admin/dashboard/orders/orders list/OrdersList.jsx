@@ -17,7 +17,8 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import ConfirmAlert from "@/components/context/ConfirmAlert"
 
 export default function OrdersList() {
   const navigate = useNavigate()
@@ -221,7 +222,7 @@ export default function OrdersList() {
         {/* Pending Orders */}
         <TabsContent value="pending">
           <div className="rounded-md border shadow-sm overflow-hidden">
-            <div className="p-4 bg-muted/30 border-b">
+            <div className="p-2 bg-muted/30 border-b">
               <h2 className="text-xl font-semibold">{language === "en" ? "Pending Orders" : "الطلبات قيد الانتظار"}</h2>
             </div>
 
@@ -251,179 +252,180 @@ export default function OrdersList() {
                       const { car, user } = getOrderDetails(order)
                       const days = calculateDays(order.startDate, order.endDate)
 
-                      return (
+                        const totalPrice = days * car?.price
+                        return (
                         <TableRow key={order.id} className="hover:bg-muted/30">
                           <TableCell className="font-medium">#{order.id}</TableCell>
                           <TableCell>{user?.name}</TableCell>
                           <TableCell>
-                            {car?.name} {car?.model} ({car?.year})
+                          {car?.name} {car?.model} ({car?.year})
                           </TableCell>
                           <TableCell className="whitespace-nowrap">
-                            <div className="text-sm">{formatDate(order.startDate)}</div>
-                            <div className="text-sm">{formatDate(order.endDate)}</div>
+                          <div className="text-sm">{formatDate(order.startDate)}</div>
+                          <div className="text-sm">{formatDate(order.endDate)}</div>
                           </TableCell>
                           <TableCell>
-                            {days} {language === "en" ? "days" : "أيام"}
+                          {days} {language === "en" ? "days" : "أيام"}
                           </TableCell>
-                          <TableCell className="font-medium">${order.price}</TableCell>
+                          <TableCell className="font-medium">${totalPrice}</TableCell>
                           <TableCell>
-                            <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100">
-                              {language === "en" ? "Pending" : "قيد الانتظار"}
-                            </Badge>
+                          <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100">
+                            {language === "en" ? "Pending" : "قيد الانتظار"}
+                          </Badge>
                           </TableCell>
                           <TableCell>
-                            <div className="flex gap-2">
-                              <Dialog>
-                                <DialogTrigger asChild>
-                                  <Button variant="outline" size="sm" className="h-8">
-                                    <Eye className="h-4 w-4 mr-1" />
-                                    {language === "en" ? "Details" : "التفاصيل"}
-                                  </Button>
-                                </DialogTrigger>
-                                <DialogContent className="max-w-3xl">
-                                  <DialogHeader>
-                                    <DialogTitle>
-                                      {language === "en" ? "Order Details" : "تفاصيل الطلب"} #{order.id}
-                                    </DialogTitle>
-                                    <DialogDescription>
-                                      {language === "en"
-                                        ? "Review order information before validation"
-                                        : "مراجعة معلومات الطلب قبل التحقق"}
-                                    </DialogDescription>
-                                  </DialogHeader>
-                                  <div className="space-y-4">
-                                    <div className="grid grid-cols-2 gap-4">
-                                      <div>
-                                        <h3 className="font-semibold mb-2">
-                                          {language === "en" ? "Car Details" : "تفاصيل السيارة"}
-                                        </h3>
-                                        <div className="space-y-1 text-sm">
-                                          <p>
-                                            <span className="font-medium">
-                                              {language === "en" ? "Make" : "الصانع"}:
-                                            </span>{" "}
-                                            {car?.name}
-                                          </p>
-                                          <p>
-                                            <span className="font-medium">
-                                              {language === "en" ? "Model" : "الموديل"}:
-                                            </span>{" "}
-                                            {car?.model}
-                                          </p>
-                                          <p>
-                                            <span className="font-medium">{language === "en" ? "Year" : "السنة"}:</span>{" "}
-                                            {car?.year}
-                                          </p>
-                                          <p>
-                                            <span className="font-medium">{language === "en" ? "Type" : "النوع"}:</span>{" "}
-                                            {car?.type}
-                                          </p>
-                                          <p>
-                                            <span className="font-medium">
-                                              {language === "en" ? "Daily Rate" : "السعر اليومي"}:
-                                            </span>{" "}
-                                            ${car?.price}
-                                          </p>
-                                        </div>
-                                      </div>
-                                      <div>
-                                        <h3 className="font-semibold mb-2">
-                                          {language === "en" ? "Customer Details" : "تفاصيل العميل"}
-                                        </h3>
-                                        <div className="space-y-1 text-sm">
-                                          <p>
-                                            <span className="font-medium">{language === "en" ? "Name" : "الاسم"}:</span>{" "}
-                                            {user?.name}
-                                          </p>
-                                          <p>
-                                            <span className="font-medium">
-                                              {language === "en" ? "Email" : "البريد الإلكتروني"}:
-                                            </span>{" "}
-                                            {user?.email}
-                                          </p>
-                                          <p>
-                                            <span className="font-medium">
-                                              {language === "en" ? "Phone" : "الهاتف"}:
-                                            </span>{" "}
-                                            {user?.phone}
-                                          </p>
-                                          <p>
-                                            <span className="font-medium">
-                                              {language === "en" ? "ID" : "رقم الهوية"}:
-                                            </span>{" "}
-                                            {user?.cin}
-                                          </p>
-                                          <p>
-                                            <span className="font-medium">
-                                              {language === "en" ? "Address" : "العنوان"}:
-                                            </span>{" "}
-                                            {user?.address}
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div>
-                                      <h3 className="font-semibold mb-2">
-                                        {language === "en" ? "Rental Details" : "تفاصيل التأجير"}
-                                      </h3>
-                                      <div className="space-y-1 text-sm">
-                                        <p>
-                                          <span className="font-medium">
-                                            {language === "en" ? "Start Date" : "تاريخ البدء"}:
-                                          </span>{" "}
-                                          {formatDate(order.startDate)}
-                                        </p>
-                                        <p>
-                                          <span className="font-medium">
-                                            {language === "en" ? "End Date" : "تاريخ الانتهاء"}:
-                                          </span>{" "}
-                                          {formatDate(order.endDate)}
-                                        </p>
-                                        <p>
-                                          <span className="font-medium">
-                                            {language === "en" ? "Duration" : "المدة"}:
-                                          </span>{" "}
-                                          {calculateDays(order.startDate, order.endDate)}{" "}
-                                          {language === "en" ? "days" : "أيام"}
-                                        </p>
-                                        <p>
-                                          <span className="font-medium">
-                                            {language === "en" ? "Total Price" : "السعر الإجمالي"}:
-                                          </span>{" "}
-                                          {order.price} MAD
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <DialogFooter className="flex justify-end gap-2">
-                                    <Button variant="outline" onClick={() => rejectOrder(order)}>
-                                      <X className="h-4 w-4 mx-1" />
-                                      {language === "en" ? "Reject" : "رفض"}
-                                    </Button>
-                                    <Button onClick={() => validateOrder(order)} className="bg-brand-600">
-                                      <Check className="h-4 w-4 mx-1" />
-                                      {language === "en" ? "Validate" : "قبول"}
-                                    </Button>
-                                  </DialogFooter>
-                                </DialogContent>
-                              </Dialog>
-                              <Button
-                                variant="destructive"
-                                size="sm"
-                                className="h-8"
-                                onClick={() => rejectOrder(order)}
-                              >
-                                <X className="h-4 w-4 mr-1" />
+                          <div className="flex gap-2">
+                            <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm" className="h-8">
+                              <Eye className="h-4 w-4 mr-1" />
+                              {language === "en" ? "Details" : "التفاصيل"}
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="max-w-3xl">
+                              <DialogHeader>
+                              <DialogTitle>
+                                {language === "en" ? "Order Details" : "تفاصيل الطلب"} #{order.id}
+                              </DialogTitle>
+                              <DialogDescription>
+                                {language === "en"
+                                ? "Review order information before validation"
+                                : "مراجعة معلومات الطلب قبل التحقق"}
+                              </DialogDescription>
+                              </DialogHeader>
+                              <div className="space-y-4">
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                <h3 className="font-semibold mb-2">
+                                  {language === "en" ? "Car Details" : "تفاصيل السيارة"}
+                                </h3>
+                                <div className="space-y-1 text-sm">
+                                  <p>
+                                  <span className="font-medium">
+                                    {language === "en" ? "Make" : "الصانع"}:
+                                  </span>{" "}
+                                  {car?.name}
+                                  </p>
+                                  <p>
+                                  <span className="font-medium">
+                                    {language === "en" ? "Model" : "الموديل"}:
+                                  </span>{" "}
+                                  {car?.model}
+                                  </p>
+                                  <p>
+                                  <span className="font-medium">{language === "en" ? "Year" : "السنة"}:</span>{" "}
+                                  {car?.year}
+                                  </p>
+                                  <p>
+                                  <span className="font-medium">{language === "en" ? "Type" : "النوع"}:</span>{" "}
+                                  {car?.type}
+                                  </p>
+                                  <p>
+                                  <span className="font-medium">
+                                    {language === "en" ? "Daily Rate" : "السعر اليومي"}:
+                                  </span>{" "}
+                                  ${car?.price}
+                                  </p>
+                                </div>
+                                </div>
+                                <div>
+                                <h3 className="font-semibold mb-2">
+                                  {language === "en" ? "Customer Details" : "تفاصيل العميل"}
+                                </h3>
+                                <div className="space-y-1 text-sm">
+                                  <p>
+                                  <span className="font-medium">{language === "en" ? "Name" : "الاسم"}:</span>{" "}
+                                  {user?.name}
+                                  </p>
+                                  <p>
+                                  <span className="font-medium">
+                                    {language === "en" ? "Email" : "البريد الإلكتروني"}:
+                                  </span>{" "}
+                                  {user?.email}
+                                  </p>
+                                  <p>
+                                  <span className="font-medium">
+                                    {language === "en" ? "Phone" : "الهاتف"}:
+                                  </span>{" "}
+                                  {user?.phone}
+                                  </p>
+                                  <p>
+                                  <span className="font-medium">
+                                    {language === "en" ? "ID" : "رقم الهوية"}:
+                                  </span>{" "}
+                                  {user?.cin}
+                                  </p>
+                                  <p>
+                                  <span className="font-medium">
+                                    {language === "en" ? "Address" : "العنوان"}:
+                                  </span>{" "}
+                                  {user?.address}
+                                  </p>
+                                </div>
+                                </div>
+                              </div>
+                              <div>
+                                <h3 className="font-semibold mb-2">
+                                {language === "en" ? "Rental Details" : "تفاصيل التأجير"}
+                                </h3>
+                                <div className="space-y-1 text-sm">
+                                <p>
+                                  <span className="font-medium">
+                                  {language === "en" ? "Start Date" : "تاريخ البدء"}:
+                                  </span>{" "}
+                                  {formatDate(order.startDate)}
+                                </p>
+                                <p>
+                                  <span className="font-medium">
+                                  {language === "en" ? "End Date" : "تاريخ الانتهاء"}:
+                                  </span>{" "}
+                                  {formatDate(order.endDate)}
+                                </p>
+                                <p>
+                                  <span className="font-medium">
+                                  {language === "en" ? "Duration" : "المدة"}:
+                                  </span>{" "}
+                                  {calculateDays(order.startDate, order.endDate)}{" "}
+                                  {language === "en" ? "days" : "أيام"}
+                                </p>
+                                <p>
+                                  <span className="font-medium">
+                                  {language === "en" ? "Total Price" : "السعر الإجمالي"}:
+                                  </span>{" "}
+                                  {totalPrice} MAD
+                                </p>
+                                </div>
+                              </div>
+                              </div>
+                              <DialogFooter className="flex justify-end gap-2">
+                              <Button variant="outline" onClick={() => rejectOrder(order)}>
+                                <X className="h-4 w-4 mx-1" />
                                 {language === "en" ? "Reject" : "رفض"}
                               </Button>
-                              <Button variant="default" size="sm" className="h-8 bg-brand-600" onClick={() => validateOrder(order)}>
-                                <Check className="h-4 w-4 mr-1" />
-                                {language === "en" ? "Validate" : "تحقق"}
+                              <Button onClick={() => validateOrder(order)} className="bg-brand-600">
+                                <Check className="h-4 w-4 mx-1" />
+                                {language === "en" ? "Validate" : "قبول"}
                               </Button>
-                            </div>
+                              </DialogFooter>
+                            </DialogContent>
+                            </Dialog>
+                            <Button
+                            variant="destructive"
+                            size="sm"
+                            className="h-8"
+                            onClick={() => rejectOrder(order)}
+                            >
+                            <X className="h-4 w-4 mr-1" />
+                            {language === "en" ? "Reject" : "رفض"}
+                            </Button>
+                            <Button variant="default" size="sm" className="h-8 bg-brand-600" onClick={() => validateOrder(order)}>
+                            <Check className="h-4 w-4 mr-1" />
+                            {language === "en" ? "Validate" : "تحقق"}
+                            </Button>
+                          </div>
                           </TableCell>
                         </TableRow>
-                      )
+                        )
                     })}
                   </TableBody>
                 </Table>
