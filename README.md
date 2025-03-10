@@ -27,7 +27,7 @@ To get started with the project, follow these steps:
 
 1. Clone the repository:
   ```bash
-  git clone [repository link]
+  git clone https://github.com/abdellahak/CarRental-ReactJS.git
   ```
 2. Navigate to the project directory:
   ```bash
@@ -56,5 +56,3 @@ Check out the live demo of the project [here](#).
 ## Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-## License
-This project is licensed under the [MIT License](./LICENSE).
