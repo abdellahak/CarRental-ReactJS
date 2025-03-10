@@ -18,7 +18,7 @@
       "year": "2016",
       "type": "diesel",
       "price": "160",
-      "available": false,
+      "available": true,
       "image": "/images/cars/car2.jpg",
       "rating": 4
     },
@@ -410,87 +410,7 @@
       "price": 220
     },
     {
-      "id": "1741362050136",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362055648",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362183673",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362187913",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362190448",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362192074",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362193705",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362194816",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362253673",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362258296",
-      "userId": "2",
-      "carId": "2",
-      "startDate": "2025-01-11",
-      "endDate": "2025-01-30",
-      "price": 160
-    },
-    {
-      "id": "1741362263528",
+      "id": "9",
       "userId": "2",
       "carId": "2",
       "startDate": "2025-01-11",
