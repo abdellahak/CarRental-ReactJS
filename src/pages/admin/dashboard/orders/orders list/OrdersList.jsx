@@ -94,7 +94,7 @@ export default function OrdersList() {
     // Add to contract
     const nextId = (Math.max(...contracts.map((contract) => Number.parseInt(contract.id))) + 1).toString()
     axios
-      .post(`${apiURL}/contracts`, newContract)
+      .post(`${apiURL}/contracts`, {...newContract, id: nextId})
       .then((res) => {
         // Update car availability
         axios

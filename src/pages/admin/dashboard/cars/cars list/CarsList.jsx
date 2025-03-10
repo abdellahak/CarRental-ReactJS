@@ -13,7 +13,8 @@ import {
   CheckCircle,
   XCircle,
   Info,
-  Pencil
+  Pencil,
+  KeyIcon
 } from "lucide-react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -208,6 +209,10 @@ function CarsList() {
               <thead className="bg-gray-100 dark:bg-gray-700">
                 <tr>
                   <th className="py-2 px-4 border-b dark:border-gray-600">
+                    <KeyIcon className="inline w-4 h-4 mx-1" />
+                    {isEnglish ? "id" : "المعرف"}
+                  </th>
+                  <th className="py-2 px-4 border-b dark:border-gray-600">
                     <CarIcon className="inline w-4 h-4 mx-1" />
                     {isEnglish ? "Model" : "الموديل"}
                   </th>
@@ -247,6 +252,9 @@ function CarsList() {
                         : "bg-white dark:bg-gray-800"
                     }
                   >
+                    <td className="py-2 px-4 border-b dark:border-gray-600">
+                      #{car.id}
+                    </td>
                     <td className="py-2 px-4 border-b dark:border-gray-600">
                       {car.model}
                     </td>

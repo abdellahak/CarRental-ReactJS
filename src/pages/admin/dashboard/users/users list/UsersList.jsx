@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Plus, Search, Info, Trash, Trash2, UserPen, User, Mail, Phone, MapPin, MoreVertical } from "lucide-react";
+import { Plus, Search, Info, Trash, Trash2, UserPen, User, Mail, Phone, MapPin, MoreVertical, IdCard} from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import ConfirmAlert from "@/components/context/ConfirmAlert";
@@ -103,6 +103,10 @@ export default function UsersList() {
           <thead className="bg-gray-50 dark:bg-gray-800">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <IdCard className="inline w-4 h-4 mx-1" />
+                {isEnglish ? "CIN" : "البطاقة الوطنية"}
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                 <User className="inline w-4 h-4 mx-1" />
                 {isEnglish ? "Name" : "الاسم"}
               </th>
@@ -132,11 +136,16 @@ export default function UsersList() {
                 onClick={() => handleRowClick(client.id)}
               >
                 <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm font-medium text-gray-900 dark:text-gray-300">
+                    {client.cin}
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900 dark:text-gray-300 flex items-center gap-2">
                     <img
                       src={client.image || "/images/users/defaultUser.jpg"}
                       alt=""
-                      className="h-10 w-10 rounded-full"
+                      className="h-10 w-10 rounded-full object-cover"
                     />
                     <span>{client.name}</span>
                   </div>

@@ -14,8 +14,11 @@ import {
   CircleEllipsis,
   Clock,
   ChartNoAxesColumnIncreasing,
+  IdCard,
+  Indent,
 } from "lucide-react";
 import axios from "axios";
+import { IdentificationIcon } from "@heroicons/react/24/solid";
 
 export default function ContractsList() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -126,6 +129,14 @@ export default function ContractsList() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                 <ul className="flex items-center space-x-2">
                   <li>
+                    <Indent className="h-5 w-5" />
+                  </li>
+                  <li>Contract Id</li>
+                </ul>
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                <ul className="flex items-center space-x-2">
+                  <li>
                     <User className="h-5 w-5" />
                   </li>
                   <li>User Name</li>
@@ -204,6 +215,11 @@ export default function ContractsList() {
               rentalDays = rentalDays > duration ? duration : rentalDays;
               return (
                 <tr key={contract.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      #{contract.id}
+                    </div>
+                  </td>
                   <td
                     className="px-6 py-4 whitespace-nowrap hover:bg-slate-200 dark:hover:bg-slate-700 relative cursor-pointer"
                     onMouseEnter={(e) => {
