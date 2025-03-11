@@ -179,7 +179,7 @@ export default function RentCar() {
     const message = isEnglish
       ? `I would like to order the car ${car.name} ${car.model} from ${startDate} to ${endDate}.`
       : `أود طلب السيارة ${car.name} ${car.model} من ${startDate} إلى ${endDate}.`;
-    const whatsappUrl = `https://wa.me/212762377545?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/212680696199?text=${encodeURIComponent(
       message
     )}`;
     window.open(whatsappUrl, "_blank");
