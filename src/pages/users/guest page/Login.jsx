@@ -28,7 +28,6 @@ export default function Login() {
       setAlertVisible(true);
       return;
     }
-    console.log("users", users);
     const user = users.find(u => 
       (u.email === identifier || u.login === identifier) && u.password === password
     );
