@@ -185,14 +185,14 @@ export default function Header() {
               </div>
               {authentification.isAuthenticated && (
                 <>
-                  <button
+                  {/* <button
                     type="button"
                     className="relative rounded-full bg-white p-1 text-gray-900 hover:text-black focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none dark:bg-gray-900 dark:text-gray-300 dark:hover:text-white"
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
                     <BellIcon aria-hidden="true" className="size-6" />
-                  </button>
+                  </button> */}
 
                   <Menu as="div" className="relative ml-3">
                     <div>
@@ -225,20 +225,20 @@ export default function Header() {
                       </MenuItem>
                       <MenuItem>
                         <Link
-                          to="#"
+                          to="/profile"
                           className="block px-4 py-2 text-sm text-gray-900 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
                         >
                           {isEnglish ? "Your Profile" : "ملفك الشخصي"}
                         </Link>
                       </MenuItem>
-                      <MenuItem>
+                      {/* <MenuItem>
                         <Link
                           to="#"
                           className="block px-4 py-2 text-sm text-gray-900 data-focus:bg-gray-100 data-focus:outline-none dark:text-gray-300 dark:data-focus:bg-gray-700"
                         >
                           {isEnglish ? "Settings" : "الإعدادات"}
                         </Link>
-                      </MenuItem>
+                      </MenuItem> */}
                       <MenuItem>
                         <button
                           onClick={handleLogout}

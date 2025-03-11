@@ -46,6 +46,9 @@ import Register from "./pages/users/guest page/Register";
 import ProtectedRoute from "./components/context/ProtectedRoute";
 import AdminRoute from "./components/context/AdminRoute";
 
+// user Profile
+import UserProfile from "./pages/users/user profile/UserProfile";
+
 // test
 import NavbarComponent from "./components/user/NavbarComponent";
 import InfiniteCarousel from "./components/user/InfiniteCarousel";
@@ -73,6 +76,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/profile" element={<UserProfile />} />
           </Route>
           <Route
             path="/dashboard"
