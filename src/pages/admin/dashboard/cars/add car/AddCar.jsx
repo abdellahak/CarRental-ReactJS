@@ -6,7 +6,6 @@ import axios from "axios";
 
 function AddCar() {
   const language = useSelector((state) => state.language.language);
-  console.log(language);
   const isEnglish = language === "en";
   const navigate = useNavigate();
   const apiURL = import.meta.env.VITE_DATA_API_URL;

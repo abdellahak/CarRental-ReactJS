@@ -298,7 +298,7 @@
     {
       "id": "8",
       "name": "abdellah khouden",
-      "email": "admin@mail.com",
+      "email": "khoudenak@gmail.com",
       "phone": "234567890°",
       "address": "lamzar \n",
       "image": "/images/users/client7.png",
@@ -497,6 +497,15 @@
       "carId": "20",
       "startDate": "2025-03-24",
       "endDate": "2025-03-31",
+      "price": "650",
+      "status": "pending"
+    },
+    {
+      "id": "12",
+      "userId": "8",
+      "carId": "21",
+      "startDate": "2025-03-15",
+      "endDate": "2025-03-30",
       "price": "650",
       "status": "pending"
     }

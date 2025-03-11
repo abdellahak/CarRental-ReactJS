@@ -24,7 +24,7 @@ export function Slider() {
   );
 
   return (
-    <div className="w-full flex justify-center">
+    <div dir="ltr" className="w-full flex justify-center">
       <Carousel
         plugins={[plugin.current]}
         className="w-full h-full relative"

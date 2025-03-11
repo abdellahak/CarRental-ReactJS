@@ -298,10 +298,8 @@ export default function RentCar() {
                         {isEnglish ? "Pick-up Date" : "تاريخ الاستلام"}
                       </label>
                       <div className="mt-1">
-                        <DatePicker
-                          selectedDate={startDate}
-                          setSelectedDate={setStartDate}
-                        />
+                        <input type="date" value={startDate} 
+                        onChange={(e)=>{setStartDate(e.target.value)}}/>
                       </div>
                     </div>
 
@@ -310,10 +308,8 @@ export default function RentCar() {
                         {isEnglish ? "Return Date" : "تاريخ العودة"}
                       </label>
                       <div className="mt-1 relative">
-                        <DatePicker
-                          selectedDate={endDate}
-                          setSelectedDate={setEndDate}
-                        />
+                      <input type="date" value={endDate} 
+                        onChange={(e)=>{setEndDate(e.target.value)}}/>
                       </div>
                     </div>
 
