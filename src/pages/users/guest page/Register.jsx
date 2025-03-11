@@ -26,20 +26,20 @@ export default function Register() {
   const navigate = useNavigate();
   const users = useSelector((state) => state.users);
 
-  // function sendEmail() {
-  //   emailjs.send(
-  //     "service_nc8s3il",
-  //     "template_bgkwtgh",
-  //     {
-  //       to_name: user.name,
-  //       from_name: "Mingo Cars",
-  //       message: `Congratulations you have reserved your car ${car.model} ${car.name} successfully`,
-  //       reply_to: user.email,
-  //       email: user.email,
-  //     },
-  //     { publicKey: "OvJKWrIx6UW3XbnQa" }
-  //   );
-  // }
+  function sendEmail(userData) {
+    emailjs.send(
+      "service_nc8s3il",
+      "template_4z16nif",
+      {
+        to_name: userData.name,
+        from_name: "Mingo Cars",
+        message: `Congratulations ${userData.name}! You have successfully registered to Mingo Cars.`,
+        reply_to: userData.email,
+        email: userData.email,
+      },
+      { publicKey: "OvJKWrIx6UW3XbnQa" }
+    );
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,11 +107,13 @@ export default function Register() {
       .then((response) => {
         dispatch({ type: "ADD_USER", payload: userData });
         dispatch({ type: "LOGIN_SUCCESS", payload: userWithoutPassword });
+        sendEmail(userData);
         navigate("/");
       })
       .catch((error) => {
         dispatch({ type: "ADD_USER", payload: userData });
         dispatch({ type: "LOGIN_SUCCESS", payload: userWithoutPassword });
+        sendEmail(userData);
         navigate("/");
       });
   };
