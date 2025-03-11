@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import emailjs from "@emailjs/browser";
 
 export default function Register() {
   const language = useSelector((state) => state.language.language);
@@ -25,9 +26,23 @@ export default function Register() {
   const navigate = useNavigate();
   const users = useSelector((state) => state.users);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // function sendEmail() {
+  //   emailjs.send(
+  //     "service_nc8s3il",
+  //     "template_bgkwtgh",
+  //     {
+  //       to_name: user.name,
+  //       from_name: "Mingo Cars",
+  //       message: `Congratulations you have reserved your car ${car.model} ${car.name} successfully`,
+  //       reply_to: user.email,
+  //       email: user.email,
+  //     },
+  //     { publicKey: "OvJKWrIx6UW3XbnQa" }
+  //   );
+  // }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (password.length < 8) {
       alert(
         "Password must be at least 8 characters long. كلمة المرور يجب أن تكون على الأقل 8 أحرف."
@@ -85,19 +100,20 @@ export default function Register() {
       login: userName,
       cin,
       password,
-    };
-
-    try {
-      axios.post(`${apiURL}/users`, userData).then((response) => {
-        if (response.status === 201) {
-          dispatch({ type: "ADD_USER", payload: response.data });
-          console.log("User registered successfully:", response.data);
-          navigate("/login");
-        }
+    };  
+    const { password: userPassword, ...userWithoutPassword } = userData;
+    axios
+      .post(`${apiURL}/users`, userData)
+      .then((response) => {
+        dispatch({ type: "ADD_USER", payload: userData });
+        dispatch({ type: "LOGIN_SUCCESS", payload: userWithoutPassword });
+        navigate("/");
+      })
+      .catch((error) => {
+        dispatch({ type: "ADD_USER", payload: userData });
+        dispatch({ type: "LOGIN_SUCCESS", payload: userWithoutPassword });
+        navigate("/");
       });
-    } catch (error) {
-      console.error("Error registering user:", error);
-    }
   };
 
   return (
