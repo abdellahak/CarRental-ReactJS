@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import InfoAlert from "../../../components/context/InfoAlert";
+import { Alert } from "@mui/material"; // Importing MUI Alert component
 
 export default function Login() {
   const language = useSelector((state) => state.language.language);
@@ -51,6 +52,9 @@ export default function Login() {
 
   return (
     <>
+      <Alert severity="info" style={{ marginBottom: "20px" }}>
+        {isEnglish ? "To access the dashboard, log in using username: admin and password: admin" : "للوصول إلى لوحة التحكم، قم بتسجيل الدخول باستخدام اسم المستخدم: admin وكلمة المرور: admin"}
+      </Alert>
       {alertVisible && (
         <InfoAlert     
           onClose={handleCloseAlert} 
