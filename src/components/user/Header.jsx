@@ -177,10 +177,10 @@ export default function Header() {
               </div>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <div className="mx-2">
+              <div className="mx-1 sm:mx-2">
                 <DarkModeToggle />
               </div>
-              <div className="mx-2">
+              <div className="mx-1 sm:mx-2">
                 <LanguageToggle />
               </div>
               {authentification.isAuthenticated && (
